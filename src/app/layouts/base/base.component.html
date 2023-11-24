@@ -1,9 +1,16 @@
-<app-navbar></app-navbar>
+
+<header class="bg-white">
+    <app-header></app-header>
+    <app-navbar></app-navbar>
+</header>
+
+
+<!--<app-navbar></app-navbar>-->
 <mat-drawer-container class="w-full h-full" autosize>
-  <mat-drawer #drawer [mode]="'over'" [opened]="false">
-    <!--<app-sidebar></app-sidebar>-->
-  </mat-drawer>
-  <mat-drawer-content class="bg-slate-50">
-      <router-outlet></router-outlet>
-  </mat-drawer-content>
+    <mat-drawer #drawer [mode]="'over'" [opened]="false">
+        <!--<app-sidebar></app-sidebar>-->
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
 </mat-drawer-container>
