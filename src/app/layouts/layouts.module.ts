@@ -5,11 +5,13 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {BaseComponent} from './base/base.component';
 import {ComponentsModule} from "../components/components.module";
 import {MaterialModule} from "../material/material.module";
+import { AuthBaseComponent } from './auth-base/auth-base.component';
 
 
 @NgModule({
     declarations: [
-        BaseComponent
+        BaseComponent,
+        AuthBaseComponent
     ],
     imports: [
         CommonModule,
