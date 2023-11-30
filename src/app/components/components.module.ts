@@ -13,7 +13,8 @@ import {NavbarComponent} from "./shared/navbar/navbar.component";
     ],
     exports: [
         NavbarComponent,
-        HeaderComponent
+        HeaderComponent,
+        FooterComponent
     ],
     imports: [
         CommonModule
