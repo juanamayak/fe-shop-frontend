@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -11,12 +12,14 @@ import {MatInputModule} from "@angular/material/input";
         CommonModule,
         MatSidenavModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonModule
     ],
     exports: [
         MatSidenavModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonModule
     ]
 })
 export class MaterialModule {

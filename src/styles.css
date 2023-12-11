@@ -9,21 +9,39 @@
 
 /* End Navbar */
 
+/* Buttons Custom */
+button {
+    @apply rounded-md !important;
+}
+/* End Button Custom */
+
+/* Success Styling */
+
+.mat-mdc-button.mat-success,
+.mat-mdc-outlined-button.mat-success {
+    @apply text-teal-600;
+}
+
+.mat-mdc-unelevated-button.mat-success,
+.mat-mdc-raised-button.mat-success {
+    @apply bg-teal-600 text-white;
+}
+
+/* End Success Styling */
+
+
 /* Custom Input Styling */
-.mat-form-field{
+.mat-form-field {
     @apply w-full;
 }
-.mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 0.5em 0 1em 0;
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    @apply py-2.5;
 }
 
-.mat-form-field-wrapper {
-    padding-bottom: 1em;
+.mat-mdc-form-field-infix {
+    min-height: 30px;
 }
 
-.mat-form-field-appearance-outline .mat-form-field-prefix,
-.mat-form-field-appearance-outline .mat-form-field-suffix {
-    top: 0em !important;
-}
 /* End Custom Input Styling*/
 
