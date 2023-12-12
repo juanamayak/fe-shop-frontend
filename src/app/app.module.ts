@@ -18,6 +18,9 @@ import {PagesModule} from "./pages/pages.module";
         PagesModule,
         LayoutsModule
     ],
+    exports: [
+        AppComponent
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

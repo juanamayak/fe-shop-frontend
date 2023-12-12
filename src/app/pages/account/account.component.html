@@ -1,0 +1,26 @@
+<mat-tab-group animationDuration="0ms" class="bg-[#f9eae6]" mat-align-tabs="center">
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa-solid fa-user"></i>&nbsp;Mi perfil
+        </ng-template>
+        <app-profile></app-profile>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa-solid fa-store"></i>&nbsp;Mis pedidos
+        </ng-template>
+        <app-orders></app-orders>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa-solid fa-map-location-dot"></i>&nbsp;Mis direcciones
+        </ng-template>
+        <app-addresses></app-addresses>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <i class="fa-solid fa-gear"></i>&nbsp;Configuración
+        </ng-template>
+        <app-configurations></app-configurations>
+    </mat-tab>
+</mat-tab-group>

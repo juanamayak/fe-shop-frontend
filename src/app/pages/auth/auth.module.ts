@@ -8,8 +8,7 @@ import {MaterialModule} from "../../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 
 const routes: Routes = [
-    {path: 'login', component: LoginComponent},
-
+    {path: 'login', component: LoginComponent}
 ]
 
 
