@@ -1,23 +1,10 @@
-<app-auth-navbar></app-auth-navbar>
+<app-users-navbar></app-users-navbar>
 
 <mat-drawer-container class="w-full h-full" autosize>
 
     <mat-drawer-content>
         <main class="relative top-20">
-            <ul class="hidden text-sm font-medium text-center text-gray-500 shadow sm:flex">
-                <li class="w-full">
-                    <a [routerLink]="['perfil']" class="inline-block w-full p-4 text-gray-900 border-r border-gray-200 rounded-s-lg" aria-current="page">Profile</a>
-                </li>
-                <li class="w-full">
-                    <a [routerLink]="['pedidos']" class="inline-block w-full p-4 text-gray-900 border-r border-gray-200 rounded-s-lg" aria-current="page">Profile</a>
-                </li>
-                <li class="w-full">
-                    <a [routerLink]="['direcciones']" class="inline-block w-full p-4 text-gray-900 border-r border-gray-200 rounded-s-lg" aria-current="page">Profile</a>
-                </li>
-                <li class="w-full">
-                    <a [routerLink]="['configuracion']" class="inline-block w-full p-4 text-gray-900 border-r border-gray-200 rounded-s-lg" aria-current="page">Profile</a>
-                </li>
-            </ul>
+            <app-users-toolbar></app-users-toolbar>
             <router-outlet></router-outlet>
         </main>
 

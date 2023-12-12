@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {BaseComponent} from "./layouts/base/base.component";
 import {UsersLayoutComponent} from "./layouts/users-layout/users-layout.component";
+import {MainLayoutComponent} from "./layouts/main-layout/main-layout.component";
 
 const routes: Routes = [
     {
-        path: '',
+        path: 'users',
         component: UsersLayoutComponent,
         children: [
             {
@@ -26,7 +26,7 @@ const routes: Routes = [
     },
     {
         path: '',
-        component: BaseComponent,
+        component: MainLayoutComponent,
         children: [
             {
                 path: '',
