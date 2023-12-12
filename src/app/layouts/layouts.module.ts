@@ -5,22 +5,22 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {BaseComponent} from './base/base.component';
 import {ComponentsModule} from "../components/components.module";
 import {MaterialModule} from "../material/material.module";
-import { AuthBaseComponent } from './auth-base/auth-base.component';
-import { AccountBaseComponent } from './account-base/account-base.component';
+import {AccountModule} from "../pages/account/account.module";
+import { UsersLayoutComponent } from './users-layout/users-layout.component';
 
 
 @NgModule({
     declarations: [
-        BaseComponent,
-        AuthBaseComponent,
-        AccountBaseComponent
+        BaseComponent, UsersLayoutComponent+
+        UsersLayoutComponent
     ],
     imports: [
         CommonModule,
         RouterModule,
         ReactiveFormsModule,
         MaterialModule,
-        ComponentsModule
+        ComponentsModule,
+        AccountModule
     ]
 })
 export class LayoutsModule {

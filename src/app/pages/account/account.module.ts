@@ -4,9 +4,10 @@ import {ProfileComponent} from './profile/profile.component';
 import {RouterModule, Routes} from "@angular/router";
 import {MaterialModule} from "../../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import { OrdersComponent } from './orders/orders.component';
-import { AddressesComponent } from './addresses/addresses.component';
-import { ConfigurationsComponent } from './configurations/configurations.component';
+import {OrdersComponent} from './orders/orders.component';
+import {AddressesComponent} from './addresses/addresses.component';
+import {ConfigurationsComponent} from './configurations/configurations.component';
+
 
 const routes: Routes = [
     {path: 'perfil', component: ProfileComponent},
@@ -21,6 +22,9 @@ const routes: Routes = [
         OrdersComponent,
         AddressesComponent,
         ConfigurationsComponent
+    ],
+    exports: [
+        ProfileComponent
     ],
     imports: [
         CommonModule,

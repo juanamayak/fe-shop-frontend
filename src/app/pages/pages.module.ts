@@ -5,6 +5,7 @@ import {HomeComponent} from "./home/home.component";
 import {AccountComponent} from './account/account.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {AccountModule} from "./account/account.module";
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent}
@@ -14,12 +15,14 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         HomeComponent,
-        AccountComponent
+        AccountComponent,
+        UsersComponent
     ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        MatTabsModule
+        MatTabsModule,
+        AccountModule
     ]
 })
 export class PagesModule {

@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {BaseComponent} from "./layouts/base/base.component";
-import {AuthBaseComponent} from "./layouts/auth-base/auth-base.component";
-import {AccountBaseComponent} from "./layouts/account-base/account-base.component";
+import {UsersLayoutComponent} from "./layouts/users-layout/users-layout.component";
 
 const routes: Routes = [
     {
-        path: 'auth',
-        component: AuthBaseComponent,
+        path: '',
+        component: UsersLayoutComponent,
         children: [
             {
                 path: '',
-                loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+                loadChildren: () => import('./pages/users/users.module').then(m => m.UsersModule)
             },
         ]
     },
     {
         path: 'cuenta',
-        component: AccountBaseComponent,
+        component: UsersLayoutComponent,
         children: [
             {
                 path: '',
