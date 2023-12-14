@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 /* Navbar Custom */
 .bg-header {
     @apply bg-[#f2999b];
@@ -14,21 +16,6 @@ button {
     @apply rounded-md !important;
 }
 /* End Button Custom */
-
-/* Success Styling */
-
-.mat-mdc-button.mat-success,
-.mat-mdc-outlined-button.mat-success {
-    @apply text-teal-600;
-}
-
-.mat-mdc-unelevated-button.mat-success,
-.mat-mdc-raised-button.mat-success {
-    @apply bg-teal-600 text-white;
-}
-
-/* End Success Styling */
-
 
 /* Custom Input Styling */
 .mat-form-field {
@@ -44,4 +31,7 @@ button {
 }
 
 /* End Custom Input Styling*/
+
+
+
 

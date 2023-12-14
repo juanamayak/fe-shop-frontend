@@ -6,6 +6,7 @@ import { UsersNavbarComponent } from './shared/users-navbar/users-navbar.compone
 import { MainHeaderComponent } from './shared/main-header/main-header.component';
 import { MainFooterComponent } from './shared/main-footer/main-footer.component';
 import { MainNavbarComponent } from './shared/main-navbar/main-navbar.component';
+import {MaterialModule} from "../material/material.module";
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { MainNavbarComponent } from './shared/main-navbar/main-navbar.component'
     ],
     imports: [
         CommonModule,
-        RouterLink
+        RouterLink,
+        MaterialModule
     ]
 })
 export class ComponentsModule {
