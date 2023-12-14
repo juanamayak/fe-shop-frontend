@@ -48,7 +48,7 @@
 </div>-->
 
 <div class="flex flex-col flex-auto items-center py-12 sm:justify-center min-w-0">
-    <div class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:border sm:border-slate-200">
+    <div class="w-full sm:w-auto py-8 px-4 sm:p-12 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
         <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
             <!-- Logo -->
             <div class="w-12">
@@ -73,6 +73,9 @@
                     <mat-label class="mb-2 block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
                     <mat-form-field appearance="outline" class="w-full">
                         <input matInput id="email" type="email">
+                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                            &nbsp;<i class="fa-solid fa-envelope"></i>
+                        </span>
                     </mat-form-field>
                 </div>
 
@@ -89,6 +92,9 @@
                             id="password"
                             matInput
                             type="password">
+                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
                     </mat-form-field>
                 </div>
 
@@ -103,7 +109,7 @@
                 <!-- Separator -->
                 <div class="flex items-center mt-8">
                     <div class="flex-auto mt-px border-t"></div>
-                    <div class="mx-2 text-sm text-slate-400">O ingresa con </div>
+                    <div class="mx-2 text-sm text-slate-400">O ingresa con</div>
                     <div class="flex-auto mt-px border-t"></div>
                 </div>
 
