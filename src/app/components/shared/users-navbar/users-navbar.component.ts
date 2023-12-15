@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class UsersNavbarComponent implements OnInit {
 
-    public session: boolean = false;
+    public session: boolean = true;
 
     constructor(
         public router: Router

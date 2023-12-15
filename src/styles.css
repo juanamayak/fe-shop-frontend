@@ -11,11 +11,6 @@
 
 /* End Navbar */
 
-/* Buttons Custom */
-button {
-    @apply rounded-md !important;
-}
-/* End Button Custom */
 
 /* Custom Input Styling */
 .mat-form-field {
@@ -25,6 +20,7 @@ button {
 .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
     @apply py-2.5;
 }
+
 
 .mat-mdc-form-field-infix {
     min-height: 30px;

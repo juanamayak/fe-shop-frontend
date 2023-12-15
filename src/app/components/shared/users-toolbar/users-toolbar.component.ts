@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class UsersToolbarComponent {
 
-    public session: boolean = false;
+    public session: boolean = true;
 
 }
