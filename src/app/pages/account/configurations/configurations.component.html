@@ -1,1 +1,62 @@
-<p>configurations works!</p>
+<div class="lg:px-10 lg:py-10">
+    <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0">
+        <div class="w-full max-w-2xl space-y-5">
+            <!-- Title and action buttons -->
+            <div class="flex items-center w-full">
+
+                <div class="text-xl font-semibold"><i class="fa-solid fa-shield-halved"></i>&nbsp;Configuración y Privacidad</div>
+            </div>
+
+            <div class="border-b border-gray-900/10 pb-5">
+                <div>
+                    <p class="text-slate-600">Cambiar contraseña</p>
+                </div>
+
+                <form class="w-2/3 mt-5">
+                    <div>
+                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">
+                            Contraseña anterior
+                        </mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">
+                            Nueva contraseña
+                        </mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput>
+                            <span matSuffix class="text-slate-300 text-sm mr-3">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">
+                            Confirmar contraseña
+                        </mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput>
+                            <span matSuffix class="text-slate-300 text-sm mr-3">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                        </mat-form-field>
+                    </div>
+
+                    <button mat-flat-button color="primary"><i class="fa-solid fa-pen-to-square"></i>&nbsp;Cambiar contraseña</button>
+                </form>
+            </div>
+            <div class="border-b border-gray-900/10 pb-5">
+                <div>
+                    <p class="text-red-600">Eliminar cuenta</p>
+                    <p class="text-slate-500 text-sm">Una vez que eliminas tu cuenta, no hay vuelta atrás. Por favor esté seguro.</p>
+                </div>
+
+                <button mat-stroked-button color="warn" class="mt-5">
+                    <i class="fa-solid fa-trash-can"></i>&nbsp;Eliminar mi cuenta
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

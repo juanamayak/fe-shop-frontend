@@ -1,1 +1,43 @@
-<p>addresses works!</p>
+<div class="lg:px-10 lg:py-10">
+    <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0">
+        <div class="w-full max-w-2xl space-y-5">
+            <!-- Title and action buttons -->
+            <div class="flex items-center justify-between w-full">
+                <div class="text-xl font-semibold">Direcciones</div>
+                <button mat-flat-button color="primary">
+                    <i class="fa-solid fa-location-dot"></i>&nbsp;Agregar dirección
+                </button>
+            </div>
+            <div class="flex gap-3 py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
+                <i class="fa-regular fa-map fa-xl text-slate-400"></i>
+                <div class="w-full space-y-5">
+                    <div class="flex justify-between w-full">
+                        <div>
+                            <div class="text-md">Juan Enrique Amaya Ku</div>
+                            <div class="text-sm text-slate-600">9842461942</div>
+                        </div>
+                        <div>
+                            <button [matMenuTriggerFor]="menu" class="px-3 py-2 rounded-full hover:bg-slate-100">
+                                <i class="fa-solid fa-ellipsis-vertical fa-lg text-slate-500"></i>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <i class="fa-solid fa-pen-to-square"></i>&nbsp;Editar
+                                </button>
+                                <button mat-menu-item>
+                                    <span class="text-red-600"><i class="fa-solid fa-trash-can"></i>&nbsp;Eliminar</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col text-slate-600 text-sm">
+                        <span>Calle 16 / 40 y 45. </span>
+                        <span>Playa del Carmen, Quintana Roo. 77710</span>
+                        <span>Casa color azul entre el edificio blanco</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

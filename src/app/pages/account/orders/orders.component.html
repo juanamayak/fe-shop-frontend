@@ -1,8 +1,7 @@
 <div class="lg:px-10 lg:py-10">
-    <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0">
-        <div class="w-full max-w-6xl py-8 px-4 sm:p-12 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
-            <div class="w-full mx-auto sm:mx-0">
-                <!-- Title and action buttons -->
+    <div class="flex flex-col space-y-8 flex-auto items-center sm:justify-center min-w-0">
+        <div class="w-full max-w-6xl py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
+            <div class="w-full mx-auto sm:mx-0 mb-5">
                 <div class="flex items-center justify-between w-full">
                     <div class="flex gap-10">
                         <div>
@@ -32,65 +31,108 @@
                         </button>
                     </div>
                 </div>
-                <div class="mt-6 border-t border-gray-100">
-                    <dl class="divide-y divide-gray-100">
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900">Full name</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Margot Foster</dd>
+            </div>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Producto
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Precio
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="bg-white border-b">
+                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
+                        <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
+                        <div class="ps-3">
+                            <div class="text-base font-semibold">Nomad Shopping Tote</div>
                         </div>
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900">Application for</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Backend Developer</dd>
+                    </th>
+                    <td class="px-6 py-4">
+                        $500.00
+                    </td>
+                </tr>
+                <tr class="bg-white border-b">
+                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
+                        <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
+                        <div class="ps-3">
+                            <div class="text-base font-semibold">Nomad Shopping Tote</div>
                         </div>
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900">Email address</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">margotfosterexample.com</dd>
+                    </th>
+                    <td class="px-6 py-4">
+                        $500.00
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="px-6 py-4">
+                <p class="text-sm text-slate-400"><i class="fa-solid fa-circle-check text-green-500"></i> Entregado el July 12, 2021</p>
+            </div>
+        </div>
+        <div class="w-full max-w-6xl py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
+            <div class="w-full mx-auto sm:mx-0 mb-5">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex gap-10">
+                        <div>
+                            <div class="text-sm font-semibold">Número de orden</div>
+                            <div class="text-md font-medium text-slate-500">
+                                WU88191111
+                            </div>
                         </div>
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900">Salary expectation</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">$120,000</dd>
+                        <div>
+                            <div class="text-sm font-semibold">Fecha de orden</div>
+                            <div class="text-md font-medium text-slate-500">
+                                Jul 6, 2021
+                            </div>
                         </div>
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900">About</dt>
-                            <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur mollit ad adipisicing reprehenderit deserunt qui eu.</dd>
+                        <div>
+                            <div class="text-sm font-semibold">Total</div>
+                            <div class="text-md font-medium text-slate-500">
+                                $160.00
+                            </div>
                         </div>
-                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                            <dt class="text-sm font-medium leading-6 text-gray-900">Attachments</dt>
-                            <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
-                                    <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                        <div class="flex w-0 flex-1 items-center">
-                                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
-                                            </svg>
-                                            <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                                                <span class="truncate font-medium">resume_back_end_developer.pdf</span>
-                                                <span class="flex-shrink-0 text-gray-400">2.4mb</span>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4 flex-shrink-0">
-                                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                                        </div>
-                                    </li>
-                                    <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                        <div class="flex w-0 flex-1 items-center">
-                                            <svg class="h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd" d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z" clip-rule="evenodd" />
-                                            </svg>
-                                            <div class="ml-4 flex min-w-0 flex-1 gap-2">
-                                                <span class="truncate font-medium">coverletter_back_end_developer.pdf</span>
-                                                <span class="flex-shrink-0 text-gray-400">4.5mb</span>
-                                            </div>
-                                        </div>
-                                        <div class="ml-4 flex-shrink-0">
-                                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </dd>
-                        </div>
-                    </dl>
+                    </div>
+
+                    <div class="flex space-x-3">
+                        <button mat-stroked-button>
+                            <i class="fa-solid fa-file-invoice"></i>
+                            Ver resumen
+                        </button>
+                    </div>
                 </div>
+            </div>
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Producto
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Precio
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="bg-white border-b">
+                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
+                        <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
+                        <div class="ps-3">
+                            <div class="text-base font-semibold">Nomad Shopping Tote</div>
+                        </div>
+                    </th>
+                    <td class="px-6 py-4">
+                        $500.00
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="px-6 py-4">
+                <p class="text-sm text-slate-400"><i class="fa-solid fa-circle-check text-green-500"></i> Entregado el July 12, 2021</p>
             </div>
         </div>
     </div>
