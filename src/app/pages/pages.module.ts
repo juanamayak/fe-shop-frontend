@@ -5,10 +5,16 @@ import {HomeComponent} from "./home/home.component";
 import {AccountComponent} from './account/account.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {AccountModule} from "./account/account.module";
-import { UsersComponent } from './users/users.component';
+import {UsersComponent} from './users/users.component';
+import { ProductsComponent } from './products/products.component';
+import {MaterialModule} from "../material/material.module";
+import {FormsModule} from "@angular/forms";
+import { ProductsDetailComponent } from './products/products-detail/products-detail.component';
 
 const routes: Routes = [
-    {path: '', component: HomeComponent}
+    {path: '', component: HomeComponent},
+    {path: 'productos', component: ProductsComponent},
+    {path: 'productos/detalle', component: ProductsDetailComponent}
 
 ]
 
@@ -16,13 +22,17 @@ const routes: Routes = [
     declarations: [
         HomeComponent,
         AccountComponent,
-        UsersComponent
+        UsersComponent,
+        ProductsComponent,
+        ProductsDetailComponent
     ],
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
         MatTabsModule,
-        AccountModule
+        AccountModule,
+        MaterialModule,
+        FormsModule
     ]
 })
 export class PagesModule {

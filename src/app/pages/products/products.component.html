@@ -1,0 +1,147 @@
+<!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<div class="bg-[#fff8f3]">
+    <div>
+        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between border-b border-gray-200 pb-6 pt-24">
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Flores</h1>
+
+                <div class="flex items-center gap-3">
+                    <button mat-flat-button color="primary">
+                        <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Buscar productos
+                    </button>
+                    <div>
+                        <button mat-stroked-button [matMenuTriggerFor]="menu">
+                            Ordenar
+                            <i class="fa-solid fa-angle-down"></i>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>
+                                <span><i class="fa-solid fa-arrow-down-1-9"></i>&nbsp;Precio: Menor a Mayor</span>
+                            </button>
+                            <button mat-menu-item>
+                                <span><i class="fa-solid fa-arrow-up-9-1"></i>&nbsp;Precio: Mayor a Menor</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+                </div>
+            </div>
+
+            <section class="pb-24 pt-6">
+                <div class="grid grid-cols-4 gap-x-8 gap-y-10">
+
+                    <div>
+                        <div class="py-6">
+                            <mat-label class="block text-sm font-medium text-slate-700">
+                                Buscar por nombre o código
+                            </mat-label>
+                            <mat-form-field appearance="outline" class="w-full">
+                                <input matInput>
+                            </mat-form-field>
+                        </div>
+                        <form class="border-t border-gray-200 py-6">
+                            <mat-label class="block text-sm font-medium text-slate-700">Rango de precio</mat-label>
+                            <mat-slider min="200" max="500" discrete>
+                                <input value="300" matSliderStartThumb>
+                                <input value="400" matSliderEndThumb>
+                            </mat-slider>
+                        </form>
+
+                        <form class="flex flex-col border-t border-gray-200 py-6">
+                            <mat-checkbox>Subcategoria 1</mat-checkbox>
+                            <mat-checkbox>Subcategoria 2</mat-checkbox>
+                            <mat-checkbox>Subcategoria 3</mat-checkbox>
+                            <mat-checkbox>Subcategoria 4</mat-checkbox>
+                            <mat-checkbox>Subcategoria 5</mat-checkbox>
+                            <mat-checkbox>Subcategoria 6</mat-checkbox>
+                        </form>
+                    </div>
+
+                    <!-- Product grid -->
+                    <div class="col-span-3">
+                        <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                            <a [routerLink]="['/productos/detalle']" class="group">
+                                <div
+                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                    <img
+                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
+                                        alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+                                        class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                </div>
+                                <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+                                <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+                            </a>
+                            <a href="#" class="group">
+                                <div
+                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                    <img
+                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg"
+                                        alt="Olive drab green insulated bottle with flared screw lid and flat top."
+                                        class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                </div>
+                                <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
+                                <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+                            </a>
+                            <a href="#" class="group">
+                                <div
+                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                    <img
+                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg"
+                                        alt="Person using a pen to cross a task off a productivity paper card."
+                                        class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                </div>
+                                <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
+                                <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
+                            </a>
+                            <a href="#" class="group">
+                                <div
+                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                    <img
+                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg"
+                                        alt="Tall slender porcelain bottle with natural clay textured body and cork stopper."
+                                        class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                </div>
+                                <h3 class="mt-4 text-sm text-gray-700">Earthen Bottle</h3>
+                                <p class="mt-1 text-lg font-medium text-gray-900">$48</p>
+                            </a>
+                            <a href="#" class="group">
+                                <div
+                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                    <img
+                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg"
+                                        alt="Olive drab green insulated bottle with flared screw lid and flat top."
+                                        class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                </div>
+                                <h3 class="mt-4 text-sm text-gray-700">Nomad Tumbler</h3>
+                                <p class="mt-1 text-lg font-medium text-gray-900">$35</p>
+                            </a>
+                            <a href="#" class="group">
+                                <div
+                                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                                    <img
+                                        src="https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg"
+                                        alt="Person using a pen to cross a task off a productivity paper card."
+                                        class="h-full w-full object-cover object-center group-hover:opacity-75">
+                                </div>
+                                <h3 class="mt-4 text-sm text-gray-700">Focus Paper Refill</h3>
+                                <p class="mt-1 text-lg font-medium text-gray-900">$89</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
