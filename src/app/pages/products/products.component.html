@@ -19,9 +19,9 @@
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">Flores</h1>
 
                 <div class="flex items-center gap-3">
-                    <button mat-flat-button color="primary">
+                    <!--<button mat-flat-button color="primary">
                         <i class="fa-solid fa-magnifying-glass"></i>&nbsp;Buscar productos
-                    </button>
+                    </button>-->
                     <div>
                         <button mat-stroked-button [matMenuTriggerFor]="menu">
                             Ordenar
@@ -41,33 +41,56 @@
 
             <section class="pb-24 pt-6">
                 <div class="grid grid-cols-4 gap-x-8 gap-y-10">
+                    <form>
 
-                    <div>
-                        <div class="py-6">
+                        <div class="space-y-3">
                             <mat-label class="block text-sm font-medium text-slate-700">
-                                Buscar por nombre o código
+                                ¿A qué ciudad deseas hacer tu envio?
                             </mat-label>
                             <mat-form-field appearance="outline" class="w-full">
-                                <input matInput>
+                                <mat-select>
+                                    <mat-option></mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
-                        <form class="border-t border-gray-200 py-6">
-                            <mat-label class="block text-sm font-medium text-slate-700">Rango de precio</mat-label>
-                            <mat-slider min="200" max="500" discrete>
-                                <input value="300" matSliderStartThumb>
-                                <input value="400" matSliderEndThumb>
-                            </mat-slider>
-                        </form>
 
-                        <form class="flex flex-col border-t border-gray-200 py-6">
+                        <div class="space-y-3">
+                            <mat-form-field appearance="outline" class="w-full">
+                                <mat-select>
+                                    <mat-option></mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200 space-y-3 py-6">
+                            <mat-label class="block text-sm font-medium text-slate-700">Buscar por nombre o código</mat-label>
+                            <mat-form-field appearance="outline" class="w-full">
+                                <input matInput >
+                            </mat-form-field>
+                        </div>
+
+                        <div class="border-t border-gray-200 space-y-3 py-6">
+                            <mat-label class="block text-sm font-medium text-slate-700">Rango de precio</mat-label>
+                            <div class="flex gap-3">
+                                <mat-form-field appearance="outline">
+                                    <input matInput currencyMask placeholder="Min">
+                                </mat-form-field>
+                                <hr class="w-16 h-1 mx-auto my-5 bg-gray-400 border-0">
+                                <mat-form-field appearance="outline">
+                                    <input matInput currencyMask placeholder="Max">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-gray-200 py-6">
                             <mat-checkbox>Subcategoria 1</mat-checkbox>
                             <mat-checkbox>Subcategoria 2</mat-checkbox>
                             <mat-checkbox>Subcategoria 3</mat-checkbox>
                             <mat-checkbox>Subcategoria 4</mat-checkbox>
                             <mat-checkbox>Subcategoria 5</mat-checkbox>
                             <mat-checkbox>Subcategoria 6</mat-checkbox>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
 
                     <!-- Product grid -->
                     <div class="col-span-3">
