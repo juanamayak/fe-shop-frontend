@@ -7,6 +7,9 @@ import { MainHeaderComponent } from './shared/main-header/main-header.component'
 import { MainFooterComponent } from './shared/main-footer/main-footer.component';
 import { MainNavbarComponent } from './shared/main-navbar/main-navbar.component';
 import {MaterialModule} from "../material/material.module";
+import { ProductSliderComponent } from './product-slider/product-slider.component';
+import {CarouselModule} from "ngx-owl-carousel-o";
+import {LightboxModule} from "ngx-lightbox";
 
 @NgModule({
     declarations: [
@@ -14,19 +17,22 @@ import {MaterialModule} from "../material/material.module";
         UsersNavbarComponent,
         MainHeaderComponent,
         MainFooterComponent,
-        MainNavbarComponent
+        MainNavbarComponent,
+        ProductSliderComponent
     ],
     exports: [
         MainHeaderComponent,
         MainNavbarComponent,
         MainFooterComponent,
         UsersNavbarComponent,
-        UsersToolbarComponent
+        UsersToolbarComponent,
+        ProductSliderComponent
     ],
     imports: [
         CommonModule,
         RouterLink,
-        MaterialModule
+        MaterialModule,
+        LightboxModule
     ]
 })
 export class ComponentsModule {

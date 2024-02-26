@@ -36,6 +36,8 @@
                             "src/.htaccess"
                         ],
                         "styles": [
+                            "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+                            "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
                             "@angular/material/prebuilt-themes/indigo-pink.css",
                             "src/custom.scss",
                             "./node_modules/@fortawesome/fontawesome-free/css/all.css",

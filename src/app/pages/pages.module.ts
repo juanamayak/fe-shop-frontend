@@ -11,6 +11,7 @@ import {MaterialModule} from "../material/material.module";
 import {FormsModule} from "@angular/forms";
 import { ProductsDetailComponent } from './products/products-detail/products-detail.component';
 import {CurrencyMaskModule} from "ng2-currency-mask";
+import {ComponentsModule} from "../components/components.module";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -34,7 +35,8 @@ const routes: Routes = [
         AccountModule,
         MaterialModule,
         FormsModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        ComponentsModule
     ]
 })
 export class PagesModule {
