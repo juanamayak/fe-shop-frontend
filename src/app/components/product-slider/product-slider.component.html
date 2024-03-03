@@ -1,3 +1,1 @@
-<div *ngFor="let image of _albums; let i=index">
-    <img [src]="image.thumb" (click)="open(i)" />
-</div>
+<ks-carousel [id]="100" [images]="images" [config]="carouselConfig"></ks-carousel>

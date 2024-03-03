@@ -8,8 +8,7 @@ import { MainFooterComponent } from './shared/main-footer/main-footer.component'
 import { MainNavbarComponent } from './shared/main-navbar/main-navbar.component';
 import {MaterialModule} from "../material/material.module";
 import { ProductSliderComponent } from './product-slider/product-slider.component';
-import {CarouselModule} from "ngx-owl-carousel-o";
-import {LightboxModule} from "ngx-lightbox";
+import {GalleryModule} from "@ks89/angular-modal-gallery";
 
 @NgModule({
     declarations: [
@@ -32,7 +31,7 @@ import {LightboxModule} from "ngx-lightbox";
         CommonModule,
         RouterLink,
         MaterialModule,
-        LightboxModule
+        GalleryModule
     ]
 })
 export class ComponentsModule {

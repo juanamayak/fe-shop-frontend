@@ -1,78 +1,51 @@
-import { Component } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Lightbox } from 'ngx-lightbox';
+import {Component} from '@angular/core';
+import {CarouselLibConfig, Image} from "@ks89/angular-modal-gallery";
 
 @Component({
-  selector: 'app-product-slider',
-  templateUrl: './product-slider.component.html',
-  styleUrl: './product-slider.component.css'
+    selector: 'app-product-slider',
+    templateUrl: './product-slider.component.html',
+    styleUrl: './product-slider.component.css'
 })
 export class ProductSliderComponent {
 
-    customOptions: OwlOptions = {
-        margin:10,
-        loop: true,
-        mouseDrag: true,
-        touchDrag: false,
-        pullDrag: false,
-        dots: true,
-        navSpeed: 700,
-        navText: ['', ''],
-        autoWidth:true,
-        items: 1,
-        URLhashListener:true,
-        startPosition: 'URLHash',
-        /*responsive: {
-            0: {
-                items: 1
-            },
-            400: {
-                items: 2
-            },
-            740: {
-                items: 3
-            },
-            940: {
-                items: 4
-            }
-        },*/
-        nav: false
-    }
-
-    images = [
-        { id: 1, path: 'assets/default-product.jpg' },
-        { id: 2, path: 'assets/default-product.jpg' },
-        { id: 3, path: 'assets/default-product.jpg' },
-        { id: 4, path: 'assets/default-product.jpg' },
-        { id: 5, path: 'assets/default-product.jpg' },
-        { id: 6, path: 'assets/default-product.jpg' }
+    public images: Image[] = [
+        new Image(1, {img: 'assets/default-product.jpg'}),
+        new Image(2, {img: 'assets/default-product.jpg'}),
+        new Image(3, {img: 'assets/default-product.jpg'})
     ];
 
-    public _albums: any[] = [];
-    constructor(private _lightbox: Lightbox) {
-        for (let i = 1; i <= 4; i++) {
-            const src = 'demo/img/image' + i + '.jpg';
-            const caption = 'Image ' + i + ' caption here';
-            const thumb = 'demo/img/image' + i + '-thumb.jpg';
-            const album = {
-                src: src,
-                caption: caption,
-                thumb: thumb
-            };
-
-            this._albums.push(album);
+    carouselConfig: CarouselLibConfig = {
+        carouselSlideInfinite: false,
+        carouselDotsConfig: {
+            visible: false
+        },
+        carouselConfig: {
+            maxWidth: '100%',
+            maxHeight: '100%',
+            showArrows: true,
+            objectFit: 'cover',
+            keyboardEnable: true,
+            modalGalleryEnable: true
+        },
+        carouselPlayConfig: {
+            autoPlay: false,
+            interval: 5000,
+            pauseOnHover: true
+        },
+        carouselPreviewsConfig: {
+            visible: true,
+            number: 3,
+            width: 'auto',
+            maxHeight: '100%'
         }
+    };
+
+    constructor() {
+
     }
 
-    open(index: number): void {
-        // open lightbox
-        this._lightbox.open(this._albums, index);
+    test(event: any) {
+        console.log(event);
     }
-
-    close(): void {
-        // close lightbox programmatically
-        this._lightbox.close();
-    }
-
 
 }
