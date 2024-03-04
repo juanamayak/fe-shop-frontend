@@ -1,20 +1,20 @@
 @use '@angular/material' as mat;
 
 $fe-primary-pallet: (
-    50 : #fee8ec,
-    100 : #fcc5cf,
-    200 : #fa9faf,
-    300 : #f7798e,
-    400 : #f65c76,
-    500 : #f43f5e,
-    600 : #f33956,
-    700 : #f1314c,
-    800 : #ef2942,
-    900 : #ec1b31,
+    50 : #fdf3f3,
+    100 : #fbe0e1,
+    200 : #f9cccd,
+    300 : #f6b8b9,
+    400 : #f4a8aa,
+    500 : #f2999b,
+    600 : #f09193,
+    700 : #ee8689,
+    800 : #ec7c7f,
+    900 : #e86b6d,
     A100 : #ffffff,
-    A200 : #ffecee,
-    A400 : #ffb9bf,
-    A700 : #ffa0a8,
+    A200 : #ffffff,
+    A400 : #fff6f7,
+    A700 : #ffddde,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -39,13 +39,18 @@ $my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
 // The "warn" palette is optional and defaults to red if not specified.
 $my-warn: mat.define-palette(mat.$red-palette);
 
+$fe-typography: mat.define-typography-config(
+    $font-family: 'Montserrat'
+);
+
+
 $theme: mat.define-light-theme((
     color: (
         primary: $primary,
         accent: $my-accent,
         warn: $my-warn,
     ),
-    typography: mat.define-typography-config(),
+    typography: $fe-typography,
     density: 0,
 ));
 

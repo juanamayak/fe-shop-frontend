@@ -1,4 +1,4 @@
-<main class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+<main class="mx-auto max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid w-full grid-cols-2 items-start gap-10">
         <div>
             <app-product-slider></app-product-slider>
@@ -13,7 +13,8 @@
 
             <p class="text-4xl font-bold text-[#f2999b]">$192</p>
 
-            <button mat-flat-button color="primary" class="w-full text-xl font-bold uppercase">
+            <button mat-flat-button color="primary" class="w-full text-lg font-bold uppercase"
+                    (click)="addToShoppingCart()">
                 <i class="fa-solid fa-cart-shopping"></i>&nbsp;Añadir al carrito
             </button>
 

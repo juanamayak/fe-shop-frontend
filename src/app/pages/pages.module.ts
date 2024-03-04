@@ -12,11 +12,13 @@ import {FormsModule} from "@angular/forms";
 import { ProductsDetailComponent } from './products/products-detail/products-detail.component';
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {ComponentsModule} from "../components/components.module";
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'productos', component: ProductsComponent},
-    {path: 'productos/detalle', component: ProductsDetailComponent}
+    {path: 'productos/detalle', component: ProductsDetailComponent},
+    {path: 'carrito', component: ShoppingCartComponent}
 
 ]
 
@@ -26,7 +28,8 @@ const routes: Routes = [
         AccountComponent,
         UsersComponent,
         ProductsComponent,
-        ProductsDetailComponent
+        ProductsDetailComponent,
+        ShoppingCartComponent
     ],
     imports: [
         CommonModule,
