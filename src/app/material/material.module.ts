@@ -11,6 +11,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTableModule} from "@angular/material/table";
 import {MatSliderModule} from "@angular/material/slider";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
     declarations: [],
@@ -26,7 +28,9 @@ import {MatSliderModule} from "@angular/material/slider";
         MatSelectModule,
         MatMenuModule,
         MatTableModule,
-        MatSliderModule
+        MatSliderModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     exports: [
         MatSidenavModule,
@@ -39,7 +43,9 @@ import {MatSliderModule} from "@angular/material/slider";
         MatSelectModule,
         MatMenuModule,
         MatTableModule,
-        MatSliderModule
+        MatSliderModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 export class MaterialModule {
