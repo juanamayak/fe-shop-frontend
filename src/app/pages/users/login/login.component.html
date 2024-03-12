@@ -66,13 +66,13 @@
             </div>
 
             <!-- Sign in form -->
-            <form
+            <form [formGroup]="loginForm"
                 class="mt-8">
 
                 <div>
                     <mat-label class="mb-2 block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
                     <mat-form-field appearance="outline" class="w-full">
-                        <input matInput id="email" type="email">
+                        <input matInput formControlName="email">
                         <span matSuffix class="text-slate-300 text-sm mr-3">
                             &nbsp;<i class="fa-solid fa-envelope"></i>
                         </span>
@@ -89,8 +89,8 @@
                     </div>
                     <mat-form-field appearance="outline" class="w-full">
                         <input
-                            id="password"
                             matInput
+                            formControlName="password"
                             type="password">
                         <span matSuffix class="text-slate-300 text-sm mr-3">
                             <i class="fa-solid fa-key"></i>

@@ -13,12 +13,14 @@ import { ProductsDetailComponent } from './products/products-detail/products-det
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {ComponentsModule} from "../components/components.module";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'productos', component: ProductsComponent},
     {path: 'productos/detalle', component: ProductsDetailComponent},
-    {path: 'carrito', component: ShoppingCartComponent}
+    {path: 'carrito', component: ShoppingCartComponent},
+    {path: 'checkout', component: CheckoutComponent}
 
 ]
 
@@ -29,7 +31,8 @@ const routes: Routes = [
         UsersComponent,
         ProductsComponent,
         ProductsDetailComponent,
-        ShoppingCartComponent
+        ShoppingCartComponent,
+        CheckoutComponent
     ],
     imports: [
         CommonModule,

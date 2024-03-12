@@ -6,6 +6,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutsModule} from "./layouts/layouts.module";
 import {PagesModule} from "./pages/pages.module";
 import {CurrencyMaskModule} from "ng2-currency-mask";
+import {NgxSpinnerModule} from "ngx-spinner";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     declarations: [
@@ -15,9 +17,11 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         PagesModule,
         LayoutsModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        NgxSpinnerModule
     ],
     exports: [
         AppComponent

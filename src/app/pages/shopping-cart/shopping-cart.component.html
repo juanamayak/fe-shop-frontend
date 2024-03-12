@@ -60,7 +60,8 @@
                 <ul class="space-y-1 text-gray-500 list-inside text-justify">
                     <li class="flex">
                         <i class="fa-regular fa-circle-check mr-5 mt-1"></i>
-                        Sabemos lo importante que es esta fecha, es por esto que nos comprometemos a entregar en el día y horario seleccionado.
+                        Sabemos lo importante que es esta fecha, es por esto que nos comprometemos a entregar en el día
+                        y horario seleccionado.
                     </li>
                     <li class="flex">
                         <i class="fa-regular fa-circle-check mr-5 mt-1"></i>
@@ -68,7 +69,8 @@
                     </li>
                     <li class="flex">
                         <i class="fa-regular fa-circle-check mr-5 mt-1"></i>
-                        En caso de no tener respuesta, entregaremos tu pedido con alguien cercano: vecino, compañero de trabajo o recepción.
+                        En caso de no tener respuesta, entregaremos tu pedido con alguien cercano: vecino, compañero de
+                        trabajo o recepción.
                     </li>
                     <li class="flex">
                         <i class="fa-regular fa-circle-check mr-5 mt-1"></i>
@@ -76,50 +78,89 @@
                     </li>
                 </ul>
 
-                <p class="text-md font-semibold text-[#f2999b]">Recuerda: todas las notificaciones de tu pedido llegarán a tu correo electrónico registrado.</p>
+                <p class="text-md font-semibold text-[#f2999b]">Recuerda: todas las notificaciones de tu pedido llegarán
+                    a tu correo electrónico registrado.</p>
             </div>
         </div>
 
-        <form action="" class="space-y-5">
-            <h3 class="text-sm font-medium text-slate-700">1. Selecciona fecha de envío</h3>
-            <div>
+        <div class="space-y-5">
+            <form action="" class="space-y-3">
+                <h3 class="text-sm font-medium text-slate-700">1. Selecciona fecha de envío</h3>
+                <div>
+                    <mat-form-field class="w-full" appearance="outline">
+                        <input matInput [matDatepicker]="datepicker" (click)="datepicker.open()">
+                        <mat-datepicker #datepicker>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancel</button>
+                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <h3 class="text-sm font-medium text-slate-700">2. Selecciona la hora de envío</h3>
                 <mat-form-field class="w-full" appearance="outline">
-                    <input matInput [matDatepicker]="datepicker" (click)="datepicker.open()">
-                    <mat-datepicker #datepicker>
-                        <mat-datepicker-actions>
-                            <button mat-button matDatepickerCancel>Cancel</button>
-                            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-                        </mat-datepicker-actions>
-                    </mat-datepicker>
+                    <mat-select>
+                        <mat-option value="option1">Option 1</mat-option>
+                        <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+                        <mat-option value="option3">Option 3</mat-option>
+                    </mat-select>
                 </mat-form-field>
+
+
+                <h3 class="text-sm font-medium text-slate-700">3. Complementar pedido (opcional)</h3>
+                <button mat-raised-button color="primary" class="w-full">
+                    <i class="fa-solid fa-cart-plus"></i>&nbsp;Ver más productos
+                </button>
+
+            </form>
+
+            <hr>
+
+            <div class="bg-slate-100 p-5 rounded-md">
+                <h3 class="text-sm font-semibold text-slate-700">Resumen de compra</h3>
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <tbody>
+                    <tr class="border-b">
+                        <th scope="row" class="font-medium text-gray-900">
+                            Subtotal
+                        </th>
+                        <td class="px-6 py-4 text-right">
+                            $150
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <th scope="row" class="font-medium text-gray-900">
+                            Horario de envio
+                        </th>
+                        <td class="px-6 py-4 text-right">
+                            $280
+                        </td>
+                    </tr>
+                    <tr class="border-b">
+                        <th scope="row" class="font-medium text-gray-900">
+                            Envio
+                        </th>
+                        <td class="px-6 py-4 text-right">
+                            $100
+                        </td>
+                    </tr>
+
+                    <tr class="">
+                        <th scope="row" class="font-semibold text-lg text-gray-900">
+                            Total
+                        </th>
+                        <td class="px-6 py-4 font-semibold text-lg text-right">
+                            $629
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <h3 class="text-sm font-medium text-slate-700">2. Selecciona la hora de envío</h3>
-            <div>
-                <input type="radio" id="hosting-small" name="hosting" value="hosting-small" class="hidden peer" required />
-                <label for="hosting-small" class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 ">
-                    <div class="block">
-                        <div class="w-full text-lg font-semibold">0-50 MB</div>
-                        <div class="w-full">Good for small websites</div>
-                    </div>
-                </label>
-            </div>
-
-            <div>
-                <input type="radio" id="hosting-big" name="hosting" value="hosting-big" class="hidden peer">
-                <label for="hosting-big" class="inline-flex items-center justify-between w-full p-5 text-green-500 bg-white border border-green-500 rounded-lg cursor-pointer peer-checked:border-green-500 peer-checked:text-green-500 hover:text-green-500 hover:bg-green-100">
-                    <div class="block">
-                        <div class="w-full text-lg font-semibold">500-1000 MB</div>
-                        <div class="w-full">Good for large websites</div>
-                    </div>
-                </label>
-            </div>
-
-            <h3 class="text-sm font-medium text-slate-700">3. Complementar pedido (opcional)</h3>
-            <button mat-raised-button color="primary" class="w-full">
-                <i class="fa-solid fa-cart-plus"></i>&nbsp;Ver más productos
+            <button mat-raised-button color="primary" class="w-full" (click)="createShoppingCart()">
+                <i class="fa-solid fa-credit-card"></i> Ir a pagar
             </button>
-
-        </form>
+        </div>
     </div>
 </main>
