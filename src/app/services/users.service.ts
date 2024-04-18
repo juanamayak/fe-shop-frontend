@@ -11,6 +11,9 @@ export class UsersService {
 
     public urlApi: string = environment.url;
 
+    public jwtToken = 'TK1983!';
+    public profileToken = 'PF849!';
+
     constructor(
         private httpClient: HttpClient,
         private router: Router
@@ -19,6 +22,16 @@ export class UsersService {
 
     public login(data: any): Observable<any> {
         return this.httpClient.post(`${this.urlApi}/users/login`, data);
+    }
+
+    getToken() {
+        const token = sessionStorage.getItem(this.jwtToken);
+
+        if (token) {
+            return token;
+        }
+
+        return null;
     }
 
 }

@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UsersService} from "../../../services/users.service";
 import {NgxSpinnerModule, NgxSpinnerService} from "ngx-spinner";
 import {FormBuilder, Validators} from "@angular/forms";
+import {AlertsService} from "../../../services/alerts.service";
 
 @Component({
     selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private usersService: UsersService,
         private formBuilder: FormBuilder,
+        private alertsService: AlertsService,
         private spinner: NgxSpinnerService,
         private router: Router
     ) {
@@ -38,10 +40,15 @@ export class LoginComponent implements OnInit {
         const data = this.loginForm.value;
         this.usersService.login(data).subscribe({
             next: res => {
-                console.log(res);
+                const token = res.token;
+                sessionStorage.setItem(this.usersService.jwtToken, token);
+                this.router.navigate(['cuenta/perfil']);
+
+                this.spinner.hide();
             },
             error: err => {
-                console.log(err);
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
             }
         })
     }
