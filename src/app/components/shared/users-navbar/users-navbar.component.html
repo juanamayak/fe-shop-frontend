@@ -11,36 +11,35 @@
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <div class="relative ml-3">
                     <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-3">
-                        <div *ngIf="!session">
-                            @if (router.url === '/users/login'){
-                            <button mat-raised-button [routerLink]="['registro']">
-                                <i class="fa-solid fa-user"></i>&nbsp;Crear cuenta
+                        @if (session) {
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                                <i class="fa-solid fa-circle-user text-white"></i>
                             </button>
-                            } @else {
-                            <button mat-raised-button [routerLink]="['login']">
-                                <i class="fa-solid fa-right-to-bracket"></i>&nbsp;Iniciar sesión
-                            </button>
-                            }
-                        </div>
-
-
-
-                        <button mat-icon-button  [matMenuTriggerFor]="menu">
-                            <i class="fa-solid fa-circle-user text-white"></i>
-                        </button>
-                        <mat-menu #menu="matMenu">
-                            <button mat-menu-item>
-                                <span><i class="fa-regular fa-user"></i>&nbsp;Mi cuenta</span>
-                            </button>
-                            <button mat-menu-item>
-                                <span><i class="fa-solid fa-store"></i>&nbsp;Mis pedidos</span>
-                            </button>
-                            <button mat-menu-item>
-                                <span><i class="fa-solid fa-power-off"></i>&nbsp;Salir</span>
-                            </button>
-                        </mat-menu>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item>
+                                    <span><i class="fa-regular fa-user"></i>&nbsp;Mi cuenta</span>
+                                </button>
+                                <button mat-menu-item>
+                                    <span><i class="fa-solid fa-store"></i>&nbsp;Mis pedidos</span>
+                                </button>
+                                <button mat-menu-item (click)="logout()">
+                                    <span><i class="fa-solid fa-power-off"></i>&nbsp;Salir</span>
+                                </button>
+                            </mat-menu>
+                        } @else {
+                            <div>
+                                @if (router.url === '/users/login') {
+                                    <button mat-raised-button [routerLink]="['registro']">
+                                        <i class="fa-solid fa-user"></i>&nbsp;Crear cuenta
+                                    </button>
+                                } @else {
+                                    <button mat-raised-button [routerLink]="['login']">
+                                        <i class="fa-solid fa-right-to-bracket"></i>&nbsp;Iniciar sesión
+                                    </button>
+                                }
+                            </div>
+                        }
                     </div>
-
                 </div>
             </div>
         </div>

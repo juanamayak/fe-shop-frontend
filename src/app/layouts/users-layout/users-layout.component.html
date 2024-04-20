@@ -1,10 +1,13 @@
-<app-users-navbar></app-users-navbar>
+<app-users-navbar [session]="session"></app-users-navbar>
 
 <mat-drawer-container class="w-full h-full" autosize>
 
     <mat-drawer-content>
         <main class="relative top-20">
-            <app-users-toolbar></app-users-toolbar>
+            @if (session){
+                <app-users-toolbar></app-users-toolbar>
+            }
+
             <router-outlet></router-outlet>
         </main>
 

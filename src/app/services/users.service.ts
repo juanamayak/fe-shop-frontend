@@ -21,7 +21,15 @@ export class UsersService {
     }
 
     public login(data: any): Observable<any> {
-        return this.httpClient.post(`${this.urlApi}/users/login`, data);
+        return this.httpClient.post(`${this.urlApi}/clients/login`, data);
+    }
+
+    public register(data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/clients/register`, data);
+    }
+
+    public verifyAccount(userUuid: any, verificationCode: any): Observable<any> {
+        return this.httpClient.get(`${this.urlApi}/clients/verify/${userUuid}/${verificationCode}`);
     }
 
     getToken() {

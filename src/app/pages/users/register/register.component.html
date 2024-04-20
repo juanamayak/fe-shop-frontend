@@ -6,112 +6,129 @@
                 <img src="assets/logotipo-floreria-envios.png">
             </div>
 
-            <!-- Title -->
-            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Crea tu cuenta</div>
-            <div class="flex text-sm items-baseline mt-0.5 font-medium">
-                <div>¿Ya tienes cuenta?</div>
-                <a
-                    class="ml-1 text-blue-600 hover:text-blue-500"
-                    [routerLink]="['/sign-up']">Inicia sesión
-                </a>
-            </div>
-
-            <!-- Sign in form -->
-            <form class="mt-8">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                        <mat-label class="block text-sm font-medium text-slate-700">
-                            Nombre(s)
-                        </mat-label>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <input matInput>
-                        </mat-form-field>
+            @if (createdAccount) {
+                <div id="alert-additional-content-3"
+                     class="p-4 my-4 text-green-800 border border-green-300 rounded-lg bg-green-50" role="alert">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-circle-check me-2"></i>
+                        <span class="sr-only">Info</span>
+                        <h3 class="text-lg font-medium">Tu cuenta se creo exitosamente</h3>
                     </div>
-                    <div>
-                        <mat-label class="block text-sm font-medium text-slate-700">Apellidos</mat-label>
-                        <mat-form-field appearance="outline" class="w-full">
-                            <input matInput>
-                            <span matSuffix class="text-slate-300 text-sm mr-3">
+                    <div class="mt-2 mb-4 text-sm">
+                        Te hemos enviado un correo electrónico. Por favor, verifica tu bandeja de entrada (revisa la
+                        carpeta de spam por si acaso) y haz clic en el enlace de activación que te hemos enviado. Una
+                        vez que actives tu cuenta, podrás iniciar sesión y comenzar a utilizar nuestra plataforma.
+                    </div>
+                </div>
+            } @else {
+                <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Crea tu cuenta</div>
+                <div class="flex text-sm items-baseline mt-0.5 font-medium">
+                    <div>¿Ya tienes cuenta?</div>
+                    <a
+                        class="ml-1 text-blue-600 hover:text-blue-500"
+                        [routerLink]="['/users/login']">Inicia sesión
+                    </a>
+                </div>
+
+                <form class="mt-8" [formGroup]="registerForm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <mat-label class="block text-sm font-medium text-slate-700">
+                                Nombre(s)
+                            </mat-label>
+                            <mat-form-field appearance="outline" class="w-full">
+                                <input matInput formControlName="name">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-label class="block text-sm font-medium text-slate-700">Apellidos</mat-label>
+                            <mat-form-field appearance="outline" class="w-full">
+                                <input matInput formControlName="lastname">
+                                <span matSuffix class="text-slate-300 text-sm mr-3">
                                 <i class="fa-solid fa-user"></i>
                             </span>
-                        </mat-form-field>
+                            </mat-form-field>
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <mat-label class="block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
-                    <mat-form-field appearance="outline" class="w-full">
-                        <input matInput id="email" type="email">
-                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                    <div>
+                        <mat-label class="block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput type="email" formControlName="email">
+                            <span matSuffix class="text-slate-300 text-sm mr-3">
                             <i class="fa-solid fa-at"></i>
                         </span>
-                    </mat-form-field>
-                </div>
+                        </mat-form-field>
+                    </div>
 
-                <div>
-                    <mat-label class="block text-sm font-medium text-slate-700">Teléfono</mat-label>
-                    <mat-form-field appearance="outline" class="w-full">
-                        <input matInput id="email" type="email">
-                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                    <div>
+                        <mat-label class="block text-sm font-medium text-slate-700">Teléfono</mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput formControlName="cellphone">
+                            <span matSuffix class="text-slate-300 text-sm mr-3">
                             <i class="fa-solid fa-phone"></i>
                         </span>
-                    </mat-form-field>
-                </div>
+                        </mat-form-field>
+                    </div>
 
-                <div>
-                    <mat-label class="block text-sm font-medium text-slate-700">Contraseña</mat-label>
-                    <mat-form-field appearance="outline" class="w-full">
-                        <input
-                            id="password"
-                            matInput
-                            type="password">
-                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                    <div>
+                        <mat-label class="block text-sm font-medium text-slate-700">Contraseña</mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input
+                                matInput
+                                formControlName="password"
+                                type="password">
+                            <span matSuffix class="text-slate-300 text-sm mr-3">
                             <i class="fa-solid fa-key"></i>
                         </span>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-label class="block text-sm font-medium text-slate-700">Confirmar contraseña</mat-label>
-                    <mat-form-field appearance="outline" class="w-full">
-                        <input
-                            id="password"
-                            matInput
-                            type="password">
-                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label class="block text-sm font-medium text-slate-700">Confirmar contraseña</mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input
+                                matInput
+                                formControlName="confirm_password"
+                                type="password">
+                            <span matSuffix class="text-slate-300 text-sm mr-3">
                             <i class="fa-solid fa-key"></i>
                         </span>
-                    </mat-form-field>
-                </div>
+                        </mat-form-field>
+                    </div>
 
-                <mat-checkbox class="example-margin">He leído y acepto los términos y condiciones, y las políticas de privacidad de floreriaenvios.com</mat-checkbox>
+                    <mat-checkbox class="example-margin" formControlName="terms_and_conditions">He leído y acepto los
+                        términos y condiciones, y las políticas de privacidad de floreriaenvios.com
+                    </mat-checkbox>
 
-                <!-- Submit button -->
-                <button
-                    class="w-full mt-6"
-                    mat-flat-button
-                    color="primary">
-                    Crear cuenta
-                </button>
+                    <!-- Submit button -->
+                    <button (click)="register()"
+                            [disabled]="registerForm.invalid || !registerForm.value.terms_and_conditions"
+                            class="w-full mt-6"
+                            mat-flat-button
+                            color="primary">
+                        Crear cuenta
+                    </button>
 
-                <!-- Separator -->
-                <div class="flex items-center mt-8">
-                    <div class="flex-auto mt-px border-t"></div>
-                    <div class="mx-2 text-sm text-slate-400">O registrate con </div>
-                    <div class="flex-auto mt-px border-t"></div>
-                </div>
+                    <!-- Separator -->
+                    <div class="flex items-center mt-8">
+                        <div class="flex-auto mt-px border-t"></div>
+                        <div class="mx-2 text-sm text-slate-400">O registrate con</div>
+                        <div class="flex-auto mt-px border-t"></div>
+                    </div>
 
-                <!-- Single sign-on buttons -->
-                <div class="flex items-center mt-8 space-x-4">
-                    <button
-                        class="flex-auto"
-                        type="button"
-                        mat-stroked-button>
+                    <!-- Single sign-on buttons -->
+                    <div class="flex items-center mt-8 space-x-4">
+                        <button
+                            class="flex-auto"
+                            type="button"
+                            mat-stroked-button>
                         <span class="text-blue-600">
                             <i class="fa-brands fa-square-facebook fa-xl"></i>&nbsp;Facebook
                         </span>
-                    </button>
-                </div>
-            </form>
+                        </button>
+                    </div>
+                </form>
+            }
         </div>
     </div>
 </div>

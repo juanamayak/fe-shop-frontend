@@ -1,21 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./login/login.component";
 import {MaterialModule} from "../../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
-import { RegisterComponent } from './register/register.component';
+import {RegisterComponent} from './register/register.component';
+import {AccountVerificationComponent} from './account-verification/account-verification.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'registro', component: RegisterComponent}
+    {path: 'registro', component: RegisterComponent},
+    {path: 'verification/:uuid/:code', component: AccountVerificationComponent}
 ]
 
 
 @NgModule({
     declarations: [
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AccountVerificationComponent
     ],
     imports: [
         CommonModule,
@@ -24,4 +27,5 @@ const routes: Routes = [
         ReactiveFormsModule
     ]
 })
-export class UsersModule { }
+export class UsersModule {
+}

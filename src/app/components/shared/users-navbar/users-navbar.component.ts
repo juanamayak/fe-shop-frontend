@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
+import {UsersService} from "../../../services/users.service";
 
 
 @Component({
@@ -9,9 +10,10 @@ import {Router} from "@angular/router";
 })
 export class UsersNavbarComponent implements OnInit {
 
-    public session: boolean = true;
+    @Input() session: any;
 
     constructor(
+        private usersService: UsersService,
         public router: Router
     ) {
 
@@ -19,5 +21,10 @@ export class UsersNavbarComponent implements OnInit {
 
     ngOnInit() {
 
+    }
+
+    logout(){
+        sessionStorage.clear();
+        this.router.navigate(['users/login']);
     }
 }
