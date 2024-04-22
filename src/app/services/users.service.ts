@@ -9,10 +9,11 @@ import {Router} from "@angular/router";
 })
 export class UsersService {
 
-    public urlApi: string = environment.url;
+    public urlApi: string = environment.urlApi;
 
     public jwtToken = 'TK1983!';
     public profileToken = 'PF849!';
+    public uuidToken = 'UID27#';
 
     constructor(
         private httpClient: HttpClient,
@@ -26,6 +27,14 @@ export class UsersService {
 
     public register(data: any): Observable<any> {
         return this.httpClient.post(`${this.urlApi}/clients/register`, data);
+    }
+
+    public getUser(userUuid: any): Observable<any> {
+        return this.httpClient.get(`${this.urlApi}/clients/${userUuid}`);
+    }
+
+    public updateUsers(userUuid: any, data: any): Observable<any>{
+        return this.httpClient.post(`${this.urlApi}/clients/update/${userUuid}`, data);
     }
 
     public verifyAccount(userUuid: any, verificationCode: any): Observable<any> {

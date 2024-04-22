@@ -12,83 +12,86 @@
                             </div>
                         </div>
 
-                        <form class="mt-8">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <div>
-                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">
-                                        Nombre(s)
-                                    </mat-label>
-                                    <mat-form-field appearance="outline" class="w-full">
-                                        <input matInput>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Apellidos</mat-label>
-                                    <mat-form-field appearance="outline" class="w-full">
-                                        <input matInput>
-                                        <span matSuffix class="text-slate-300 text-sm mr-3">
+                        @if(userForm){
+                            <form [formGroup]="userForm" class="mt-8">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">
+                                            Nombre(s)
+                                        </mat-label>
+                                        <mat-form-field appearance="outline" class="w-full">
+                                            <input matInput formControlName="name">
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">Apellidos</mat-label>
+                                        <mat-form-field appearance="outline" class="w-full">
+                                            <input matInput formControlName="lastname">
+                                            <span matSuffix class="text-slate-300 text-sm mr-3">
                                             <i class="fa-solid fa-user"></i>
                                         </span>
-                                    </mat-form-field>
+                                        </mat-form-field>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div>
-                                <mat-label class="mb-2 block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
-                                <mat-form-field appearance="outline" class="w-2/3">
-                                    <input matInput id="email" type="email">
-                                    <span matSuffix class="text-slate-300 text-sm mr-3">
+                                <div>
+                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
+                                    <mat-form-field appearance="outline" class="w-2/3">
+                                        <input matInput type="email" formControlName="email">
+                                        <span matSuffix class="text-slate-300 text-sm mr-3">
                                         <i class="fa-solid fa-at"></i>
                                     </span>
-                                </mat-form-field>
-                            </div>
-
-                            <div class="grid grid-rows-1">
-                                <span class="mb-2 block text-sm font-medium text-slate-700">Fecha de Nacimiento</span>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-0 sm:gap-5">
-
-                                    <div>
-                                        <mat-form-field appearance="outline">
-                                            <input matInput placeholder="Día">
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div>
-                                        <mat-form-field appearance="outline">
-                                            <mat-select placeholder="Mes">
-                                                <mat-option>Hola hola </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div>
-                                        <mat-form-field appearance="outline">
-                                            <input matInput placeholder="Año">
-                                        </mat-form-field>
-                                    </div>
-
+                                    </mat-form-field>
                                 </div>
-                            </div>
 
-                            <div>
-                                <mat-label class="mb-2 block text-sm font-medium text-slate-700">Teléfono</mat-label>
-                                <mat-form-field appearance="outline" class="w-full">
-                                    <input matInput type="email">
-                                    <span matSuffix class="text-slate-300 text-sm mr-3">
+                                <div class="grid grid-rows-1">
+                                    <span class="mb-2 block text-sm font-medium text-slate-700">Fecha de Nacimiento</span>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-0 sm:gap-5">
+
+                                        <div>
+                                            <mat-form-field appearance="outline" class="w-full">
+                                                <input matInput placeholder="Día" formControlName="birthday_day">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div>
+                                            <mat-form-field appearance="outline" class="w-full">
+                                                <mat-select placeholder="Mes" formControlName="birthday_month">
+                                                    <mat-option>Hola hola </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div>
+                                            <mat-form-field appearance="outline" class="w-full">
+                                                <input matInput placeholder="Año" formControlName="birthday_year">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Teléfono</mat-label>
+                                    <mat-form-field appearance="outline" class="w-1/2">
+                                        <input matInput type="email" formControlName="cellphone">
+                                        <span matSuffix class="text-slate-300 text-sm mr-3">
                                         <i class="fa-solid fa-phone"></i>
                                     </span>
-                                </mat-form-field>
-                            </div>
+                                    </mat-form-field>
+                                </div>
 
-                            <div class="flex justify-end">
-                                <button
-                                    mat-flat-button
-                                    color="primary">
-                                    Actualizar información
-                                </button>
-                            </div>
+                                <div class="flex justify-end">
+                                    <button [disabled]="userForm.invalid"
+                                        mat-flat-button
+                                        color="primary">
+                                        Actualizar información
+                                    </button>
+                                </div>
 
-                        </form>
+                            </form>
+                        }
+
                     </div>
 
                     <div class="border-b border-gray-900/10 pb-12">
@@ -99,61 +102,64 @@
                             </div>
                         </div>
 
-                        <form class="mt-8">
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                        @if (addressForm){
+                            <form [formGroup]="addressForm" class="mt-8">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                                    <div>
+                                        <mat-label class="text-sm font-medium text-slate-500">Pais</mat-label>
+                                        <mat-form-field appearance="outline" class="w-full">
+                                            <mat-select formControlName="country_id" (selectionChange)="getStates($event)">
+                                                @for (country of countries; track country) {
+                                                    <mat-option [value]="country.id">{{ country.name }}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-label class="text-sm font-medium text-slate-500">Estado</mat-label>
+                                        <mat-form-field appearance="outline" class="w-full">
+                                            <mat-select formControlName="state_id" (selectionChange)="getCities($event)">
+                                                @for (state of states; track state) {
+                                                    <mat-option [value]="state.id">{{ state.name }}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    <div>
+                                        <mat-label class="text-sm font-medium text-slate-500">Municipio</mat-label>
+                                        <mat-form-field appearance="outline" class="w-full">
+                                            <mat-select formControlName="city_id">
+                                                @for (city of cities; track city) {
+                                                    <mat-option [value]="city.id">{{ city.name }}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div>
+                                    <mat-label class="block text-sm font-medium text-slate-700">Dirección</mat-label>
+                                    <mat-form-field appearance="outline" class="w-full">
+                                        <input matInput formControlName="address">
+                                    </mat-form-field>
+                                </div>
                                 <div>
                                     <mat-label class="block text-sm font-medium text-slate-700">
-                                        País
+                                        Código Postal
                                     </mat-label>
-                                    <mat-form-field appearance="outline" class="w-full">
-                                        <mat-select placeholder="Selecciona un pais">
-                                            <mat-option>
-                                            </mat-option>
-                                        </mat-select>
+                                    <mat-form-field appearance="outline" class="w-1/2">
+                                        <input matInput formControlName="zip">
                                     </mat-form-field>
                                 </div>
-                                <div>
-                                    <mat-label class="block text-sm font-medium text-slate-700">Estado</mat-label>
-                                    <mat-form-field appearance="outline" class="w-full">
-                                        <mat-select placeholder="Selecciona un estado">
-                                            <mat-option >
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div>
-                                    <mat-label class="block text-sm font-medium text-slate-700">Ciudad</mat-label>
-                                    <mat-form-field appearance="outline" class="w-full">
-                                        <mat-select  placeholder="Selecciona una ciudad">
-                                            <mat-option>
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div>
-                                <mat-label class="block text-sm font-medium text-slate-700">Dirección</mat-label>
-                                <mat-form-field appearance="outline" class="w-full">
-                                    <input matInput>
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <mat-label class="block text-sm font-medium text-slate-700">
-                                    Código Postal
-                                </mat-label>
-                                <mat-form-field appearance="outline" class="w-1/2">
-                                    <input matInput>
-                                </mat-form-field>
-                            </div>
 
-                            <div class="flex justify-end">
-                                <button
-                                    mat-flat-button
-                                    color="primary">
-                                    Actualizar dirección
-                                </button>
-                            </div>
-                        </form>
+                                <div class="flex justify-end">
+                                    <button [disabled]="addressForm.invalid"
+                                        mat-flat-button
+                                        color="primary">
+                                        Actualizar dirección
+                                    </button>
+                                </div>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>

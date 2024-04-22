@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
+import {UsersService} from "../../../services/users.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main-navbar',
@@ -8,15 +10,20 @@ import {MatDialog} from "@angular/material/dialog";
 })
 export class MainNavbarComponent implements OnInit{
 
+    public session: any;
     constructor(
-        private dialog: MatDialog
+        private usersService: UsersService,
+        public router: Router
     ) {
     }
 
     ngOnInit(){
-
+        this.session = this.usersService.getToken();
     }
 
-
+    logout(){
+        sessionStorage.clear();
+        this.router.navigate(['users/login']);
+    }
 
 }

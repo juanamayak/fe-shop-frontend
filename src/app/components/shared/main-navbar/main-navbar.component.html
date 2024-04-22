@@ -3,11 +3,33 @@
         <div class="col-start-2">
             <img class="w-28 mx-auto" src="../../../../../assets/logotipo-floreria-envios.png" alt="">
         </div>
+
         <div class="flex items-center">
             <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-3">
-                <a [routerLink]="['users/login']" class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar sesión</a>
-                <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
-                <a [routerLink]="['users/registro']" class="text-sm font-medium text-gray-700 hover:text-gray-800">Crear cuenta</a>
+
+
+                @if (session) {
+                    <button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <span><i class="fa-regular fa-user"></i>&nbsp;Mi cuenta</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span><i class="fa-solid fa-store"></i>&nbsp;Mis pedidos</span>
+                        </button>
+                        <button mat-menu-item (click)="logout()">
+                            <span><i class="fa-solid fa-power-off"></i>&nbsp;Salir</span>
+                        </button>
+                    </mat-menu>
+                } @else {
+                    <a [routerLink]="['users/login']" class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar
+                        sesión</a>
+                    <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
+                    <a [routerLink]="['users/registro']" class="text-sm font-medium text-gray-700 hover:text-gray-800">Crear
+                        cuenta</a>
+                }
             </div>
 
             <div class="ml-4 flow-root lg:ml-6">
@@ -24,7 +46,8 @@
 
         <!-- Flyout menus -->
         <div class="flex h-full space-x-8 uppercase font-bold">
-            <a [routerLink]="['productos']" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Flores</a>
+            <a [routerLink]="['productos']"
+               class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Flores</a>
             <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Plantas</a>
             <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Regalos</a>
             <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Dulces</a>

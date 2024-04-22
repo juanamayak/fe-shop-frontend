@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
         this.usersService.login(data).subscribe({
             next: res => {
                 const token = res.token;
+                const uuid = res.uuid;
                 sessionStorage.setItem(this.usersService.jwtToken, token);
+                sessionStorage.setItem(this.usersService.uuidToken, btoa(uuid));
                 this.router.navigate(['cuenta/perfil']);
 
                 this.spinner.hide();
