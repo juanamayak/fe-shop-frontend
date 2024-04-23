@@ -5,6 +5,8 @@ import {AlertsService} from "../../../services/alerts.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LocationsService} from "../../../services/locations.service";
 import {readableStreamLikeToAsyncGenerator} from "rxjs/internal/util/isReadableStreamLike";
+import moment from "moment";
+import {Months} from "../../../constants/months";
 
 @Component({
     selector: 'app-profile',
@@ -22,6 +24,8 @@ export class ProfileComponent implements OnInit {
     public states: any;
     public cities: any;
 
+    public months = Months;
+
     constructor(
         private usersService: UsersService,
         private formBuilder: FormBuilder,
@@ -32,15 +36,16 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+        const userUuid: string = sessionStorage.getItem(this.usersService.uuidToken)!;
+        this.userUuid = atob(userUuid);
         this.getCountries();
         this.getUser();
     }
 
-    getUser(){
-        this.userUuid = sessionStorage.getItem(this.usersService.uuidToken);
-        this.usersService.getUser(atob(this.userUuid)).subscribe({
+    getUser() {
+        this.usersService.getUser(this.userUuid).subscribe({
             next: res => {
-                this.initForms(res.user);
+                this.initForms(res.client);
             },
             error: err => {
                 this.spinner.hide();
@@ -49,36 +54,82 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    initForms(user: any){
+    initForms(user: any) {
+        this.getStates({value: user.country_id});
+        this.getCities({value: user.state_id});
+
+        const birthday = moment(user.birthday, 'YYYY-MM-DD');
+        const birthday_day = birthday.date();
+        const birthday_month = birthday.month() + 1;
+        const birthday_year = birthday.year();
+
         this.userForm = this.formBuilder.group({
-            name: [user.name, Validators.required],
-            lastname: [user.lastname, Validators.required],
-            email: [user.email, Validators.required],
-            birthday_day: ['', Validators.required],
-            birthday_month: ['', Validators.required],
-            birthday_year: ['', Validators.required],
-            cellphone: [user.cellphone, Validators.required],
+            name: [user && user.name ? user.name : '', Validators.required],
+            lastname: [user && user.lastname ? user.lastname : '', Validators.required],
+            email: [user && user.email ? user.email : '', Validators.required],
+            birthday_day: [user && user.birthday ? birthday_day : '', Validators.required],
+            birthday_month: [user && user.birthday ? birthday_month : '', Validators.required],
+            birthday_year: [user && user.birthday ? birthday_year : '', Validators.required],
+            cellphone: [user && user.cellphone ? user.cellphone : '', Validators.required],
         });
 
         this.addressForm = this.formBuilder.group({
-            country_id: ['', Validators.required],
-            state_id: ['', Validators.required],
-            city_id: ['', Validators.required],
-            address: ['', Validators.required],
-            zip: ['', Validators.required],
+            country_id: [user && user.country_id ? user.country_id : '', Validators.required],
+            state_id: [user && user.state_id ? user.state_id : '', Validators.required],
+            city_id: [user && user.city_id ? user.city_id : '', Validators.required],
+            address: [user && user.address ? user.address : '', Validators.required],
+            zip: [user && user.zip ? user.zip : '', Validators.required],
         })
     }
 
-    updateUser(){
+    updateUser() {
         this.spinner.show();
-        const data = this.userForm.value;
+        const user = this.userForm.value;
+        const birthday = `${user.birthday_year}-${user.birthday_month}-${user.birthday_day}`
+
+        const data = {
+            name: user.name,
+            lastname: user.lastname,
+            email: user.email,
+            birthday: moment(birthday).format('YYYY-MM-DD'),
+            cellphone: user.cellphone.toString()
+        };
+
         this.usersService.updateUsers(this.userUuid, data).subscribe({
-            next: res => {},
-            error: err => {}
-        })
+            next: res => {
+                this.spinner.hide();
+                this.alertsService.successAlert(res.message);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        });
     }
 
-    getCountries(){
+    updateAddress() {
+        this.spinner.show();
+        const user = this.addressForm.value;
+        const data = {
+            country_id: user.country_id,
+            state_id: user.state_id,
+            city_id: user.city_id,
+            address: user.address,
+            zip: user.zip
+        };
+        this.usersService.updateAddress(this.userUuid, data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.alertsService.successAlert(res.message);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        });
+    }
+
+    getCountries() {
         this.locationsService.getCountries().subscribe({
             next: res => {
                 this.countries = res.countries;
@@ -90,7 +141,7 @@ export class ProfileComponent implements OnInit {
         })
     }
 
-    getStates(event: any){
+    getStates(event: any) {
         const countryId = event.value;
         this.locationsService.getStates(countryId).subscribe({
             next: res => {
@@ -103,7 +154,7 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    getCities(event: any){
+    getCities(event: any) {
         const stateId = event.value;
         this.locationsService.getCities(stateId).subscribe({
             next: res => {

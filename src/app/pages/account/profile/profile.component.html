@@ -12,7 +12,7 @@
                             </div>
                         </div>
 
-                        @if(userForm){
+                        @if (userForm) {
                             <form [formGroup]="userForm" class="mt-8">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
@@ -24,7 +24,8 @@
                                         </mat-form-field>
                                     </div>
                                     <div>
-                                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">Apellidos</mat-label>
+                                        <mat-label class="mb-2 block text-sm font-medium text-slate-700">Apellidos
+                                        </mat-label>
                                         <mat-form-field appearance="outline" class="w-full">
                                             <input matInput formControlName="lastname">
                                             <span matSuffix class="text-slate-300 text-sm mr-3">
@@ -35,7 +36,9 @@
                                 </div>
 
                                 <div>
-                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Correo electrónico</mat-label>
+                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Correo
+                                        electrónico
+                                    </mat-label>
                                     <mat-form-field appearance="outline" class="w-2/3">
                                         <input matInput type="email" formControlName="email">
                                         <span matSuffix class="text-slate-300 text-sm mr-3">
@@ -45,26 +48,29 @@
                                 </div>
 
                                 <div class="grid grid-rows-1">
-                                    <span class="mb-2 block text-sm font-medium text-slate-700">Fecha de Nacimiento</span>
+                                    <span
+                                        class="mb-2 block text-sm font-medium text-slate-700">Fecha de Nacimiento</span>
                                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-0 sm:gap-5">
 
                                         <div>
                                             <mat-form-field appearance="outline" class="w-full">
-                                                <input matInput placeholder="Día" formControlName="birthday_day">
+                                                <input matInput placeholder="Día (DD)" formControlName="birthday_day">
                                             </mat-form-field>
                                         </div>
 
                                         <div>
                                             <mat-form-field appearance="outline" class="w-full">
-                                                <mat-select placeholder="Mes" formControlName="birthday_month">
-                                                    <mat-option>Hola hola </mat-option>
+                                                <mat-select placeholder="Mes (MM)" formControlName="birthday_month">
+                                                    @for (month of months; track month) {
+                                                        <mat-option [value]="month.value">{{ month.name }}</mat-option>
+                                                    }
                                                 </mat-select>
                                             </mat-form-field>
                                         </div>
 
                                         <div>
                                             <mat-form-field appearance="outline" class="w-full">
-                                                <input matInput placeholder="Año" formControlName="birthday_year">
+                                                <input matInput placeholder="Año (YYYY)" formControlName="birthday_year">
                                             </mat-form-field>
                                         </div>
 
@@ -72,7 +78,8 @@
                                 </div>
 
                                 <div>
-                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Teléfono</mat-label>
+                                    <mat-label class="mb-2 block text-sm font-medium text-slate-700">Teléfono
+                                    </mat-label>
                                     <mat-form-field appearance="outline" class="w-1/2">
                                         <input matInput type="email" formControlName="cellphone">
                                         <span matSuffix class="text-slate-300 text-sm mr-3">
@@ -82,9 +89,8 @@
                                 </div>
 
                                 <div class="flex justify-end">
-                                    <button [disabled]="userForm.invalid"
-                                        mat-flat-button
-                                        color="primary">
+                                    <button [disabled]="userForm.invalid" mat-flat-button color="primary"
+                                            (click)="updateUser()">
                                         Actualizar información
                                     </button>
                                 </div>
@@ -102,13 +108,14 @@
                             </div>
                         </div>
 
-                        @if (addressForm){
+                        @if (addressForm) {
                             <form [formGroup]="addressForm" class="mt-8">
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
                                     <div>
                                         <mat-label class="text-sm font-medium text-slate-500">Pais</mat-label>
                                         <mat-form-field appearance="outline" class="w-full">
-                                            <mat-select formControlName="country_id" (selectionChange)="getStates($event)">
+                                            <mat-select formControlName="country_id"
+                                                        (selectionChange)="getStates($event)">
                                                 @for (country of countries; track country) {
                                                     <mat-option [value]="country.id">{{ country.name }}</mat-option>
                                                 }
@@ -118,7 +125,8 @@
                                     <div>
                                         <mat-label class="text-sm font-medium text-slate-500">Estado</mat-label>
                                         <mat-form-field appearance="outline" class="w-full">
-                                            <mat-select formControlName="state_id" (selectionChange)="getCities($event)">
+                                            <mat-select formControlName="state_id"
+                                                        (selectionChange)="getCities($event)">
                                                 @for (state of states; track state) {
                                                     <mat-option [value]="state.id">{{ state.name }}</mat-option>
                                                 }
@@ -152,9 +160,8 @@
                                 </div>
 
                                 <div class="flex justify-end">
-                                    <button [disabled]="addressForm.invalid"
-                                        mat-flat-button
-                                        color="primary">
+                                    <button [disabled]="addressForm.invalid" mat-flat-button color="primary"
+                                            (click)="updateAddress()">
                                         Actualizar dirección
                                     </button>
                                 </div>

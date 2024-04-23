@@ -37,6 +37,10 @@ export class UsersService {
         return this.httpClient.post(`${this.urlApi}/clients/update/${userUuid}`, data);
     }
 
+    public updateAddress(userUuid: any, data: any): Observable<any>{
+        return this.httpClient.post(`${this.urlApi}/clients/update/address/${userUuid}`, data);
+    }
+
     public verifyAccount(userUuid: any, verificationCode: any): Observable<any> {
         return this.httpClient.get(`${this.urlApi}/clients/verify/${userUuid}/${verificationCode}`);
     }
