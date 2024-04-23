@@ -7,7 +7,8 @@ import {LayoutsModule} from "./layouts/layouts.module";
 import {PagesModule} from "./pages/pages.module";
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {NgxSpinnerModule} from "ngx-spinner";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 
 @NgModule({
     declarations: [
@@ -22,6 +23,9 @@ import {HttpClientModule} from "@angular/common/http";
         LayoutsModule,
         CurrencyMaskModule,
         NgxSpinnerModule
+    ],
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     ],
     exports: [
         AppComponent

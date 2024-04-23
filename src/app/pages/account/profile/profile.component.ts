@@ -79,7 +79,10 @@ export class ProfileComponent implements OnInit {
             city_id: [user && user.city_id ? user.city_id : '', Validators.required],
             address: [user && user.address ? user.address : '', Validators.required],
             zip: [user && user.zip ? user.zip : '', Validators.required],
-        })
+        });
+
+        this.userForm.disable();
+        this.addressForm.disable();
     }
 
     updateUser() {
@@ -166,6 +169,22 @@ export class ProfileComponent implements OnInit {
                 this.alertsService.errorAlert(err.error.errors);
             }
         });
+    }
+
+    enableUserForm(event: any){
+        if (event.checked){
+            this.userForm.enable();
+        } else {
+            this.userForm.disable()
+        }
+    }
+
+    enableAddressForm(event: any){
+        if (event.checked){
+            this.addressForm.enable();
+        } else {
+            this.addressForm.disable()
+        }
     }
 
 }

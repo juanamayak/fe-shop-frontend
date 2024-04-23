@@ -1,0 +1,90 @@
+<h2 mat-dialog-title>Agregar dirección</h2>
+<mat-dialog-content>
+    <form [formGroup]="addressForm">
+        <div class="grid grid-cols-2 gap-5">
+            <div>
+                <mat-label class="text-sm font-medium text-slate-500">Nombre del receptor</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="name_receiver">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="text-sm font-medium text-slate-500">Teléfono del receptor</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="phone_receiver">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div>
+                <mat-label class="text-sm font-medium text-slate-500">Pais</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-select formControlName="country_id"
+                                (selectionChange)="getStates($event)">
+                        @for (country of countries; track country) {
+                            <mat-option [value]="country.id">{{ country.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="text-sm font-medium text-slate-500">Estado</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-select formControlName="state_id"
+                                (selectionChange)="getCities($event)">
+                        @for (state of states; track state) {
+                            <mat-option [value]="state.id">{{ state.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="text-sm font-medium text-slate-500">Municipio</mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-select formControlName="city_id">
+                        @for (city of cities; track city) {
+                            <mat-option [value]="city.id">{{ city.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-span-2">
+            <mat-label class="block text-sm font-medium text-slate-700">Dirección</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <input matInput formControlName="address">
+            </mat-form-field>
+        </div>
+        <div class="grid grid-cols-2 gap-5">
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">
+                    Colonia
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="colony">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">
+                    Código Postal
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="zip">
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <mat-label class="block text-sm font-medium text-slate-700">
+                Referencias
+            </mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <textarea matInput formControlName="references"></textarea>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div class="space-x-3">
+        <button mat-stroked-button color="primary">Cancelar</button>
+        <button mat-flat-button color="primary" cdkFocusInitial (click)="createAddress()">Crear dirección</button>
+    </div>
+</mat-dialog-content>

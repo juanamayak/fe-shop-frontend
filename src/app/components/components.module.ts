@@ -9,6 +9,9 @@ import { MainNavbarComponent } from './shared/main-navbar/main-navbar.component'
 import {MaterialModule} from "../material/material.module";
 import { ProductSliderComponent } from './product-slider/product-slider.component';
 import {GalleryModule} from "@ks89/angular-modal-gallery";
+import { CreateAddressModalComponent } from './modals/addresses/create-address-modal/create-address-modal.component';
+import {MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -17,7 +20,8 @@ import {GalleryModule} from "@ks89/angular-modal-gallery";
         MainHeaderComponent,
         MainFooterComponent,
         MainNavbarComponent,
-        ProductSliderComponent
+        ProductSliderComponent,
+        CreateAddressModalComponent
     ],
     exports: [
         MainHeaderComponent,
@@ -31,7 +35,10 @@ import {GalleryModule} from "@ks89/angular-modal-gallery";
         CommonModule,
         RouterLink,
         MaterialModule,
-        GalleryModule
+        GalleryModule,
+        MatDialogContent,
+        MatDialogTitle,
+        ReactiveFormsModule
     ]
 })
 export class ComponentsModule {

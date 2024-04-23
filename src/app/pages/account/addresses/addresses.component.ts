@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialog} from "@angular/material/dialog";
+import {
+    CreateAddressModalComponent
+} from "../../../components/modals/addresses/create-address-modal/create-address-modal.component";
+import {AddressesService} from "../../../services/addresses.service";
+import {NgxSpinnerService} from "ngx-spinner";
+import {AlertsService} from "../../../services/alerts.service";
 
 export interface PeriodicElement {
     name: string;
@@ -26,9 +33,38 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './addresses.component.html',
   styleUrl: './addresses.component.css'
 })
-export class AddressesComponent {
+export class AddressesComponent implements OnInit{
 
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = ELEMENT_DATA;
+    public addresses: any;
+
+    constructor(
+        private addressesService: AddressesService,
+        private alertsService: AlertsService,
+        private spinner: NgxSpinnerService,
+        private dialog: MatDialog
+    ) {
+    }
+
+    ngOnInit(){
+        this.getAddresses()
+    }
+
+    getAddresses(){
+        this.spinner.show();
+        this.addressesService.getAddresses().subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.addresses = res.addresses;
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        })
+    }
+
+    openAddressesModal(){
+        this.dialog.open(CreateAddressModalComponent, {});
+    }
 
 }

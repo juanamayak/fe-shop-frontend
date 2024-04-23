@@ -10,6 +10,8 @@
                             <div>
                                 <div class="text-xl font-semibold">Editar perfil</div>
                             </div>
+
+                            <mat-slide-toggle (change)="enableUserForm($event)">Editar información</mat-slide-toggle>
                         </div>
 
                         @if (userForm) {
@@ -89,7 +91,7 @@
                                 </div>
 
                                 <div class="flex justify-end">
-                                    <button [disabled]="userForm.invalid" mat-flat-button color="primary"
+                                    <button [disabled]="userForm.invalid || userForm.disabled" mat-flat-button color="primary"
                                             (click)="updateUser()">
                                         Actualizar información
                                     </button>
@@ -104,8 +106,9 @@
                         <div class="flex items-center justify-between w-full">
                             <div>
                                 <div class="text-xl font-semibold">Mi dirección</div>
-
                             </div>
+
+                            <mat-slide-toggle (change)="enableAddressForm($event)">Editar dirección</mat-slide-toggle>
                         </div>
 
                         @if (addressForm) {
@@ -160,7 +163,7 @@
                                 </div>
 
                                 <div class="flex justify-end">
-                                    <button [disabled]="addressForm.invalid" mat-flat-button color="primary"
+                                    <button [disabled]="addressForm.invalid || addressForm.disabled" mat-flat-button color="primary"
                                             (click)="updateAddress()">
                                         Actualizar dirección
                                     </button>
