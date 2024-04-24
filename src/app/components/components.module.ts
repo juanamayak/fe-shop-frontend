@@ -12,6 +12,7 @@ import {GalleryModule} from "@ks89/angular-modal-gallery";
 import { CreateAddressModalComponent } from './modals/addresses/create-address-modal/create-address-modal.component';
 import {MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
+import { EditAddressModalComponent } from './modals/addresses/edit-address-modal/edit-address-modal.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import {ReactiveFormsModule} from "@angular/forms";
         MainFooterComponent,
         MainNavbarComponent,
         ProductSliderComponent,
-        CreateAddressModalComponent
+        CreateAddressModalComponent,
+        EditAddressModalComponent
     ],
     exports: [
         MainHeaderComponent,

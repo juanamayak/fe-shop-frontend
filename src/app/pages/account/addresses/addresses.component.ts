@@ -7,6 +7,9 @@ import {
 import {AddressesService} from "../../../services/addresses.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AlertsService} from "../../../services/alerts.service";
+import {
+    EditAddressModalComponent
+} from "../../../components/modals/addresses/edit-address-modal/edit-address-modal.component";
 
 export interface PeriodicElement {
     name: string;
@@ -29,11 +32,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-addresses',
-  templateUrl: './addresses.component.html',
-  styleUrl: './addresses.component.css'
+    selector: 'app-addresses',
+    templateUrl: './addresses.component.html',
+    styleUrl: './addresses.component.css'
 })
-export class AddressesComponent implements OnInit{
+export class AddressesComponent implements OnInit {
 
     public addresses: any;
 
@@ -45,16 +48,17 @@ export class AddressesComponent implements OnInit{
     ) {
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.getAddresses()
     }
 
-    getAddresses(){
+    getAddresses() {
         this.spinner.show();
         this.addressesService.getAddresses().subscribe({
             next: res => {
                 this.spinner.hide();
                 this.addresses = res.addresses;
+                console.log(res.addresses);
             },
             error: err => {
                 this.spinner.hide();
@@ -63,8 +67,30 @@ export class AddressesComponent implements OnInit{
         })
     }
 
-    openAddressesModal(){
-        this.dialog.open(CreateAddressModalComponent, {});
+    openCreateAddressesModal() {
+        const dialogRef = this.dialog.open(CreateAddressModalComponent);
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.getAddresses();
+            }
+        });
+    }
+
+    openUpdateAddresseModal(address: any) {
+        const config = {
+            data: {
+                address
+            }
+        }
+
+        const dialogRef = this.dialog.open(EditAddressModalComponent, config);
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.getAddresses();
+            }
+        });
     }
 
 }

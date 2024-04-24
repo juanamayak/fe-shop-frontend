@@ -22,6 +22,10 @@ export class AddressesService {
         return this.httpClient.post(`${this.url}/addresses/create`, data);
     }
 
+    updateAddresses(addressesUuid: any, data: any): Observable<any>{
+        return this.httpClient.put(`${this.url}/addresses/update/${addressesUuid}`, data);
+    }
+
     deleteAddresses(addressesUuid: any): Observable<any>{
         return this.httpClient.put(`${this.url}/addresses/delete/${addressesUuid}`, {});
     }

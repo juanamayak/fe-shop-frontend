@@ -5,8 +5,8 @@ import {RouterModule, Routes} from "@angular/router";
 import {MaterialModule} from "../../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {OrdersComponent} from './orders/orders.component';
-import {AddressesComponent} from './addresses/addresses.component';
 import {ConfigurationsComponent} from './configurations/configurations.component';
+import {AddressesComponent} from "./addresses/addresses.component";
 
 
 const routes: Routes = [
