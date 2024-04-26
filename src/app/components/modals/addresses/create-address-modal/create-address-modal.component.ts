@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LocationsService} from "../../../../services/locations.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -6,6 +6,8 @@ import {AlertsService} from "../../../../services/alerts.service";
 import {AddressesService} from "../../../../services/addresses.service";
 import {DialogRef} from "@angular/cdk/dialog";
 import {MatDialogRef} from "@angular/material/dialog";
+import * as mapboxgl from 'mapbox-gl';
+import {MapService} from "../../../../services/map.service";
 
 @Component({
   selector: 'app-create-address-modal',
@@ -20,9 +22,12 @@ export class CreateAddressModalComponent implements OnInit{
     public states: any;
     public cities: any;
 
+    public map: any;
+
     constructor(
         private formBuilder: FormBuilder,
         private locationsService: LocationsService,
+        private mapService: MapService,
         private addressesService: AddressesService,
         private alertsService: AlertsService,
         private spinner: NgxSpinnerService,
@@ -33,6 +38,11 @@ export class CreateAddressModalComponent implements OnInit{
     ngOnInit(){
         this.getCountries();
         this.initAddressForm();
+        this.initMap();
+    }
+
+    initMap() {
+        this.mapService.buildMap();
     }
 
     initAddressForm(){

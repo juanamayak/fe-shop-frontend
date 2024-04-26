@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        const userUuid: string = sessionStorage.getItem(this.usersService.uuidToken)!;
+        const userUuid: string = this.usersService.getUuid()!;
         this.userUuid = atob(userUuid);
         this.getCountries();
         this.getUser();

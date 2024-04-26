@@ -93,4 +93,27 @@ export class AddressesComponent implements OnInit {
         });
     }
 
+    deleteAddress(addressUuid: string){
+        this.alertsService.confirmDelete(`¿Estás seguro de eliminar esta dirección?`)
+            .then((res) => {
+                if (res.isConfirmed) {
+                    this.spinner.show();
+                    const data = { status: -1}
+                    this.addressesService.deleteAddresses(addressUuid, data).subscribe({
+                        next: res => {
+                            this.spinner.hide();
+                            this.alertsService.successAlert((res as any).message);
+                            setTimeout(() => {
+                                this.getAddresses()
+                            }, 2500);
+                        },
+                        error: err => {
+                            this.spinner.hide();
+                            this.alertsService.errorAlert(err.error.errors);
+                        }
+                    })
+                }
+            });
+    }
+
 }

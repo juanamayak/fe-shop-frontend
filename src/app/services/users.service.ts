@@ -15,6 +15,7 @@ export class UsersService {
     public profileToken = 'PF849!';
     public uuidToken = 'UID27#';
 
+
     constructor(
         private httpClient: HttpClient,
         private router: Router
@@ -50,6 +51,16 @@ export class UsersService {
 
         if (token) {
             return token;
+        }
+
+        return null;
+    }
+
+    getUuid(){
+        const uuid = sessionStorage.getItem(this.uuidToken);
+
+        if (uuid) {
+            return uuid;
         }
 
         return null;

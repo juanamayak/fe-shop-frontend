@@ -25,7 +25,7 @@
                                     <button mat-menu-item (click)="openUpdateAddresseModal(address)">
                                         <i class="fa-solid fa-pen-to-square"></i>&nbsp;Editar
                                     </button>
-                                    <button mat-menu-item>
+                                    <button mat-menu-item (click)="deleteAddress(address.uuid)">
                                         <span class="text-red-600"><i class="fa-solid fa-trash-can"></i>&nbsp;Eliminar</span>
                                     </button>
                                 </mat-menu>

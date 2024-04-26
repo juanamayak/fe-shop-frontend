@@ -26,7 +26,7 @@ export class AddressesService {
         return this.httpClient.put(`${this.url}/addresses/update/${addressesUuid}`, data);
     }
 
-    deleteAddresses(addressesUuid: any): Observable<any>{
-        return this.httpClient.put(`${this.url}/addresses/delete/${addressesUuid}`, {});
+    deleteAddresses(addressesUuid: any, data: any): Observable<any>{
+        return this.httpClient.put(`${this.url}/addresses/delete/${addressesUuid}`, data);
     }
 }
