@@ -1,12 +1,12 @@
-import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {LocationsService} from "../../../../services/locations.service";
 import {AddressesService} from "../../../../services/addresses.service";
 import {AlertsService} from "../../../../services/alerts.service";
 import {NgxSpinnerService} from "ngx-spinner";
-import {DialogRef} from "@angular/cdk/dialog";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {MapComponent} from "../../../map/map.component";
+import * as mapboxgl from "mapbox-gl";
+import {environment} from "../../../../../environments/environment.development";
 
 @Component({
     selector: 'app-edit-address-modal',
@@ -15,8 +15,6 @@ import {MapComponent} from "../../../map/map.component";
 })
 export class EditAddressModalComponent implements OnInit {
 
-    @ViewChild(MapComponent) mapComponent: MapComponent;
-
     public addressForm: any;
 
     public countries: any;
@@ -24,6 +22,10 @@ export class EditAddressModalComponent implements OnInit {
     public cities: any;
 
     public address: any;
+
+    public map: mapboxgl.Map;
+    public style = `mapbox://styles/mapbox/streets-v12`;
+    public zoom = 15;
 
     constructor(
         @Inject(MAT_DIALOG_DATA) public data: any,
@@ -34,7 +36,6 @@ export class EditAddressModalComponent implements OnInit {
         private spinner: NgxSpinnerService,
         private dialogRef: MatDialogRef<any>
     ) {
-        this.mapComponent.initMap(this.address.longitude, this.address.latitude);
     }
 
     ngOnInit() {
@@ -56,15 +57,14 @@ export class EditAddressModalComponent implements OnInit {
             colony: [this.address && this.address.colony ? this.address.colony : '', Validators.required],
             zip: [this.address && this.address.zip ? this.address.zip.toString() : '', Validators.required],
             references: [this.address && this.address.references ? this.address.references : '', Validators.required],
-            longitude: [''],
-            latitude: [''],
+            longitude: [this.address && this.address.longitude ? this.address.longitude: ''],
+            latitude: [this.address && this.address.latitude ? this.address.latitude: ''],
         });
 
-        if (this.mapComponent) {
-            this.mapComponent.initMap(this.address.longitude, this.address.latitude);
-        } else {
-            console.error("this.mapComponent no está definido.");
-        }
+        setTimeout(() => {
+            this.initMap(Number(this.address.longitude), Number(this.address.latitude));
+        }, 1000);
+
     }
 
     updateAddress() {
@@ -114,10 +114,8 @@ export class EditAddressModalComponent implements OnInit {
         const stateId = event.value;
         this.locationsService.getCities(stateId).subscribe({
             next: res => {
-                this.spinner.hide();
                 this.cities = res.cities;
                 this.initAddressForm();
-
             },
             error: err => {
                 this.spinner.hide();
@@ -126,9 +124,32 @@ export class EditAddressModalComponent implements OnInit {
         });
     }
 
-    getLngLat(event: any){
-        this.longitude.setValue(event.lng);
-        this.latitude.setValue(event.lat);
+    initMap(lng: any, lat: any) {
+        if (this.map) {
+            this.map.remove();
+        }
+
+        this.map = new mapboxgl.Map({
+            accessToken: environment.mapboxToken,
+            container: 'map',
+            style: this.style,
+            zoom: this.zoom,
+            center: [lng, lat]
+        });
+
+        this.map.addControl(new mapboxgl.NavigationControl());
+        this.buildMarker(lng, lat)
+    }
+
+    buildMarker(lng: any, lat: any) {
+        const marker = new mapboxgl.Marker({
+            draggable: true
+        }).setLngLat([lng, lat]).addTo(this.map);
+
+        marker.on('dragend', () => {
+            this.longitude.setValue(marker.getLngLat().lng);
+            this.latitude.setValue(marker.getLngLat().lat);
+        });
     }
 
     get longitude() {

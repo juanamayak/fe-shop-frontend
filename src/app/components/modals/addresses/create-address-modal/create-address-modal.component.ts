@@ -7,6 +7,8 @@ import {AddressesService} from "../../../../services/addresses.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {MapService} from "../../../../services/map.service";
 import {MapComponent} from "../../../map/map.component";
+import * as mapboxgl from "mapbox-gl";
+import {environment} from "../../../../../environments/environment.development";
 
 @Component({
   selector: 'app-create-address-modal',
@@ -22,6 +24,10 @@ export class CreateAddressModalComponent implements OnInit{
     public states: any;
     public cities: any;
 
+    public map: mapboxgl.Map;
+    public style = `mapbox://styles/mapbox/streets-v12`;
+    public zoom = 9;
+
     constructor(
         private formBuilder: FormBuilder,
         private locationsService: LocationsService,
@@ -36,6 +42,8 @@ export class CreateAddressModalComponent implements OnInit{
     ngOnInit(){
         this.getCountries();
         this.initAddressForm();
+
+        this.initMap(-99.133683, 19.438900);
     }
 
     initAddressForm(){
@@ -52,8 +60,6 @@ export class CreateAddressModalComponent implements OnInit{
             longitude: [''],
             latitude: [''],
         });
-
-        this.mapComponent.initMap(-99.133683, 19.438900);
     }
 
     createAddress(){
@@ -127,9 +133,32 @@ export class CreateAddressModalComponent implements OnInit{
         });
     }
 
-    getLngLat(event: any){
-        this.longitude.setValue(event.lng);
-        this.latitude.setValue(event.lat);
+    initMap(lng: any, lat: any) {
+        if (this.map){
+            this.map.remove();
+        }
+
+        this.map = new mapboxgl.Map({
+            accessToken: environment.mapboxToken,
+            container: 'map',
+            style: this.style,
+            zoom: this.zoom,
+            center: [lng, lat]
+        });
+
+        this.map.addControl(new mapboxgl.NavigationControl());
+        this.buildMarker(lng, lat)
+    }
+
+    buildMarker(lng: any, lat: any) {
+        const marker = new mapboxgl.Marker({
+            draggable: true
+        }).setLngLat([lng, lat]).addTo(this.map);
+
+        marker.on('dragend', () => {
+            this.longitude.setValue(marker.getLngLat().lng);
+            this.latitude.setValue(marker.getLngLat().lat);
+        });
     }
 
     get longitude() {
