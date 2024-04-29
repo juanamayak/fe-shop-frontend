@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Editar dirección</h2>
-<mat-dialog-content>
-    @if (addressForm) {
+@if (addressForm) {
+    <mat-dialog-content>
         <form [formGroup]="addressForm">
             <div class="grid grid-cols-2 gap-5">
                 <div>
@@ -83,10 +83,21 @@
                 </mat-form-field>
             </div>
         </form>
-    }
 
-    <div class="space-x-3">
-        <button mat-stroked-button color="primary">Cancelar</button>
-        <button mat-flat-button color="primary" cdkFocusInitial (click)="updateAddress()">Crear dirección</button>
-    </div>
-</mat-dialog-content>
+        <div>
+            <mat-label class="mb-1 block text-md font-medium text-slate-700">Verifica la dirección</mat-label>
+            <div class="flex items-center space-x-2 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+                <i class="fa-solid fa-location-dot fa-lg"></i>
+                <div>
+                    Ubica el pin en la ubicación exacta {{ address.longitude }}
+                </div>
+            </div>
+            <div id="map" class="w-full h-96"></div>
+        </div>
+
+        <div class="space-x-3">
+            <button mat-stroked-button color="primary">Cancelar</button>
+            <button mat-flat-button color="primary" cdkFocusInitial (click)="updateAddress()">Crear dirección</button>
+        </div>
+    </mat-dialog-content>
+}

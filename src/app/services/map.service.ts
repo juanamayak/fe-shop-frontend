@@ -7,46 +7,39 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
     providedIn: 'root'
 })
 export class MapService {
-    mapbox = (mapboxgl as typeof mapboxgl);
-    map: mapboxgl.Map | any;
-    style = `mapbox://styles/mapbox/streets-v12`;
-    // Coordenadas de la localización donde queremos centrar el mapa
-    lat = 19.4361242;
-    lng = -99.1464531;
-    zoom = 10;
+
+    private mapbox = (mapboxgl as typeof mapboxgl);
+    private map: mapboxgl.Map | any;
+    private style = `mapbox://styles/mapbox/streets-v12`;
+    private zoom = 9;
 
     constructor() {
-        this.mapbox.accessToken = environment.mapboxToken;
+        // (mapboxgl as any).accessToken = environment.mapboxToken;
     }
 
-    buildMap() {
+    buildMap(lng: any, lat: any) {
+        if (this.map){
+            this.map.remove();
+        }
+
         this.map = new mapboxgl.Map({
             container: 'map',
             style: this.style,
             zoom: this.zoom,
-            center: [this.lng, this.lat]
+            center: [lng, lat]
         });
 
         this.map.addControl(new mapboxgl.NavigationControl());
+        this.buildMarker(lng, lat)
     }
 
-    buildMarker(lat: any, lng: any){
+    buildMarker(lng: any, lat: any) {
         const marker = new mapboxgl.Marker({
             draggable: true
         }).setLngLat([lng, lat]).addTo(this.map);
 
-        /*marker.on('dragstart', () => {
-            this.map?.dragPan.disable();
-        });
-
-        marker.on('drag', () => {
-            // Actualizar las coordenadas en tiempo real si es necesario
-        });
-
         marker.on('dragend', () => {
-            const lngLat = marker.getLngLat();
-            console.log('Marcador movido a:', lngLat.lng, lngLat.lat);
-            this.map?.dragPan.enable();
-        });*/
+            return marker.getLngLat();
+        });
     }
 }

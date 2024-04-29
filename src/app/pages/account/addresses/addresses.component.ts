@@ -58,7 +58,6 @@ export class AddressesComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.addresses = res.addresses;
-                console.log(res.addresses);
             },
             error: err => {
                 this.spinner.hide();

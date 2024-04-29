@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {LocationsService} from "../../../../services/locations.service";
 import {AddressesService} from "../../../../services/addresses.service";
@@ -6,6 +6,7 @@ import {AlertsService} from "../../../../services/alerts.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {DialogRef} from "@angular/cdk/dialog";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MapComponent} from "../../../map/map.component";
 
 @Component({
     selector: 'app-edit-address-modal',
@@ -13,6 +14,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
     styleUrl: './edit-address-modal.component.css'
 })
 export class EditAddressModalComponent implements OnInit {
+
+    @ViewChild(MapComponent) mapComponent: MapComponent;
+
     public addressForm: any;
 
     public countries: any;
@@ -30,14 +34,15 @@ export class EditAddressModalComponent implements OnInit {
         private spinner: NgxSpinnerService,
         private dialogRef: MatDialogRef<any>
     ) {
+        this.mapComponent.initMap(this.address.longitude, this.address.latitude);
     }
 
     ngOnInit() {
         this.address = this.data.address;
 
         this.getCountries();
-        this.getStates({ value: this.address.country_id});
-        this.getCities({ value: this.address.state_id});
+        this.getStates({value: this.address.country_id});
+        this.getCities({value: this.address.state_id});
     }
 
     initAddressForm() {
@@ -54,9 +59,15 @@ export class EditAddressModalComponent implements OnInit {
             longitude: [''],
             latitude: [''],
         });
+
+        if (this.mapComponent) {
+            this.mapComponent.initMap(this.address.longitude, this.address.latitude);
+        } else {
+            console.error("this.mapComponent no está definido.");
+        }
     }
 
-    updateAddress(){
+    updateAddress() {
         this.spinner.show();
         const data = this.addressForm.value;
         this.addressesService.updateAddresses(this.address.uuid, data).subscribe({
@@ -106,11 +117,25 @@ export class EditAddressModalComponent implements OnInit {
                 this.spinner.hide();
                 this.cities = res.cities;
                 this.initAddressForm();
+
             },
             error: err => {
                 this.spinner.hide();
                 this.alertsService.errorAlert(err.error.errors);
             }
         });
+    }
+
+    getLngLat(event: any){
+        this.longitude.setValue(event.lng);
+        this.latitude.setValue(event.lat);
+    }
+
+    get longitude() {
+        return this.addressForm.get("longitude");
+    }
+
+    get latitude() {
+        return this.addressForm.get("latitude");
     }
 }

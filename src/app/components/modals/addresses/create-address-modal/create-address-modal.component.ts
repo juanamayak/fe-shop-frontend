@@ -1,13 +1,12 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LocationsService} from "../../../../services/locations.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AlertsService} from "../../../../services/alerts.service";
 import {AddressesService} from "../../../../services/addresses.service";
-import {DialogRef} from "@angular/cdk/dialog";
 import {MatDialogRef} from "@angular/material/dialog";
-import * as mapboxgl from 'mapbox-gl';
 import {MapService} from "../../../../services/map.service";
+import {MapComponent} from "../../../map/map.component";
 
 @Component({
   selector: 'app-create-address-modal',
@@ -15,14 +14,13 @@ import {MapService} from "../../../../services/map.service";
   styleUrl: './create-address-modal.component.css'
 })
 export class CreateAddressModalComponent implements OnInit{
+    @ViewChild(MapComponent) mapComponent: MapComponent;
 
     public addressForm: any;
 
     public countries: any;
     public states: any;
     public cities: any;
-
-    public map: any;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -38,11 +36,6 @@ export class CreateAddressModalComponent implements OnInit{
     ngOnInit(){
         this.getCountries();
         this.initAddressForm();
-        this.initMap();
-    }
-
-    initMap() {
-        this.mapService.buildMap();
     }
 
     initAddressForm(){
@@ -58,7 +51,9 @@ export class CreateAddressModalComponent implements OnInit{
             references: ['', Validators.required],
             longitude: [''],
             latitude: [''],
-        })
+        });
+
+        this.mapComponent.initMap(-99.133683, 19.438900);
     }
 
     createAddress(){
@@ -121,14 +116,27 @@ export class CreateAddressModalComponent implements OnInit{
     getCityInfo(event: any){
         this.locationsService.getCity(event.value).subscribe({
             next: res => {
-                console.log(res);
-                this.mapService.buildMarker(res.city.latitude, res.city.longitude);
+                const longitude = res.city.longitude;
+                const latitude = res.city.latitude;
+                this.mapComponent.initMap(longitude, latitude);
             },
             error: err => {
                 this.spinner.hide();
                 this.alertsService.errorAlert(err.error.errors);
             }
-        })
+        });
+    }
 
+    getLngLat(event: any){
+        this.longitude.setValue(event.lng);
+        this.latitude.setValue(event.lat);
+    }
+
+    get longitude() {
+        return this.addressForm.get("longitude");
+    }
+
+    get latitude() {
+        return this.addressForm.get("latitude");
     }
 }

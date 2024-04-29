@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>Agregar dirección</h2>
-<mat-dialog-content>
+<mat-dialog-content class="space-y-5">
     <form [formGroup]="addressForm">
         <div class="grid grid-cols-2 gap-5">
             <div>
@@ -12,6 +12,31 @@
                 <mat-label class="text-sm font-medium text-slate-500">Teléfono del receptor</mat-label>
                 <mat-form-field appearance="outline" class="w-full">
                     <input matInput formControlName="phone_receiver">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-span-2">
+            <mat-label class="block text-sm font-medium text-slate-700">Dirección</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <input matInput formControlName="address">
+            </mat-form-field>
+        </div>
+        <div class="grid grid-cols-2 gap-5">
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">
+                    Colonia
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="colony">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label class="block text-sm font-medium text-slate-700">
+                    Código Postal
+                </mat-label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="zip">
                 </mat-form-field>
             </div>
         </div>
@@ -49,30 +74,6 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="col-span-2">
-            <mat-label class="block text-sm font-medium text-slate-700">Dirección</mat-label>
-            <mat-form-field appearance="outline" class="w-full">
-                <input matInput formControlName="address">
-            </mat-form-field>
-        </div>
-        <div class="grid grid-cols-2 gap-5">
-            <div>
-                <mat-label class="block text-sm font-medium text-slate-700">
-                    Colonia
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-full">
-                    <input matInput formControlName="colony">
-                </mat-form-field>
-            </div>
-            <div>
-                <mat-label class="block text-sm font-medium text-slate-700">
-                    Código Postal
-                </mat-label>
-                <mat-form-field appearance="outline" class="w-full">
-                    <input matInput formControlName="zip">
-                </mat-form-field>
-            </div>
-        </div>
         <div>
             <mat-label class="block text-sm font-medium text-slate-700">
                 Referencias
@@ -83,7 +84,16 @@
         </div>
     </form>
 
-    <div id="map" class="w-full h-96"></div>
+    <div>
+        <mat-label class="mb-1 block text-md font-medium text-slate-700">Verifica la dirección</mat-label>
+        <div class="flex items-center space-x-2 p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50" role="alert">
+            <i class="fa-solid fa-location-dot fa-lg"></i>
+            <div>
+                Ubica el pin en la ubicación exacta
+            </div>
+        </div>
+        <div id="map" class="w-full h-96"></div>
+    </div>
 
     <div class="space-x-3">
         <button mat-stroked-button color="primary">Cancelar</button>

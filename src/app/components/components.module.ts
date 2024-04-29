@@ -13,6 +13,7 @@ import { CreateAddressModalComponent } from './modals/addresses/create-address-m
 import {MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
 import { EditAddressModalComponent } from './modals/addresses/edit-address-modal/edit-address-modal.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { EditAddressModalComponent } from './modals/addresses/edit-address-modal
         MainNavbarComponent,
         ProductSliderComponent,
         CreateAddressModalComponent,
-        EditAddressModalComponent
+        EditAddressModalComponent,
+        MapComponent
     ],
     exports: [
         MainHeaderComponent,
