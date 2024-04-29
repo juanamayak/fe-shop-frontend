@@ -25,4 +25,8 @@ export class LocationsService {
     getCities(stateId: number): Observable<any>{
         return this.httpClient.get(`${this.url}/cities/${stateId}`);
     }
+
+    getCity(cityId: number): Observable<any>{
+        return this.httpClient.get(`${this.url}/city/${cityId}`);
+    }
 }

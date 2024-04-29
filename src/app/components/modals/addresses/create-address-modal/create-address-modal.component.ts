@@ -117,4 +117,18 @@ export class CreateAddressModalComponent implements OnInit{
             }
         });
     }
+
+    getCityInfo(event: any){
+        this.locationsService.getCity(event.value).subscribe({
+            next: res => {
+                console.log(res);
+                this.mapService.buildMarker(res.city.latitude, res.city.longitude);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        })
+
+    }
 }

@@ -40,7 +40,8 @@
                             "@angular/material/prebuilt-themes/indigo-pink.css",
                             "src/custom.scss",
                             "./node_modules/@fortawesome/fontawesome-free/css/all.css",
-                            "src/styles.css"
+                            "src/styles.css",
+                            "mapbox-gl/dist/mapbox-gl.css"
                         ],
                         "scripts": [
                             "./node_modules/@fortawesome/fontawesome-free/js/all.js"

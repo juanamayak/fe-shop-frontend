@@ -41,7 +41,7 @@
             <div>
                 <mat-label class="text-sm font-medium text-slate-500">Municipio</mat-label>
                 <mat-form-field appearance="outline" class="w-full">
-                    <mat-select formControlName="city_id">
+                    <mat-select formControlName="city_id" (selectionChange)="getCityInfo($event)">
                         @for (city of cities; track city) {
                             <mat-option [value]="city.id">{{ city.name }}</mat-option>
                         }
@@ -83,7 +83,7 @@
         </div>
     </form>
 
-    <div id="map" class="w-full h-auto"></div>
+    <div id="map" class="w-full h-96"></div>
 
     <div class="space-x-3">
         <button mat-stroked-button color="primary">Cancelar</button>
