@@ -67,7 +67,7 @@ export class ProductsComponent implements OnInit{
     }
 
     getProducts(categoryUuid: any){
-        this.productsService.getProducts(categoryUuid).subscribe({
+        this.productsService.getProductsByCategory(categoryUuid).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.products = res.products;

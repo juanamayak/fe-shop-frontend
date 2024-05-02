@@ -14,7 +14,11 @@ export class ProductsService {
     ) {
     }
 
-    getProducts(categoryUuid: any): Observable<any>{
+    getProductsByCategory(categoryUuid: string): Observable<any>{
         return this.httpClient.get(`${this.url}/products/category/${categoryUuid}`);
+    }
+
+    getProductImages(productUuid: string): Observable<any>{
+        return this.httpClient.get(`${this.url}/products/images/${productUuid}`);
     }
 }
