@@ -46,14 +46,12 @@
 
         <!-- Flyout menus -->
         <div class="flex h-full space-x-8 uppercase font-bold">
-            <a [routerLink]="['productos']"
-               class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Flores</a>
-            <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Plantas</a>
-            <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Regalos</a>
-            <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Dulces</a>
-            <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Cervezas</a>
-            <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Vinos</a>
-            <a href="#" class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600">Contacto</a>
+            @for(category of categories; track category){
+                <a (click)="goToProducts(category)"
+                   class="flex items-center text-sm font-bold text-gray-500 hover:text-gray-600 hover:cursor-pointer">
+                    {{ category.name }}
+                </a>
+            }
         </div>
 
     </div>

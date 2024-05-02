@@ -44,10 +44,10 @@ export class AlertsService {
         });
     }
 
-    confirmRequest() {
-        Swal.fire({
-            title: 'Are you sure to continue with the process?',
-            text: "This action cannot be reversed",
+    confirmRequest(message: any) {
+        const confirmation = Swal.fire({
+            title: message,
+            text: "Esta acción no se puede revertir",
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Continue',
@@ -59,6 +59,8 @@ export class AlertsService {
             },
             buttonsStyling: false
         });
+
+        return confirmation;
     }
 
     confirmDelete(message: any) {

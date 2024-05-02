@@ -1,82 +1,62 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
-import {ProductsService} from "../../services/products.service";
-import {NgxSpinnerService} from "ngx-spinner";
-import {AlertsService} from "../../services/alerts.service";
-import {MatDialogRef} from "@angular/material/dialog";
-import {LocationsService} from "../../services/locations.service";
 import {FormBuilder} from "@angular/forms";
-import {CategoriesService} from "../../services/categories.service";
+import {LocationsService} from "../../../services/locations.service";
+import {AlertsService} from "../../../services/alerts.service";
+import {NgxSpinnerService} from "ngx-spinner";
+import {ProductsService} from "../../../services/products.service";
+import {Router} from "@angular/router";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+    selector: 'app-delivery-city-modal',
+    templateUrl: './delivery-city-modal.component.html',
+    styleUrl: './delivery-city-modal.component.css'
 })
-export class ProductsComponent implements OnInit{
+export class DeliveryCityModalComponent implements OnInit {
 
-    public filterForm: any;
-
-    public products: any;
-    public category: any;
+    public searchForm: any;
 
     public countries: any;
     public states: any;
     public cities: any;
 
     constructor(
-        private productsService: ProductsService,
-        private categoriesService: CategoriesService,
         private locationsService: LocationsService,
-        private formBuilder: FormBuilder,
-        private spinner: NgxSpinnerService,
+        private productsService: ProductsService,
         private alertsService: AlertsService,
-        private activatedRoute: ActivatedRoute
+        private spinner: NgxSpinnerService,
+        private router: Router,
+        private formBuilder: FormBuilder,
+        private dialogRef: MatDialogRef<any>
     ) {
     }
 
-    ngOnInit(){
-        this.getCategory();
+    ngOnInit() {
         this.getCountries();
-        this.initForm();
+        this.initForm()
     }
 
     initForm() {
-        this.filterForm = this.formBuilder.group({
+        this.searchForm = this.formBuilder.group({
             city_id: ['']
         });
     }
 
-    getCategory(){
-        this.activatedRoute.params.subscribe((params) => {
-            if (params) {
-                this.spinner.show();
-                const categoryUuid = params['categoryUuid'];
-                this.categoriesService.getCategory(categoryUuid).subscribe({
-                    next: res => {
-                        this.category = res.category;
-                        this.getProducts(categoryUuid);
-                    },
-                    error: err => {
-                        this.spinner.hide()
-                        this.alertsService.errorAlert(err.error.errors);
-                    }
-                });
-            }
-        });
-    }
-
-    getProducts(categoryUuid: any){
-        this.productsService.getProducts(categoryUuid).subscribe({
+    searchProducts() {
+        const cityId = this.searchForm.value.city_id;
+        this.router.navigate(['productos', cityId]);
+        this.dialogRef.close(true);
+        /*this.productsService.getProducts(cityId).subscribe({
             next: res => {
                 this.spinner.hide();
-                this.products = res.products;
+                this.productsService.sendData(res.providers);
+                this.dialogRef.close(true);
             },
             error: err => {
                 this.spinner.hide()
                 this.alertsService.errorAlert(err.error.errors);
             }
-        });
+        });*/
     }
 
     getCountries() {
@@ -118,4 +98,5 @@ export class ProductsComponent implements OnInit{
             }
         });
     }
+
 }

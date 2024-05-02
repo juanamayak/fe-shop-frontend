@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {UsersService} from "../../../services/users.service";
 import {Router} from "@angular/router";
+import {Categories} from "../../../constants/categories";
+import {EditAddressModalComponent} from "../../modals/addresses/edit-address-modal/edit-address-modal.component";
+import {DeliveryCityModalComponent} from "../../modals/delivery-city-modal/delivery-city-modal.component";
 
 @Component({
   selector: 'app-main-navbar',
@@ -11,8 +14,10 @@ import {Router} from "@angular/router";
 export class MainNavbarComponent implements OnInit{
 
     public session: any;
+    public categories = Categories;
     constructor(
         private usersService: UsersService,
+        private dialog: MatDialog,
         public router: Router
     ) {
     }
@@ -24,6 +29,10 @@ export class MainNavbarComponent implements OnInit{
     logout(){
         sessionStorage.clear();
         this.router.navigate(['users/login']);
+    }
+
+    goToProducts(category: any){
+        this.router.navigate(['productos', category.uuid]);
     }
 
 }

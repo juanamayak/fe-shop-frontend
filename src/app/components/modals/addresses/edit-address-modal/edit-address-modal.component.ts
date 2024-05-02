@@ -82,7 +82,7 @@ export class EditAddressModalComponent implements OnInit {
                 this.spinner.hide();
                 this.alertsService.errorAlert(err.error.errors);
             }
-        })
+        });
     }
 
     getCountries() {

@@ -8,7 +8,7 @@ import {AccountModule} from "./account/account.module";
 import {UsersComponent} from './users/users.component';
 import { ProductsComponent } from './products/products.component';
 import {MaterialModule} from "../material/material.module";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProductsDetailComponent } from './products/products-detail/products-detail.component';
 import {CurrencyMaskModule} from "ng2-currency-mask";
 import {ComponentsModule} from "../components/components.module";
@@ -17,7 +17,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
-    {path: 'productos', component: ProductsComponent},
+    {path: 'productos/:categoryUuid', component: ProductsComponent},
     {path: 'productos/detalle', component: ProductsDetailComponent},
     {path: 'carrito', component: ShoppingCartComponent},
     {path: 'checkout', component: CheckoutComponent}
@@ -42,7 +42,8 @@ const routes: Routes = [
         MaterialModule,
         FormsModule,
         CurrencyMaskModule,
-        ComponentsModule
+        ComponentsModule,
+        ReactiveFormsModule
     ]
 })
 export class PagesModule {

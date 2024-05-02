@@ -14,6 +14,7 @@ import {MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
 import { EditAddressModalComponent } from './modals/addresses/edit-address-modal/edit-address-modal.component';
 import { MapComponent } from './map/map.component';
+import { DeliveryCityModalComponent } from './modals/delivery-city-modal/delivery-city-modal.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import { MapComponent } from './map/map.component';
         ProductSliderComponent,
         CreateAddressModalComponent,
         EditAddressModalComponent,
-        MapComponent
+        MapComponent,
+        DeliveryCityModalComponent
     ],
     exports: [
         MainHeaderComponent,

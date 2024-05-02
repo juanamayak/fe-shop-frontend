@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>¿A que ciudad deseas hacer tu envio?</h1>
+<mat-dialog-content>
+    <form [formGroup]="searchForm">
+        <div>
+            <mat-label class="text-sm font-medium text-slate-500">Pais</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-select
+                            (selectionChange)="getStates($event)">
+                    @for (country of countries; track country) {
+                        <mat-option [value]="country.id">{{ country.name }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-label class="text-sm font-medium text-slate-500">Estado</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-select
+                            (selectionChange)="getCities($event)">
+                    @for (state of states; track state) {
+                        <mat-option [value]="state.id">{{ state.name }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-label class="text-sm font-medium text-slate-500">Municipio</mat-label>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-select formControlName="city_id">
+                    @for (city of cities; track city) {
+                        <mat-option [value]="city.id">{{ city.name }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <button mat-flat-button color="primary" class="w-full" (click)="searchProducts()">Comenzar</button>
+    </form>
+</mat-dialog-content>
