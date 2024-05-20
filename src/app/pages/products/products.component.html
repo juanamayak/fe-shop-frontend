@@ -1,19 +1,5 @@
-<!--
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <div class="bg-[#fff8f3]">
-    @if(products){
+    @if (products) {
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between border-b border-gray-200 pb-6 pt-24">
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ category.name }}</h1>
@@ -41,7 +27,7 @@
 
             <section class="pb-24 pt-6">
                 <div class="grid grid-cols-4 gap-x-8 gap-y-10">
-                    <form [formGroup]="filterForm">
+                    <form [formGroup]="filterForm" class="border-r pr-5">
                         <div class="space-y-3">
                             <mat-label class="block text-sm font-medium text-slate-700">
                                 ¿A qué ciudad deseas hacer tu envio?
@@ -76,36 +62,39 @@
                         </div>
 
                         <div class="border-t border-gray-200 space-y-3 py-6">
-                            <mat-label class="block text-sm font-medium text-slate-700">Buscar por nombre o código</mat-label>
-                            <mat-form-field appearance="outline" class="w-full">
-                                <input matInput >
-                            </mat-form-field>
-                        </div>
-
-                        <div class="border-t border-gray-200 space-y-3 py-6">
                             <mat-label class="block text-sm font-medium text-slate-700">Rango de precio</mat-label>
                             <div class="flex gap-3">
                                 <mat-form-field appearance="outline">
-                                    <input matInput currencyMask placeholder="Min">
+                                    <input matInput currencyMask placeholder="Min" formControlName="min_price">
                                 </mat-form-field>
                                 <hr class="w-16 h-1 mx-auto my-5 bg-gray-400 border-0">
                                 <mat-form-field appearance="outline">
-                                    <input matInput currencyMask placeholder="Max">
+                                    <input matInput currencyMask placeholder="Max" formControlName="max_price">
                                 </mat-form-field>
                             </div>
                         </div>
 
                         <div class="flex flex-col border-t border-gray-200 py-6">
-                            @for (subcategory of category.subcategories; track subcategory){
-                                <mat-checkbox [value]="subcategory.id">{{ subcategory.name }}</mat-checkbox>
+                            @for (subcategory of category.subcategories; track subcategory) {
+                                <mat-checkbox [value]="subcategory.id" formArrayName="subcategories">{{ subcategory.name }}</mat-checkbox>
                             }
                         </div>
+                        <button mat-flat-button color="primary" class="w-full"
+                                (click)="applyFilter()">
+                            Aplicar filtro
+                        </button>
                     </form>
 
                     <!-- Product grid -->
                     <div class="col-span-3">
+                        <div>
+                            <mat-form-field appearance="outline" class="w-full">
+                                <input matInput (keyup)="searchProducts($event)"
+                                       placeholder="Buscar por nombre o código">
+                            </mat-form-field>
+                        </div>
                         <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                            @for (product of products; track product){
+                            @for (product of filteredProducts; track product) {
                                 <a [routerLink]="['/productos/detalle']" class="group">
                                     <div
                                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">

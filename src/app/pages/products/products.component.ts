@@ -5,7 +5,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {AlertsService} from "../../services/alerts.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {LocationsService} from "../../services/locations.service";
-import {FormBuilder} from "@angular/forms";
+import {FormArray, FormBuilder} from "@angular/forms";
 import {CategoriesService} from "../../services/categories.service";
 
 @Component({
@@ -23,6 +23,8 @@ export class ProductsComponent implements OnInit{
     public countries: any;
     public states: any;
     public cities: any;
+
+    public filteredProducts: any;
 
     constructor(
         private productsService: ProductsService,
@@ -43,8 +45,23 @@ export class ProductsComponent implements OnInit{
 
     initForm() {
         this.filterForm = this.formBuilder.group({
-            city_id: ['']
+            city_id: [''],
+            min_price: [''],
+            max_price: [''],
+            subcategories: this.formBuilder.array([])
         });
+    }
+
+    applyFilter(){
+        const data = this.filterForm.value;
+        console.log(data);
+    }
+
+    searchProducts(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.filteredProducts = this.products.filter((product: any) =>
+            product.name.toLowerCase().includes(filterValue.toLowerCase())
+        );
     }
 
     getCategory(){
@@ -71,6 +88,7 @@ export class ProductsComponent implements OnInit{
             next: res => {
                 this.spinner.hide();
                 this.products = res.products;
+                this.filteredProducts = this.products.slice();
             },
             error: err => {
                 this.spinner.hide()
@@ -117,5 +135,9 @@ export class ProductsComponent implements OnInit{
                 this.alertsService.errorAlert(err.error.errors);
             }
         });
+    }
+
+    get subcategories() {
+        return this.filterForm.get('subcategories') as FormArray;
     }
 }
