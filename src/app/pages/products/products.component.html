@@ -76,7 +76,7 @@
 
                         <div class="flex flex-col border-t border-gray-200 py-6">
                             @for (subcategory of category.subcategories; track subcategory) {
-                                <mat-checkbox [value]="subcategory.id" formArrayName="subcategories">{{ subcategory.name }}</mat-checkbox>
+                                <mat-checkbox value="{{subcategory.id}}" (change)="subcategoryCheck($event)">{{ subcategory.name }}</mat-checkbox>
                             }
                         </div>
                         <button mat-flat-button color="primary" class="w-full"
@@ -88,7 +88,7 @@
                     <!-- Product grid -->
                     <div class="col-span-3">
                         <div>
-                            <mat-form-field appearance="outline" class="w-full">
+                            <mat-form-field appearance="outline" class="w-1/2">
                                 <input matInput (keyup)="searchProducts($event)"
                                        placeholder="Buscar por nombre o código">
                             </mat-form-field>

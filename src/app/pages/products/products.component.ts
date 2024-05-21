@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit{
             city_id: [''],
             min_price: [''],
             max_price: [''],
-            subcategories: this.formBuilder.array([])
+            subcategories: [[]],
         });
     }
 
@@ -137,7 +137,15 @@ export class ProductsComponent implements OnInit{
         });
     }
 
+    subcategoryCheck(event: any){
+        let subcategoriesArray = [];
+        if (event.checked){
+            subcategoriesArray.push(event.source.value);
+        }
+        console.log(subcategoriesArray);
+    }
+
     get subcategories() {
-        return this.filterForm.get('subcategories') as FormArray;
+        return this.filterForm.get('subcategories');
     }
 }
