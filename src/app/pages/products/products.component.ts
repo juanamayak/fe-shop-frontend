@@ -5,21 +5,22 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {AlertsService} from "../../services/alerts.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {LocationsService} from "../../services/locations.service";
-import {FormArray, FormBuilder} from "@angular/forms";
+import {FormArray, FormBuilder, Validators} from "@angular/forms";
 import {CategoriesService} from "../../services/categories.service";
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+    selector: 'app-products',
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.css'
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent implements OnInit {
 
     public filterForm: any;
 
     public products: any;
     public category: any;
 
+    public loading: boolean = false;
     public countries: any;
     public states: any;
     public cities: any;
@@ -37,7 +38,7 @@ export class ProductsComponent implements OnInit{
     ) {
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.getCategory();
         this.getCountries();
         this.initForm();
@@ -45,6 +46,8 @@ export class ProductsComponent implements OnInit{
 
     initForm() {
         this.filterForm = this.formBuilder.group({
+            country_id: [142],
+            state_id: [''],
             city_id: [''],
             min_price: [''],
             max_price: [''],
@@ -52,9 +55,34 @@ export class ProductsComponent implements OnInit{
         });
     }
 
-    applyFilter(){
+    applyFilter() {
         const data = this.filterForm.value;
-        console.log(data);
+
+        this.filteredProducts = this.products.filter((product: any) => {
+            if (data.city_id) {
+                const providers = product.providers.map((provider: any) => provider.city_id);
+                if (!providers.includes(data.city_id)) {
+                    return false;
+                }
+            }
+
+            if ((data.min_price && Number(product.price) < data.min_price) ||
+                (data.max_price && Number(product.price) > data.max_price)) {
+                return false;
+            }
+
+            if (data.subcategories.length > 0) {
+                const subcategories = product.subcategories.map((subcategory: any) => subcategory.id);
+
+                const included = data.subcategories.some((subcategory: any) => subcategories.includes(subcategory));
+
+                return included;
+            }
+
+            return true;
+        });
+
+        console.log(this.filteredProducts);
     }
 
     searchProducts(event: Event) {
@@ -64,7 +92,7 @@ export class ProductsComponent implements OnInit{
         );
     }
 
-    getCategory(){
+    getCategory() {
         this.activatedRoute.params.subscribe((params) => {
             if (params) {
                 this.spinner.show();
@@ -83,7 +111,7 @@ export class ProductsComponent implements OnInit{
         });
     }
 
-    getProducts(categoryUuid: any){
+    getProducts(categoryUuid: any) {
         this.productsService.getProductsByCategory(categoryUuid).subscribe({
             next: res => {
                 this.spinner.hide();
@@ -98,10 +126,12 @@ export class ProductsComponent implements OnInit{
     }
 
     getCountries() {
+        this.loading = true;
         this.locationsService.getCountries().subscribe({
             next: res => {
                 // TODO: Ordenar Mexico, Estados Unidos y Canada de primero
                 this.countries = res.countries;
+                this.getStates({value: 142});
             },
             error: err => {
                 this.spinner.hide();
@@ -111,10 +141,12 @@ export class ProductsComponent implements OnInit{
     }
 
     getStates(event: any) {
+        this.loading = true;
         const countryId = event.value;
         this.locationsService.getStates(countryId).subscribe({
             next: res => {
                 this.states = res.states;
+                this.loading = false;
             },
             error: err => {
                 this.spinner.hide();
@@ -124,11 +156,13 @@ export class ProductsComponent implements OnInit{
     }
 
     getCities(event: any) {
+        this.loading = true;
         const stateId = event.value;
         this.locationsService.getCities(stateId).subscribe({
             next: res => {
                 this.spinner.hide();
                 this.cities = res.cities;
+                this.loading = false;
             },
             error: err => {
                 this.spinner.hide();
@@ -137,12 +171,16 @@ export class ProductsComponent implements OnInit{
         });
     }
 
-    subcategoryCheck(event: any){
-        let subcategoriesArray = [];
-        if (event.checked){
-            subcategoriesArray.push(event.source.value);
+    subcategoryCheck(event: any, subcategory: any) {
+        const subcategories = this.subcategories.value;
+        const index = subcategories.indexOf(subcategory.id);
+        if (event.checked) {
+            subcategories.push(subcategory.id);
+        } else if (!event.checked && index !== -1) {
+            subcategories.splice(index, 1);
         }
-        console.log(subcategoriesArray);
+
+        this.subcategories.setValue(subcategories);
     }
 
     get subcategories() {

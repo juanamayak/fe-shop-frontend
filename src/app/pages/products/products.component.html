@@ -28,37 +28,44 @@
             <section class="pb-24 pt-6">
                 <div class="grid grid-cols-4 gap-x-8 gap-y-10">
                     <form [formGroup]="filterForm" class="border-r pr-5">
-                        <div class="space-y-3">
-                            <mat-label class="block text-sm font-medium text-slate-700">
-                                ¿A qué ciudad deseas hacer tu envio?
-                            </mat-label>
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-select placeholder="Pais"
-                                            (selectionChange)="getStates($event)">
-                                    @for (country of countries; track country) {
-                                        <mat-option [value]="country.id">{{ country.name }}</mat-option>
-                                    }
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-select placeholder="Estado"
-                                            (selectionChange)="getCities($event)">
-                                    @for (state of states; track state) {
-                                        <mat-option [value]="state.id">{{ state.name }}</mat-option>
-                                    }
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field appearance="outline" class="w-full">
-                                <mat-select formControlName="city_id" placeholder="Ciudad">
-                                    @for (city of cities; track city) {
-                                        <mat-option [value]="city.id">{{ city.name }}</mat-option>
-                                    }
-                                </mat-select>
-                            </mat-form-field>
+                        <div class="mb-3">
+                            <div class="space-y-3">
+                                <mat-label class="block text-sm font-medium text-slate-700">
+                                    ¿A qué ciudad deseas hacer tu envio?
+                                </mat-label>
+                                <mat-form-field appearance="outline" class="w-full">
+                                    <mat-select placeholder="Pais" formControlName="country_id"
+                                                (selectionChange)="getStates($event)">
+                                        @for (country of countries; track country) {
+                                            <mat-option [value]="country.id">{{ country.name }}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="outline" class="w-full">
+                                    <mat-select placeholder="Estado" formControlName="state_id"
+                                                (selectionChange)="getCities($event)">
+                                        @for (state of states; track state) {
+                                            <mat-option [value]="state.id">{{ state.name }}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="outline" class="w-full">
+                                    <mat-select formControlName="city_id" placeholder="Ciudad">
+                                        @for (city of cities; track city) {
+                                            <mat-option [value]="city.id">{{ city.name }}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            @if(loading){
+                                <mat-progress-bar mode="buffer" color="primary"></mat-progress-bar>
+                            }
+
                         </div>
 
                         <div class="border-t border-gray-200 space-y-3 py-6">
@@ -76,7 +83,10 @@
 
                         <div class="flex flex-col border-t border-gray-200 py-6">
                             @for (subcategory of category.subcategories; track subcategory) {
-                                <mat-checkbox value="{{subcategory.id}}" (change)="subcategoryCheck($event)">{{ subcategory.name }}</mat-checkbox>
+                                <mat-checkbox [value]="subcategory.id"
+                                              (change)="subcategoryCheck($event, subcategory)">
+                                    {{ subcategory.name }}
+                                </mat-checkbox>
                             }
                         </div>
                         <button mat-flat-button color="primary" class="w-full"
@@ -87,12 +97,12 @@
 
                     <!-- Product grid -->
                     <div class="col-span-3">
-                        <div>
+                        <!--<div>
                             <mat-form-field appearance="outline" class="w-1/2">
                                 <input matInput (keyup)="searchProducts($event)"
                                        placeholder="Buscar por nombre o código">
                             </mat-form-field>
-                        </div>
+                        </div>-->
                         <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                             @for (product of filteredProducts; track product) {
                                 <a [routerLink]="['/productos/detalle']" class="group">
