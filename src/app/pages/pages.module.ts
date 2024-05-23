@@ -18,7 +18,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'productos/:categoryUuid', component: ProductsComponent},
-    {path: 'productos/detalle', component: ProductsDetailComponent},
+    {path: 'productos/detalle/:productUuid', component: ProductsDetailComponent},
     {path: 'carrito', component: ShoppingCartComponent},
     {path: 'checkout', component: CheckoutComponent}
 

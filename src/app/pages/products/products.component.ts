@@ -81,8 +81,6 @@ export class ProductsComponent implements OnInit {
 
             return true;
         });
-
-        console.log(this.filteredProducts);
     }
 
     searchProducts(event: Event) {

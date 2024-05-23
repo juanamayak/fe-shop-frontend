@@ -14,6 +14,10 @@ export class ProductsService {
     ) {
     }
 
+    getProduct(productUuid: string): Observable<any>{
+        return this.httpClient.get(`${this.url}/products/${productUuid}`);
+    }
+
     getProductsByCategory(categoryUuid: string): Observable<any>{
         return this.httpClient.get(`${this.url}/products/category/${categoryUuid}`);
     }

@@ -1,59 +1,61 @@
-<main class="mx-auto max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
-    <div class="grid w-full grid-cols-2 items-start gap-10">
-        <div>
-            <app-product-slider></app-product-slider>
-        </div>
-
-
-        <div class="space-y-8">
+@if(product){
+    <main class="mx-auto max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
+        <div class="grid w-full grid-cols-2 items-start gap-10">
             <div>
-                <h2 class="text-4xl font-bold text-[#f2999b]">Ramo de Rosas</h2>
-                <h3 class="text-md font-bold text-gray-500">Flores</h3>
+                <app-product-slider [productUuid]="product.uuid"></app-product-slider>
             </div>
 
-            <p class="text-4xl font-bold text-[#f2999b]">$192</p>
 
-            <button mat-flat-button color="primary" class="w-full text-lg font-bold uppercase"
-                    (click)="addToShoppingCart()">
-                <i class="fa-solid fa-cart-shopping"></i>&nbsp;Añadir al carrito
-            </button>
-
-            <div class="flex gap-5">
-                <div class="flex flex-col items-center w-1/4 text-center">
-                    <img class="w-20" src="assets/stripe-logo.png"/>
-                    <h5 class="mt-2 text-xs text-gray-500">MSI con tarjetas de crédito y débito</h5>
+            <div class="space-y-8">
+                <div>
+                    <h2 class="text-4xl font-bold text-[#f2999b]">{{ product.name }}</h2>
+                    <h3 class="text-md font-bold text-gray-500">{{ product.category.name }}</h3>
                 </div>
-                <div class="flex flex-col items-center w-1/4 text-center">
-                    <img class="w-20" src="assets/oxxo-logo.png"/>
-                    <h5 class="mt-2 text-xs text-gray-500">Pagos y depositos en efectivo en OXXO</h5>
+
+                <p class="text-4xl font-bold text-[#f2999b]">{{ product.price | currency }}</p>
+
+                <button mat-flat-button color="primary" class="w-full text-lg font-bold uppercase"
+                        (click)="addToShoppingCart()">
+                    <i class="fa-solid fa-cart-shopping"></i>&nbsp;Añadir al carrito
+                </button>
+
+                <div class="flex gap-5">
+                    <div class="flex flex-col items-center w-1/4 text-center">
+                        <img class="w-20" src="assets/stripe-logo.png"/>
+                        <h5 class="mt-2 text-xs text-gray-500">MSI con tarjetas de crédito y débito</h5>
+                    </div>
+                    <div class="flex flex-col items-center w-1/4 text-center">
+                        <img class="w-20" src="assets/oxxo-logo.png"/>
+                        <h5 class="mt-2 text-xs text-gray-500">Pagos y depositos en efectivo en OXXO</h5>
+                    </div>
+                    <div class="flex flex-col items-center w-1/4 text-center">
+                        <img class="w-20" src="assets/paypal-logo.png"/>
+                        <h5 class="mt-2 text-xs text-gray-500">Usa tu cuenta o saldo de PayPal</h5>
+                    </div>
                 </div>
-                <div class="flex flex-col items-center w-1/4 text-center">
-                    <img class="w-20" src="assets/paypal-logo.png"/>
-                    <h5 class="mt-2 text-xs text-gray-500">Usa tu cuenta o saldo de PayPal</h5>
+
+                <div class="flex items-center gap-3 text-gray-500">
+                    <i class="fa-solid fa-location-dot fa-2x"></i>
+                    <p class="text-sm">Recogida disponible en Avenida 30 entre Const. y Calle 20 Col. Gonzalo Guerrero,
+                        Playa del Carmen, Quintana Roo, México</p>
                 </div>
-            </div>
 
-            <div class="flex items-center gap-3 text-gray-500">
-                <i class="fa-solid fa-location-dot fa-2x"></i>
-                <p class="text-sm">Recogida disponible en Avenida 30 entre Const. y Calle 20 Col. Gonzalo Guerrero,
-                    Playa del Carmen, Quintana Roo, México</p>
-            </div>
+                <div class="space-y-2">
+                    <h5 class="text-xs text-gray-500 font-semibold uppercase">Descripción del producto</h5>
+                    <p class="text-sm text-gray-500">Regala y envía directo este hermoso arreglo de 12 rosas, color melón,
+                        claveles blancos y si deseas en jarrón con acabado tornasol. ¡Es perfecto para celebrar cualquier
+                        ocasion especial!</p>
+                </div>
 
-            <div class="space-y-2">
-                <h5 class="text-xs text-gray-500 font-semibold uppercase">Descripción del producto</h5>
-                <p class="text-sm text-gray-500">Regala y envía directo este hermoso arreglo de 12 rosas, color melón,
-                    claveles blancos y si deseas en jarrón con acabado tornasol. ¡Es perfecto para celebrar cualquier
-                    ocasion especial!</p>
-            </div>
-
-            <div class="space-y-2">
-                <h5 class="text-xs text-gray-500 font-semibold uppercase">Promesa de FloreriaEnvios</h5>
-                <p class="text-sm text-gray-500">Elaborado con amor y cuidadosamente por expertos en arte floral,
-                    eligiendo siempre las flores más frescas, de temporada, hermosas y cumpliendo los más altos
-                    estándares de calidad.</p>
+                <div class="space-y-2">
+                    <h5 class="text-xs text-gray-500 font-semibold uppercase">Promesa de FloreriaEnvios</h5>
+                    <p class="text-sm text-gray-500">Elaborado con amor y cuidadosamente por expertos en arte floral,
+                        eligiendo siempre las flores más frescas, de temporada, hermosas y cumpliendo los más altos
+                        estándares de calidad.</p>
+                </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
+}
 
 
