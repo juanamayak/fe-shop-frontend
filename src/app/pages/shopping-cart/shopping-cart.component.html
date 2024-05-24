@@ -2,58 +2,60 @@
     <div class="grid w-full grid-cols-3 items-start gap-10">
         <div class="col-span-2 space-y-5">
 
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-16 py-3">
-                        <span class="sr-only">Image</span>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Product
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Qty
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Price
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="bg-white border-b hover:bg-gray-50">
-                    <td class="p-4">
-                        <img src="assets/default-product.jpg" class="w-24 max-w-full max-h-full rounded-lg">
-                    </td>
-                    <td class="px-6 py-4 text-gray-500">
-                        Apple Watch
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="flex items-center">
-                            <button mat-icon-button>
-                                <i class="fa-solid fa-circle-minus"></i>
+            @if(cart){
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-16 py-3">
+                            <span class="sr-only">Image</span>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Product
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Qty
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Price
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        <td class="p-4">
+                            <img src="assets/default-product.jpg" class="w-24 max-w-full max-h-full rounded-lg">
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">
+                            {{ cart.product.name }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center">
+                                <button mat-icon-button>
+                                    <i class="fa-solid fa-circle-minus"></i>
+                                </button>
+                                <mat-form-field appearance="outline" class="w-20 -mb-5">
+                                    <input matInput type="number" [min]="1">
+                                </mat-form-field>
+                                <button mat-icon-button>
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">
+                            $599
+                        </td>
+                        <td class="px-6 py-4">
+                            <button mat-icon-button color="warn">
+                                <i class="fa-solid fa-trash-can"></i>
                             </button>
-                            <mat-form-field appearance="outline" class="w-20 -mb-5">
-                                <input matInput type="number" [min]="1">
-                            </mat-form-field>
-                            <button mat-icon-button>
-                                <i class="fa-solid fa-circle-plus"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 text-gray-500">
-                        $599
-                    </td>
-                    <td class="px-6 py-4">
-                        <button mat-icon-button color="warn">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            }
 
             <div class="space-y-2 p-5">
                 <h5 class="text-lg text-[#f2999b] font-semibold">Garantía de FloreríaEnvios</h5>

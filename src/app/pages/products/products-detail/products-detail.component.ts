@@ -4,6 +4,8 @@ import {ProductsService} from "../../../services/products.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AlertsService} from "../../../services/alerts.service";
 import {GalleryItem} from "@daelmaak/ngx-gallery";
+import {CartsService} from "../../../services/carts.service";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-products-detail',
@@ -12,20 +14,30 @@ import {GalleryItem} from "@daelmaak/ngx-gallery";
 })
 export class ProductsDetailComponent implements OnInit {
 
+    public cartForm: any;
     public product: any;
 
     public images: GalleryItem[] = []
 
     constructor(
         private productsService: ProductsService,
+        private cartService: CartsService,
         private activatedRoute: ActivatedRoute,
         private spinner: NgxSpinnerService,
+        private formBuilder: FormBuilder,
         private alertsService: AlertsService,
         private router: Router
     ){ }
 
     ngOnInit() {
         this.getProduct();
+        this.initCarForm();
+    }
+
+    initCarForm(){
+        this.cartForm = this.formBuilder.group({
+            quantity: [1, Validators.required],
+        })
     }
 
     getProduct() {
@@ -66,8 +78,27 @@ export class ProductsDetailComponent implements OnInit {
         })
     }
 
-    public addToShoppingCart(){
-        this.router.navigate(['carrito'])
+    addToCart(){
+        this.spinner.show();
+        const data = {
+            product_id: this.product.id,
+            quantity: this.cartForm.value.quantity
+        }
+
+        this.cartService.addToCart(data).subscribe({
+            next: res => {
+                this.alertsService.successAlert(res.message);
+                this.spinner.hide();
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        });
+    }
+
+    viewCart(){
+        this.router.navigate(['carrito']);
     }
 
 }
