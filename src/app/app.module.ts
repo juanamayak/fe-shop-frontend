@@ -9,6 +9,7 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
+import {GalleryComponent} from "@daelmaak/ngx-gallery";
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import {JwtInterceptor} from "./interceptors/jwt.interceptor";
         PagesModule,
         LayoutsModule,
         CurrencyMaskModule,
-        NgxSpinnerModule
+        NgxSpinnerModule,
+        GalleryComponent
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

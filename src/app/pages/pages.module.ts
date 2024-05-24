@@ -14,6 +14,7 @@ import {CurrencyMaskModule} from "ng2-currency-mask";
 import {ComponentsModule} from "../components/components.module";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import {GalleryComponent} from "@daelmaak/ngx-gallery";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -43,7 +44,8 @@ const routes: Routes = [
         FormsModule,
         CurrencyMaskModule,
         ComponentsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        GalleryComponent
     ]
 })
 export class PagesModule {

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ProductsService} from "../../../services/products.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {AlertsService} from "../../../services/alerts.service";
-import {CarouselLibConfig, Image} from "@ks89/angular-modal-gallery";
+import {GalleryItem} from "@daelmaak/ngx-gallery";
 
 @Component({
   selector: 'app-products-detail',
@@ -14,7 +14,7 @@ export class ProductsDetailComponent implements OnInit {
 
     public product: any;
 
-    public files: Image[] = [];
+    public images: GalleryItem[] = []
 
     constructor(
         private productsService: ProductsService,
@@ -36,6 +36,7 @@ export class ProductsDetailComponent implements OnInit {
                 this.productsService.getProduct(productUuid).subscribe({
                     next: res => {
                         this.product = res.product;
+                        this.getImages();
                     },
                     error: err => {
                         this.spinner.hide()
@@ -46,7 +47,24 @@ export class ProductsDetailComponent implements OnInit {
         });
     }
 
+    getImages() {
+        this.productsService.getProductImages(this.product.uuid).subscribe({
+            next: res => {
+                this.images = res.images.map((image: any) => {
+                    return {
+                        src: `data:${image.file.type};base64,${image.url}`,
+                        thumbSrc: `data:${image.file.type};base64,${image.url}`
+                    }
+                });
 
+                this.spinner.hide();
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        })
+    }
 
     public addToShoppingCart(){
         this.router.navigate(['carrito'])
