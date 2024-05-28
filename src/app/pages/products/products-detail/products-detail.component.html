@@ -15,7 +15,7 @@
 
                 <p class="text-4xl font-bold text-[#f2999b]">{{ product.price | currency }}</p>
 
-                <form [formGroup]="cartForm">
+                <!--<form [formGroup]="cartForm">
                     <div>
                         <mat-label class="text-sm font-medium text-slate-500">Cantidad</mat-label>
                         <mat-form-field appearance="outline" class="w-full">
@@ -27,19 +27,14 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
+                </form>-->
 
-                    <div class="space-y-5">
-                        <button mat-flat-button color="primary" class="w-full text-lg font-bold uppercase"
-                                (click)="addToCart()">
-                            <i class="fa-solid fa-cart-shopping"></i>&nbsp;Añadir al carrito
-                        </button>
-
-                        <button mat-stroked-button color="primary" class="w-full text-lg font-bold uppercase"
-                                (click)="viewCart()">
-                            Ver el carrito de compras
-                        </button>
-                    </div>
-                </form>
+                <div class="space-y-5">
+                    <button mat-flat-button color="primary" class="w-full text-lg font-bold uppercase"
+                            (click)="addToCart()">
+                        <i class="fa-solid fa-cart-shopping"></i>&nbsp;Añadir al carrito
+                    </button>
+                </div>
 
                 <div class="flex gap-5">
                     <div class="flex flex-col items-center w-1/4 text-center">

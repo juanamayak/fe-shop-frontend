@@ -1,8 +1,8 @@
-<main class="mx-auto max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
+<main class="mx-auto w-5/6 space-y-10 px-4 py-16 sm:px-6 lg:px-8">
     <div class="grid w-full grid-cols-3 items-start gap-10">
         <div class="col-span-2 space-y-5">
 
-            @if(cart){
+            @if (cartProducts) {
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
@@ -13,46 +13,58 @@
                             Product
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Qty
+                            Cantidad
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Price
+                            Precio
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Total
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Eliminar
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="bg-white border-b hover:bg-gray-50">
-                        <td class="p-4">
-                            <img src="assets/default-product.jpg" class="w-24 max-w-full max-h-full rounded-lg">
-                        </td>
-                        <td class="px-6 py-4 text-gray-500">
-                            {{ cart.product.name }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="flex items-center">
-                                <button mat-icon-button>
-                                    <i class="fa-solid fa-circle-minus"></i>
-                                </button>
-                                <mat-form-field appearance="outline" class="w-20 -mb-5">
-                                    <input matInput type="number" [min]="1">
-                                </mat-form-field>
-                                <button mat-icon-button>
-                                    <i class="fa-solid fa-circle-plus"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 text-gray-500">
-                            $599
-                        </td>
-                        <td class="px-6 py-4">
-                            <button mat-icon-button color="warn">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </td>
-                    </tr>
+                        @for (cart of cartProducts; track cart) {
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <td class="p-4">
+                                    <img src="assets/default-product.jpg" class="w-24 max-w-full max-h-full rounded-lg">
+                                </td>
+                                <td class="px-6 py-4 text-gray-500">
+                                    {{ cart.product.name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <form [formGroup]="quantityForm.controls[$index]">
+                                        <div class="flex items-center">
+                                            <button mat-icon-button (click)="decrement($index)">
+                                                <i class="fa-solid fa-circle-minus"></i>
+                                            </button>
+                                            <mat-form-field appearance="outline" class="w-20 -mb-5">
+                                                <input matInput [min]="1" formControlName="quantity">
+                                            </mat-form-field>
+                                            <button mat-icon-button (click)="increment($index)">
+                                                <i class="fa-solid fa-circle-plus"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td class="px-6 py-4 text-gray-500">
+                                    {{ cart.product.price | currency }}
+                                </td>
+
+                                <td class="px-6 py-4 text-gray-500">
+                                    {{ (cart.product.price * quantityForm.at($index).get('quantity').value) | currency }}
+                                </td>
+
+                                <td class="px-6 py-4">
+                                    <button mat-icon-button color="warn">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             }
@@ -160,7 +172,7 @@
                 </table>
             </div>
 
-            <button mat-raised-button color="primary" class="w-full" (click)="createShoppingCart()">
+            <button mat-raised-button color="primary" class="w-full">
                 <i class="fa-solid fa-credit-card"></i> Ir a pagar
             </button>
         </div>

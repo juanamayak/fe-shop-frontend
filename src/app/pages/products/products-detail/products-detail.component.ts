@@ -31,7 +31,7 @@ export class ProductsDetailComponent implements OnInit {
 
     ngOnInit() {
         this.getProduct();
-        this.initCarForm();
+        // this.initCarForm();
     }
 
     initCarForm(){
@@ -82,12 +82,16 @@ export class ProductsDetailComponent implements OnInit {
         this.spinner.show();
         const data = {
             product_id: this.product.id,
-            quantity: this.cartForm.value.quantity
+            quantity: 1
         }
 
         this.cartService.addToCart(data).subscribe({
             next: res => {
                 this.alertsService.successAlert(res.message);
+                setTimeout(() => {
+                    this.router.navigate(['carrito']);
+                }, 2500);
+
                 this.spinner.hide();
             },
             error: err => {
