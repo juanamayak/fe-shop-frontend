@@ -92,7 +92,6 @@ export class ShoppingCartComponent implements OnInit{
 
     addQuantity(index: any, productId: any): void {
         const control = this.quantityForm.at(index).get('quantity');
-        console.log(control)
         control.setValue(control.value + 1);
         const data = {
             quantity: control.value
@@ -111,7 +110,6 @@ export class ShoppingCartComponent implements OnInit{
 
     subQuantity(index: any, productId: any): void {
         const control = this.quantityForm.at(index).get('quantity');
-        console.log(control)
         if (control.value > 1) {
             control.setValue(control.value - 1);
         }
