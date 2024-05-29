@@ -2,7 +2,7 @@
     <div class="grid w-full grid-cols-3 items-start gap-10">
         <div class="col-span-2 space-y-5">
 
-            @if (cartProducts) {
+            @if (products) {
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
@@ -27,35 +27,35 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @for (cart of cartProducts; track cart) {
+                        @for (product of products; track product) {
                             <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="p-4">
                                     <img src="assets/default-product.jpg" class="w-24 max-w-full max-h-full rounded-lg">
                                 </td>
                                 <td class="px-6 py-4 text-gray-500">
-                                    {{ cart.product.name }}
+                                    {{ product.name }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <form [formGroup]="quantityForm.controls[$index]">
                                         <div class="flex items-center">
-                                            <button mat-icon-button (click)="decrement($index)">
+                                            <button mat-icon-button (click)="subQuantity($index, product.id)">
                                                 <i class="fa-solid fa-circle-minus"></i>
                                             </button>
                                             <mat-form-field appearance="outline" class="w-20 -mb-5">
                                                 <input matInput [min]="1" formControlName="quantity">
                                             </mat-form-field>
-                                            <button mat-icon-button (click)="increment($index)">
+                                            <button mat-icon-button (click)="addQuantity($index, product.id)">
                                                 <i class="fa-solid fa-circle-plus"></i>
                                             </button>
                                         </div>
                                     </form>
                                 </td>
                                 <td class="px-6 py-4 text-gray-500">
-                                    {{ cart.product.price | currency }}
+                                    {{ product.price | currency }}
                                 </td>
 
                                 <td class="px-6 py-4 text-gray-500">
-                                    {{ (cart.product.price * quantityForm.at($index).get('quantity').value) | currency }}
+                                    {{ (product.price * quantityForm.at($index).get('quantity').value) | currency }}
                                 </td>
 
                                 <td class="px-6 py-4">
@@ -103,7 +103,7 @@
                 <div>
                     <mat-form-field class="w-full" appearance="outline">
                         <input matInput [matDatepicker]="datepicker" (click)="datepicker.open()">
-                        <mat-datepicker #datepicker>
+                        <mat-datepicker #datepicker touchUi>
                             <mat-datepicker-actions>
                                 <button mat-button matDatepickerCancel>Cancel</button>
                                 <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
@@ -113,14 +113,18 @@
                 </div>
 
                 <h3 class="text-sm font-medium text-slate-700">2. Selecciona la hora de envío</h3>
-                <mat-form-field class="w-full" appearance="outline">
-                    <mat-select>
-                        <mat-option value="option1">Option 1</mat-option>
-                        <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-                        <mat-option value="option3">Option 3</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection" (change)="selectDeliveryHour($event)">
+                    @for (hour of deliveryHours; track hour) {
+                        @if(hour.special === 1){
+                            <mat-chip-option [value]="hour.id">{{hour.start_hour | date:'shortTime':'GMT'}} - {{hour.end_hour | date:'shortTime':'GMT'}}</mat-chip-option>
+                            <mat-chip-option [value]="0">Horario especial: +$280 MXN</mat-chip-option>
+                        }
 
+                        @if(hour.special === 2 && showSpecialHours){
+                            <mat-chip-option [value]="hour.id">{{hour.start_hour | date:'shortTime':'GMT'}} - {{hour.end_hour | date:'shortTime':'GMT'}}</mat-chip-option>
+                        }
+                    }
+                </mat-chip-listbox>
 
                 <h3 class="text-sm font-medium text-slate-700">3. Complementar pedido (opcional)</h3>
                 <button mat-raised-button color="primary" class="w-full">
@@ -140,15 +144,7 @@
                             Subtotal
                         </th>
                         <td class="px-6 py-4 text-right">
-                            $150
-                        </td>
-                    </tr>
-                    <tr class="border-b">
-                        <th scope="row" class="font-medium text-gray-900">
-                            Horario de envio
-                        </th>
-                        <td class="px-6 py-4 text-right">
-                            $280
+                            {{ subtotal | currency }}
                         </td>
                     </tr>
                     <tr class="border-b">
@@ -156,16 +152,30 @@
                             Envio
                         </th>
                         <td class="px-6 py-4 text-right">
-                            $100
+                            {{ 100 | currency }}
                         </td>
                     </tr>
+                    @if(showSpecialHours){
+                        <tr class="border-b" >
+                            <th scope="row" class="font-medium text-gray-900">
+                                Horario especial
+                            </th>
+                            <td class="px-6 py-4 text-right">
+                                {{ 280 | currency}}
+                            </td>
+                        </tr>
+                    }
 
                     <tr class="">
                         <th scope="row" class="font-semibold text-lg text-gray-900">
                             Total
                         </th>
                         <td class="px-6 py-4 font-semibold text-lg text-right">
-                            $629
+                            @if(showSpecialHours){
+                                {{ (subtotal + 100 + 280) | currency}}
+                            }@else {
+                                {{ (subtotal + 100) | currency}}
+                            }
                         </td>
                     </tr>
                     </tbody>

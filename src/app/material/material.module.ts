@@ -16,6 +16,8 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
     declarations: [],
@@ -36,7 +38,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         MatNativeDateModule,
         MatSlideToggleModule,
         MatProgressSpinnerModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatButtonToggleModule,
+        MatChipsModule
     ],
     exports: [
         MatSidenavModule,
@@ -54,7 +58,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
         MatNativeDateModule,
         MatSlideToggleModule,
         MatProgressSpinnerModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatButtonToggleModule,
+        MatChipsModule
     ]
 })
 export class MaterialModule {

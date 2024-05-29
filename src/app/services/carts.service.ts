@@ -21,4 +21,8 @@ export class CartsService {
     addToCart(data: any): Observable<any>{
         return this.httpClient.post(`${this.url}/cart/create`, data);
     }
+
+    updateQuantity(productId: any, data: any): Observable<any>{
+        return this.httpClient.put(`${this.url}/cart/quantity/${productId}`, data);
+    }
 }
