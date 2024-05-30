@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { EditAddressModalComponent } from './modals/addresses/edit-address-modal/edit-address-modal.component';
 import { MapComponent } from './map/map.component';
 import { DeliveryCityModalComponent } from './modals/delivery-city-modal/delivery-city-modal.component';
+import { AddressesListModalComponent } from './modals/addresses/addresses-list-modal/addresses-list-modal.component';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { DeliveryCityModalComponent } from './modals/delivery-city-modal/deliver
         CreateAddressModalComponent,
         EditAddressModalComponent,
         MapComponent,
-        DeliveryCityModalComponent
+        DeliveryCityModalComponent,
+        AddressesListModalComponent
     ],
     exports: [
         MainHeaderComponent,

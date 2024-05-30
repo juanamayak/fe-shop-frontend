@@ -105,7 +105,7 @@ export class ShoppingCartComponent implements OnInit {
                 this.spinner.hide();
                 this.alertsService.successAlert(res.message);
                 setTimeout(() => {
-                    this.router.navigate(['checkout']);
+                    this.router.navigate(['checkout', res.order]);
                 }, 2500);
             },
             error: err => {

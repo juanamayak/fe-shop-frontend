@@ -21,7 +21,7 @@ const routes: Routes = [
     {path: 'productos/:categoryUuid', component: ProductsComponent},
     {path: 'productos/detalle/:productUuid', component: ProductsDetailComponent},
     {path: 'carrito', component: ShoppingCartComponent},
-    {path: 'checkout', component: CheckoutComponent}
+    {path: 'checkout/:orderUuid', component: CheckoutComponent}
 
 ]
 
