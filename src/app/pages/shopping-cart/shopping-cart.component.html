@@ -30,7 +30,8 @@
                         @for (product of products; track product) {
                             <tr class="bg-white border-b hover:bg-gray-50">
                                 <td class="p-4">
-                                    <img src="assets/default-product.jpg" class="w-24 max-w-full max-h-full rounded-lg">
+                                    <img src="data:{{ product.image.file.type }};base64,{{ product.image.url}}"
+                                         class="w-24 max-w-full max-h-full rounded-lg">
                                 </td>
                                 <td class="px-6 py-4 text-gray-500">
                                     {{ product.name }}
@@ -98,40 +99,49 @@
         </div>
 
         <div class="space-y-5">
-            <form action="" class="space-y-3">
-                <h3 class="text-sm font-medium text-slate-700">1. Selecciona fecha de envío</h3>
-                <div>
-                    <mat-form-field class="w-full" appearance="outline">
-                        <input matInput [matDatepicker]="datepicker" (click)="datepicker.open()">
-                        <mat-datepicker #datepicker touchUi>
-                            <mat-datepicker-actions>
-                                <button mat-button matDatepickerCancel>Cancel</button>
-                                <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
-                            </mat-datepicker-actions>
-                        </mat-datepicker>
-                    </mat-form-field>
-                </div>
+            @if (orderForm) {
+                <form [formGroup]="orderForm" class="space-y-3">
+                    <h3 class="text-sm font-medium text-slate-700">1. Selecciona fecha de envío</h3>
+                    <div>
+                        <mat-form-field class="w-full" appearance="outline">
+                            <input matInput [matDatepicker]="datepicker" (click)="datepicker.open()"
+                                   formControlName="delivery_date">
+                            <mat-datepicker #datepicker touchUi>
+                                <mat-datepicker-actions>
+                                    <button mat-button matDatepickerCancel>Cancel</button>
+                                    <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                </mat-datepicker-actions>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
 
-                <h3 class="text-sm font-medium text-slate-700">2. Selecciona la hora de envío</h3>
-                <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection" (change)="selectDeliveryHour($event)">
-                    @for (hour of deliveryHours; track hour) {
-                        @if(hour.special === 1){
-                            <mat-chip-option [value]="hour.id">{{hour.start_hour | date:'shortTime':'GMT'}} - {{hour.end_hour | date:'shortTime':'GMT'}}</mat-chip-option>
-                            <mat-chip-option [value]="0">Horario especial: +$280 MXN</mat-chip-option>
+                    <h3 class="text-sm font-medium text-slate-700">2. Selecciona la hora de envío</h3>
+                    <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection"
+                                      (change)="selectDeliveryHour($event)"
+                                      formControlName="delivery_hour_id">
+                        @for (hour of deliveryHours; track hour) {
+                            @if (hour.special === 1) {
+                                <mat-chip-option [value]="hour.id">{{ hour.start_hour | date:'shortTime':'GMT' }}
+                                    - {{ hour.end_hour | date:'shortTime':'GMT' }}
+                                </mat-chip-option>
+                                <mat-chip-option [value]="0">Horario especial: +$280 MXN</mat-chip-option>
+                            }
+
+                            @if (hour.special === 2 && showSpecialHours) {
+                                <mat-chip-option [value]="hour.id">{{ hour.start_hour | date:'shortTime':'GMT' }}
+                                    - {{ hour.end_hour | date:'shortTime':'GMT' }}
+                                </mat-chip-option>
+                            }
                         }
+                    </mat-chip-listbox>
 
-                        @if(hour.special === 2 && showSpecialHours){
-                            <mat-chip-option [value]="hour.id">{{hour.start_hour | date:'shortTime':'GMT'}} - {{hour.end_hour | date:'shortTime':'GMT'}}</mat-chip-option>
-                        }
-                    }
-                </mat-chip-listbox>
+                    <h3 class="text-sm font-medium text-slate-700">3. Complementar pedido (opcional)</h3>
+                    <button mat-raised-button color="primary" class="w-full">
+                        <i class="fa-solid fa-cart-plus"></i>&nbsp;Ver más productos
+                    </button>
 
-                <h3 class="text-sm font-medium text-slate-700">3. Complementar pedido (opcional)</h3>
-                <button mat-raised-button color="primary" class="w-full">
-                    <i class="fa-solid fa-cart-plus"></i>&nbsp;Ver más productos
-                </button>
-
-            </form>
+                </form>
+            }
 
             <hr>
 
@@ -152,29 +162,29 @@
                             Envio
                         </th>
                         <td class="px-6 py-4 text-right">
-                            {{ 100 | currency }}
+                            {{ deliveryPrince | currency }}
                         </td>
                     </tr>
-                    @if(showSpecialHours){
-                        <tr class="border-b" >
-                            <th scope="row" class="font-medium text-gray-900">
-                                Horario especial
-                            </th>
-                            <td class="px-6 py-4 text-right">
-                                {{ 280 | currency}}
-                            </td>
-                        </tr>
-                    }
+                        @if (showSpecialHours) {
+                            <tr class="border-b">
+                                <th scope="row" class="font-medium text-gray-900">
+                                    Horario especial
+                                </th>
+                                <td class="px-6 py-4 text-right">
+                                    {{ specialPrice | currency }}
+                                </td>
+                            </tr>
+                        }
 
                     <tr class="">
                         <th scope="row" class="font-semibold text-lg text-gray-900">
                             Total
                         </th>
                         <td class="px-6 py-4 font-semibold text-lg text-right">
-                            @if(showSpecialHours){
-                                {{ (subtotal + 100 + 280) | currency}}
-                            }@else {
-                                {{ (subtotal + 100) | currency}}
+                            @if (showSpecialHours) {
+                                {{ (subtotal + deliveryPrince + specialPrice) | currency }}
+                            } @else {
+                                {{ (subtotal + deliveryPrince) | currency }}
                             }
                         </td>
                     </tr>
@@ -182,7 +192,8 @@
                 </table>
             </div>
 
-            <button mat-raised-button color="primary" class="w-full">
+            <button mat-raised-button color="primary" class="w-full"
+                    [disabled]="orderForm.invalid" (click)="createOrder()">
                 <i class="fa-solid fa-credit-card"></i> Ir a pagar
             </button>
         </div>
