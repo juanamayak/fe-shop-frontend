@@ -162,7 +162,7 @@
                             Envio
                         </th>
                         <td class="px-6 py-4 text-right">
-                            {{ deliveryPrince | currency }}
+                            {{ deliveryPrice | currency }}
                         </td>
                     </tr>
                         @if (showSpecialHours) {
@@ -182,9 +182,9 @@
                         </th>
                         <td class="px-6 py-4 font-semibold text-lg text-right">
                             @if (showSpecialHours) {
-                                {{ (subtotal + deliveryPrince + specialPrice) | currency }}
+                                {{ (subtotal + deliveryPrice + specialPrice) | currency }}
                             } @else {
-                                {{ (subtotal + deliveryPrince) | currency }}
+                                {{ (subtotal + deliveryPrice) | currency }}
                             }
                         </td>
                     </tr>

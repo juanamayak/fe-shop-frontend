@@ -16,10 +16,10 @@
                                 <i class="fa-solid fa-circle-user text-white"></i>
                             </button>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item>
+                                <button mat-menu-item [routerLink]="['/cuenta/perfil']">
                                     <span><i class="fa-regular fa-user"></i>&nbsp;Mi cuenta</span>
                                 </button>
-                                <button mat-menu-item>
+                                <button mat-menu-item [routerLink]="['/cuenta/pedidos']">
                                     <span><i class="fa-solid fa-store"></i>&nbsp;Mis pedidos</span>
                                 </button>
                                 <button mat-menu-item (click)="logout()">

@@ -1,130 +1,158 @@
-<main class="mx-auto max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
-    <div class="grid w-full grid-cols-2 items-start gap-10">
-        <div class="space-y-5">
-            <h3 class="text-2xl font-bold text-[#f2999b]">Datos de Envio</h3>
+@if (order){
+    <main class="mx-auto max-w-7xl space-y-10 px-4 py-16 sm:px-6 lg:px-8">
+        <div class="grid w-full grid-cols-2 items-start gap-10">
+            <form [formGroup]="sendDataForm" class="space-y-5">
+                <h3 class="text-2xl font-bold text-[#f2999b]">Datos de Envio</h3>
 
-            <div>
-                <h4 class=" text-[#f2999b]">1. Dirección de envío</h4>
-                <p class="text-gray-500">Esta es la dirección de la persona a la que enviaras el regalo.</p>
-            </div>
-
-            <button mat-flat-button color="primary" (click)="openAddressesDialog()">
-                <i class="fa-solid fa-map"></i>&nbsp;Seleccionar dirección
-            </button>
-
-            <div>
-                <h4 class=" text-[#f2999b]">2. Dedicatoria</h4>
-                <p class="text-gray-500">Escribe un mensaje de dedicatoria o selecciona uno de los que tenénemos
-                    preparado para ti.</p>
-            </div>
-
-            <div>
                 <div>
-                    <mat-label class="text-sm text-gray-500">Seleccionar dedicatoria</mat-label>
-                    <mat-form-field appearance="outline" class="w-full">
-                        <mat-select>
-                            <mat-option value="option1">Option 1</mat-option>
-                            <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
-                            <mat-option value="option3">Option 3</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                    <h4 class=" text-[#f2999b]">1. Dirección de envío</h4>
+                    <p class="text-gray-500">Esta es la dirección de la persona a la que enviaras el regalo.</p>
+                </div>
+
+                @if(selectedAddress){
+                    <div class="flex gap-3 py-8 px-4 sm:p-6 sm:rounded-2xl border border-green-500 bg-green-50 text-green-800">
+                        <i class="fa-solid fa-location-dot fa-xl"></i>
+                        <div class="w-full space-y-5">
+                            <div class="flex justify-between w-full">
+                                <div>
+                                    <div class="text-md">{{ selectedAddress.name_receiver }}</div>
+                                    <div class="text-sm">{{ selectedAddress.phone_receiver }}</div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col text-sm">
+                                <span>{{ selectedAddress.address }}, {{ selectedAddress.colony }}</span>
+                                <span>{{ selectedAddress.city.name }}, {{ selectedAddress.state.name }}. {{ selectedAddress.zip }}</span>
+                                <span>{{ selectedAddress.references }}</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <button mat-flat-button color="primary" (click)="openAddressesDialog()">
+                    <i class="fa-solid fa-map"></i>&nbsp;Seleccionar dirección
+                </button>
+
+                <div>
+                    <h4 class=" text-[#f2999b]">2. Dedicatoria</h4>
+                    <p class="text-gray-500">Escribe un mensaje de dedicatoria o selecciona uno de los que tenénemos
+                        preparado para ti.</p>
                 </div>
 
                 <div>
-                    <mat-label class="text-sm text-gray-500">Escribe tu mensaje</mat-label>
+                    <div>
+                        <mat-label class="text-sm text-gray-500">Seleccionar dedicatoria</mat-label>
+                        <mat-form-field appearance="outline" class="w-full" >
+                            <mat-select (selectionChange)="selectedMessage($event)">
+                                @for (message of messages; track message){
+                                    <mat-option [value]="message.message">{{ message.title }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-label class="text-sm text-gray-500">Escribe tu mensaje</mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <textarea matInput formControlName="message"></textarea>
+                            <mat-hint>Puedes personalizar el mensaje como tu lo desees</mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div>
+                    <h4 class=" text-[#f2999b]">2. ¿Quién envia este detalle?</h4>
+                    <p class="text-gray-500">Escribe el nombre de quien envia este regalo, si lo deseas también puede ser
+                        anónimo.</p>
+                </div>
+
+                <div>
+                    <mat-label class="text-sm text-gray-500">Firma</mat-label>
                     <mat-form-field appearance="outline" class="w-full">
-                        <textarea matInput></textarea>
+                        <input matInput formControlName="sign">
+                        <mat-hint>Escribe la palabra "ANÓNIMO" si deseas que el envío sea privado</mat-hint>
                     </mat-form-field>
                 </div>
-            </div>
+            </form>
 
+            <div class="space-y-5">
+                <h3 class="text-2xl font-bold text-[#f2999b]">Detalles de la Orden #{{order.order_number}}</h3>
 
-            <div>
-                <h4 class=" text-[#f2999b]">2. ¿Quién envia este detalle?</h4>
-                <p class="text-gray-500">Escribe el nombre de quien envia este regalo, si lo deseas también puede ser
-                    anónimo.</p>
-            </div>
+                <div class="space-y-5 border p-5 rounded-lg">
+                    <!--<div>
+                        <h4 class="font-semibold text-[#f2999b]">¿Tiénes un código de descuento?</h4>
+                    </div>
 
-            <mat-checkbox class="example-margin"><span class="text-sm text-gray-500">Anonimo</span></mat-checkbox>
+                    <div>
+                        <mat-label class="text-sm text-gray-500">Ingresa el cupon</mat-label>
+                        <mat-form-field appearance="outline" class="w-full">
+                            <input matInput>
+                        </mat-form-field>
+                        <button mat-flat-button color="primary"><i class="fa-solid fa-ticket"></i>&nbsp;Aplicar cupon
+                        </button>
+                    </div>-->
 
-            <div>
-                <mat-label class="text-sm text-gray-500">Firma</mat-label>
-                <mat-form-field appearance="outline" class="w-full">
-                    <input matInput>
-                </mat-form-field>
+                    <div>
+                        <h4 class="font-semibold text-[#f2999b]">Resumen de pago</h4>
+                    </div>
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <tbody>
+                        <tr class="border-b">
+                            <th scope="row" class="font-medium text-gray-900">
+                                Subtotal
+                            </th>
+                            <td class="px-6 py-4 text-right">
+                                {{ order.subtotal | currency }}
+                            </td>
+                        </tr>
+                        @if(order.special_hour){
+                            <tr class="border-b">
+                                <th scope="row" class="font-medium text-gray-900">
+                                    Horario especial
+                                </th>
+                                <td class="px-6 py-4 text-right">
+                                    {{ order.special_hour | currency }}
+                                </td>
+                            </tr>
+                        }
+                        <tr class="border-b">
+                            <th scope="row" class="font-medium text-gray-900">
+                                Envio
+                            </th>
+                            <td class="px-6 py-4 text-right">
+                                {{ order.delivery_price | currency }}
+                            </td>
+                        </tr>
+
+                        <tr class="">
+                            <th scope="row" class="font-semibold text-lg text-gray-900">
+                                Total
+                            </th>
+                            <td class="px-6 py-4 font-semibold text-lg text-right">
+                                {{ order.total | currency }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    @if(sendDataForm.valid){
+                        <button type="button"
+                                class="text-gray-900 bg-[#5433FF] border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                            <img src="assets/stripe-logo-button.png" class="w-1/4 mx-auto">
+                        </button>
+                        <ngx-stripe-card ></ngx-stripe-card>
+                        <button type="button"
+                                class="text-gray-900 bg-[#003087] border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                            <img src="assets/paypal-logo-button.png" class="w-1/4 mx-auto">
+                        </button>
+                        <button type="button"
+                                class="text-gray-900 bg-[#DE2924] border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
+                            <img src="assets/oxxo-pay-logo.png" class="w-1/4 mx-auto">
+                        </button>
+                    }
+                </div>
             </div>
         </div>
+    </main>
 
-        <div class="space-y-5">
-            <h3 class="text-2xl font-bold text-[#f2999b]">Detalles de la Orden #{{order.order_number}}</h3>
-
-            <div class="space-y-5 border p-5 rounded-lg">
-                <div>
-                    <h4 class="font-semibold text-[#f2999b]">¿Tiénes un código de descuento?</h4>
-                </div>
-
-                <div>
-                    <mat-label class="text-sm text-gray-500">Ingresa el cupon</mat-label>
-                    <mat-form-field appearance="outline" class="w-full">
-                        <input matInput>
-                    </mat-form-field>
-                    <button mat-flat-button color="primary"><i class="fa-solid fa-ticket"></i>&nbsp;Aplicar cupon
-                    </button>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold text-[#f2999b]">Resumen de pago</h4>
-                </div>
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                    <tbody>
-                    <tr class="border-b">
-                        <th scope="row" class="font-medium text-gray-900">
-                            Subtotal
-                        </th>
-                        <td class="px-6 py-4 text-right">
-                            {{ order.subtotal | currency }}
-                        </td>
-                    </tr>
-                    <!--<tr class="border-b">
-                        <th scope="row" class="font-medium text-gray-900">
-                            Horario de envio
-                        </th>
-                        <td class="px-6 py-4 text-right">
-                            $280
-                        </td>
-                    </tr>-->
-                    <tr class="border-b">
-                        <th scope="row" class="font-medium text-gray-900">
-                            Envio
-                        </th>
-                        <td class="px-6 py-4 text-right">
-                            {{ order.delivery_price | currency }}
-                        </td>
-                    </tr>
-
-                    <tr class="">
-                        <th scope="row" class="font-semibold text-lg text-gray-900">
-                            Total
-                        </th>
-                        <td class="px-6 py-4 font-semibold text-lg text-right">
-                            {{ order.total | currency }}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <button type="button"
-                        class="text-gray-900 bg-[#5433FF] border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
-                    <img src="assets/stripe-logo-button.png" class="w-1/4 mx-auto">
-                </button>
-                <button type="button"
-                        class="text-gray-900 bg-[#003087] border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
-                    <img src="assets/paypal-logo-button.png" class="w-1/4 mx-auto">
-                </button>
-                <button type="button"
-                        class="text-gray-900 bg-[#DE2924] border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 mb-2">
-                    <img src="assets/oxxo-pay-logo.png" class="w-1/4 mx-auto">
-                </button>
-            </div>
-        </div>
-    </div>
-</main>
+}

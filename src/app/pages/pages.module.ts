@@ -15,6 +15,7 @@ import {ComponentsModule} from "../components/components.module";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import {GalleryComponent} from "@daelmaak/ngx-gallery";
+import {StripeCardComponent} from "ngx-stripe";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -45,7 +46,8 @@ const routes: Routes = [
         CurrencyMaskModule,
         ComponentsModule,
         ReactiveFormsModule,
-        GalleryComponent
+        GalleryComponent,
+        StripeCardComponent
     ]
 })
 export class PagesModule {

@@ -15,7 +15,7 @@ export class AddressesService {
     }
 
     getAddresses(): Observable<any>{
-        return this.httpClient.get(`${this.url}/addresses`);
+        return this.httpClient.get(`${this.url}/addresses/client`);
     }
 
     createAddresses(data: any): Observable<any>{

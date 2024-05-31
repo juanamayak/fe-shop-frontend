@@ -1,1 +1,24 @@
-<p>addresses-list-modal works!</p>
+<h2 mat-dialog-title>Selecciona la dirección de envío</h2>
+<mat-dialog-content>
+    <div class="grid grid-cols-3 gap-4">
+        @for (address of addresses; track address) {
+            <div (click)="selectAddress(address)" class="flex gap-3 py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200 hover:cursor-pointer">
+                <i class="fa-solid fa-location-dot fa-xl text-slate-400"></i>
+                <div class="w-full space-y-5">
+                    <div class="flex justify-between w-full">
+                        <div>
+                            <div class="text-md">{{ address.name_receiver }}</div>
+                            <div class="text-sm text-slate-600">{{ address.phone_receiver }}</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col text-slate-600 text-sm">
+                        <span>{{ address.address }}, {{ address.colony }}</span>
+                        <span>{{ address.city.name }}, {{ address.state.name }}. {{ address.zip }}</span>
+                        <span>{{ address.references }}</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</mat-dialog-content>

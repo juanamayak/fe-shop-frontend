@@ -23,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
 
     public showSpecialHours: boolean = false;
 
-    public deliveryPrince = 100;
+    public deliveryPrice = 100;
     public specialPrice = 280;
 
     public subtotal: any;
@@ -45,13 +45,19 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     initOrderForm() {
-        const total = this.subtotal + this.deliveryPrince + this.specialPrice;
+        let total = 0;
+        if (this.showSpecialHours) {
+            total = this.subtotal + this.deliveryPrice + this.specialPrice;
+        } else {
+            total = this.subtotal + this.deliveryPrice;
+        }
+
         this.orderForm = this.formBuilder.group({
             delivery_date: ['', Validators.required],
             delivery_hour_id: ['', Validators.required],
             subtotal: [this.subtotal, Validators.required],
             special_price: [this.showSpecialHours ? this.specialPrice: ''],
-            delivery_price: [this.deliveryPrince, Validators.required],
+            delivery_price: [this.deliveryPrice, Validators.required],
             total: [total, Validators.required],
             products: this.formBuilder.array(
                 this.products.map((product: any) => this.formBuilder.group({
@@ -100,6 +106,7 @@ export class ShoppingCartComponent implements OnInit {
     createOrder(){
         this.spinner.show();
         const data = this.orderForm.value;
+        console.log(data);
         this.ordersService.createOrder(data).subscribe({
             next: res => {
                 this.spinner.hide();

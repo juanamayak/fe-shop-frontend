@@ -1,7 +1,9 @@
 <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-3 gap-4">
         <div class="col-start-2">
-            <img class="w-28 mx-auto" src="../../../../../assets/logotipo-floreria-envios.png" alt="">
+            <a [routerLink]="['/']">
+                <img class="w-28 mx-auto" src="../../../../../assets/logotipo-floreria-envios.png" alt="">
+            </a>
         </div>
 
         <div class="flex items-center">
@@ -13,10 +15,10 @@
                         <i class="fa-solid fa-circle-user"></i>
                     </button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item [routerLink]="['/cuenta/perfil']">
                             <span><i class="fa-regular fa-user"></i>&nbsp;Mi cuenta</span>
                         </button>
-                        <button mat-menu-item>
+                        <button mat-menu-item [routerLink]="['/cuenta/pedidos']">
                             <span><i class="fa-solid fa-store"></i>&nbsp;Mis pedidos</span>
                         </button>
                         <button mat-menu-item (click)="logout()">

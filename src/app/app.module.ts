@@ -10,6 +10,7 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {GalleryComponent} from "@daelmaak/ngx-gallery";
+import {NgxStripeModule} from "ngx-stripe";
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import {GalleryComponent} from "@daelmaak/ngx-gallery";
         LayoutsModule,
         CurrencyMaskModule,
         NgxSpinnerModule,
-        GalleryComponent
+        GalleryComponent,
+        NgxStripeModule.forRoot('')
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
