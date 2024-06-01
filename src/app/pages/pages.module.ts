@@ -15,7 +15,12 @@ import {ComponentsModule} from "../components/components.module";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import {GalleryComponent} from "@daelmaak/ngx-gallery";
-import {StripeCardComponent} from "ngx-stripe";
+import {
+    StripeCardComponent,
+    StripeCardGroupDirective, StripeCardNumberComponent,
+    StripeElementsDirective, StripeExpressCheckoutComponent,
+    StripePaymentElementComponent
+} from "ngx-stripe";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -47,7 +52,12 @@ const routes: Routes = [
         ComponentsModule,
         ReactiveFormsModule,
         GalleryComponent,
-        StripeCardComponent
+        StripeCardComponent,
+        StripeElementsDirective,
+        StripePaymentElementComponent,
+        StripeCardGroupDirective,
+        StripeExpressCheckoutComponent,
+        StripeCardNumberComponent
     ]
 })
 export class PagesModule {

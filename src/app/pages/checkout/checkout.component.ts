@@ -8,8 +8,9 @@ import {
     AddressesListModalComponent
 } from "../../components/modals/addresses/addresses-list-modal/addresses-list-modal.component";
 import {MessagesService} from "../../services/messages.service";
-import {FormBuilder, Validators} from "@angular/forms";
-import {StripeService, StripeCardElementOptions, StripeElementsOptions } from "ngx-stripe";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {StripeService, StripeCardComponent, injectStripe} from "ngx-stripe";
+import {StripeCardElementOptions, StripeElementsOptions} from "@stripe/stripe-js";
 
 @Component({
     selector: 'app-checkout',
@@ -19,17 +20,19 @@ import {StripeService, StripeCardElementOptions, StripeElementsOptions } from "n
 export class CheckoutComponent implements OnInit {
 
     public sendDataForm: any;
+    stripeTest: FormGroup;
 
     public order: any;
     public selectedAddress: any;
     public messages: any;
+
 
     cardOptions: StripeCardElementOptions = {
         style: {
             base: {
                 iconColor: '#666EE8',
                 color: '#31325F',
-                lineHeight: '40px',
+                lineHeight: '80px',
                 fontWeight: 300,
                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 fontSize: '18px',
@@ -38,6 +41,10 @@ export class CheckoutComponent implements OnInit {
                 }
             }
         }
+    };
+
+    elementsOptions: StripeElementsOptions = {
+        locale: 'en'
     };
 
     constructor(
@@ -55,6 +62,10 @@ export class CheckoutComponent implements OnInit {
     ngOnInit(): void {
         this.getOrder();
         this.initSendDataForm();
+
+        this.stripeTest = this.formBuilder.group({
+            name: ['', [Validators.required]]
+        });
     }
 
     initSendDataForm(){
@@ -63,6 +74,15 @@ export class CheckoutComponent implements OnInit {
             message: ['', Validators.required],
             sign: ['', Validators.required],
         })
+    }
+
+    createPayment(amount: number, currency: string, description: string) {
+        this.ordersService.paymentOrder(amount, currency, description)
+            .subscribe(response => {
+                window.location.href = response.url;
+            }, error => {
+                console.error('Error creating payment link:', error);
+            });
     }
 
     getOrder() {

@@ -26,7 +26,7 @@ import {NgxStripeModule} from "ngx-stripe";
         CurrencyMaskModule,
         NgxSpinnerModule,
         GalleryComponent,
-        NgxStripeModule.forRoot('')
+        NgxStripeModule.forRoot('pk_test_51JowwPDj0dfRCIRQIdedIyyT72jZ3oiuoyGxc57PB6TjiZlaUlHARkr5xvtEA4mnGANUS6vvrqJxZSn41Rb1T3BX00eyNUxdwe')
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
