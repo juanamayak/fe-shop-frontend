@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {OrdersService} from "../../services/orders.service";
@@ -9,8 +9,14 @@ import {
 } from "../../components/modals/addresses/addresses-list-modal/addresses-list-modal.component";
 import {MessagesService} from "../../services/messages.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {StripeService, StripeCardComponent, injectStripe} from "ngx-stripe";
-import {StripeCardElementOptions, StripeElementsOptions} from "@stripe/stripe-js";
+import {StripeService, StripePaymentElementComponent} from 'ngx-stripe';
+import {
+    StripeElementsOptions,
+    PaymentIntent
+} from '@stripe/stripe-js';
+import {PaymentsService} from "../../services/payments.service";
+import moment from "moment";
+
 
 @Component({
     selector: 'app-checkout',
@@ -18,30 +24,15 @@ import {StripeCardElementOptions, StripeElementsOptions} from "@stripe/stripe-js
     styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent implements OnInit {
+    @ViewChild(StripePaymentElementComponent) paymentElement: StripePaymentElementComponent;
 
     public sendDataForm: any;
-    stripeTest: FormGroup;
 
+    public stripeForm: any;
     public order: any;
     public selectedAddress: any;
+
     public messages: any;
-
-
-    cardOptions: StripeCardElementOptions = {
-        style: {
-            base: {
-                iconColor: '#666EE8',
-                color: '#31325F',
-                lineHeight: '80px',
-                fontWeight: 300,
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSize: '18px',
-                '::placeholder': {
-                    color: '#CFD7E0'
-                }
-            }
-        }
-    };
 
     elementsOptions: StripeElementsOptions = {
         locale: 'en'
@@ -50,6 +41,7 @@ export class CheckoutComponent implements OnInit {
     constructor(
         private ordersService: OrdersService,
         private messagesService: MessagesService,
+        private paymentsService: PaymentsService,
         private activatedRoute: ActivatedRoute,
         private stripeService: StripeService,
         private formBuilder: FormBuilder,
@@ -62,13 +54,10 @@ export class CheckoutComponent implements OnInit {
     ngOnInit(): void {
         this.getOrder();
         this.initSendDataForm();
-
-        this.stripeTest = this.formBuilder.group({
-            name: ['', [Validators.required]]
-        });
+        this.initStripeForm();
     }
 
-    initSendDataForm(){
+    initSendDataForm() {
         this.sendDataForm = this.formBuilder.group({
             address_id: ['', Validators.required],
             message: ['', Validators.required],
@@ -76,13 +65,72 @@ export class CheckoutComponent implements OnInit {
         })
     }
 
-    createPayment(amount: number, currency: string, description: string) {
-        this.ordersService.paymentOrder(amount, currency, description)
-            .subscribe(response => {
-                window.location.href = response.url;
-            }, error => {
-                console.error('Error creating payment link:', error);
-            });
+    initStripeForm() {
+        this.stripeForm = this.formBuilder.group({
+            name: ['', [Validators.required]],
+            email: ['', Validators.required]
+        });
+    }
+
+    createPaymentIntent() {
+        const data = {
+            amount: Math.round(this.order.total*100),
+            currency: this.order.currency
+        }
+
+        console.log(data);
+        this.paymentsService.createPaymentIntent(data).subscribe({
+            next: res => {
+                this.elementsOptions.clientSecret = res.clientSecret;
+            },
+            error: err => {
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        });
+    }
+
+    confirmStripePayment() {
+        this.spinner.show();
+        this.stripeService.confirmPayment({
+            elements: this.paymentElement.elements,
+            confirmParams: {
+                payment_method_data: {
+                    billing_details: this.stripeForm.value
+                }
+            },
+            redirect: 'if_required'
+        }).subscribe({
+            next: res => {
+                this.spinner.hide();
+                if (res.error) {
+                    this.alertsService.errorAlert(res.error.message);
+                } else if (res.paymentIntent.status === 'succeeded') {
+                    this.createPayment(res);
+                }
+            }
+        });
+    }
+
+    createPayment(res: any) {
+        const data = {
+            order_id: this.order.id,
+            transaction: res.paymentIntent.id,
+            payment_date: moment().format(),
+            payment_method: 'STRIPE',
+            payment_status: res.paymentIntent.paid ? 'PAGADO' : 'INCOMPLETO',
+            currency: this.order.currency,
+            payer_name: this.stripeForm.value.name,
+            payer_email: this.stripeForm.value.email
+        }
+        this.ordersService.paymentOrder(data).subscribe({
+            next: res => {
+                window.location.href = res.url;
+            },
+            error: err => {
+                this.spinner.hide()
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        });
     }
 
     getOrder() {
@@ -94,6 +142,7 @@ export class CheckoutComponent implements OnInit {
                     next: res => {
                         this.order = res.order;
                         this.getMessages();
+                        this.createPaymentIntent();
                     },
                     error: err => {
                         this.spinner.hide()
@@ -104,7 +153,7 @@ export class CheckoutComponent implements OnInit {
         });
     }
 
-    getMessages(){
+    getMessages() {
         this.messagesService.getMessages().subscribe({
             next: res => {
                 this.messages = res.messages;
@@ -117,7 +166,7 @@ export class CheckoutComponent implements OnInit {
         })
     }
 
-    selectedMessage(event: any){
+    selectedMessage(event: any) {
         this.message.setValue(event.value);
     }
 
@@ -129,6 +178,7 @@ export class CheckoutComponent implements OnInit {
             this.addressId.setValue(address.id);
         });
     }
+
 
     get message() {
         return this.sendDataForm.get('message');
