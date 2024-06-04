@@ -19,6 +19,6 @@ export class PaymentsService {
     }
 
     createPayment(data: any): Observable<any> {
-        return this.httpClient.post(`${this.url}/orders/payment`, data);
+        return this.httpClient.post(`${this.url}/payment/create`, data);
     }
 }

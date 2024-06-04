@@ -16,6 +16,7 @@ import {
 } from '@stripe/stripe-js';
 import {PaymentsService} from "../../services/payments.service";
 import moment from "moment";
+import {ignoreElements} from "rxjs";
 
 
 @Component({
@@ -31,6 +32,7 @@ export class CheckoutComponent implements OnInit {
     public stripeForm: any;
     public order: any;
     public selectedAddress: any;
+    public paymentMethodSelected: any;
 
     public messages: any;
 
@@ -78,7 +80,6 @@ export class CheckoutComponent implements OnInit {
             currency: this.order.currency
         }
 
-        console.log(data);
         this.paymentsService.createPaymentIntent(data).subscribe({
             next: res => {
                 this.elementsOptions.clientSecret = res.clientSecret;
@@ -101,30 +102,45 @@ export class CheckoutComponent implements OnInit {
             redirect: 'if_required'
         }).subscribe({
             next: res => {
-                this.spinner.hide();
                 if (res.error) {
+                    this.spinner.hide();
                     this.alertsService.errorAlert(res.error.message);
                 } else if (res.paymentIntent.status === 'succeeded') {
-                    this.createPayment(res);
+                    this.updateOrder(res);
                 }
             }
         });
     }
 
-    createPayment(res: any) {
+    updateOrder(paymentIntentResult: any){
+        const data = this.sendDataForm.value;
+        this.ordersService.updateOrder(this.order.uuid, data).subscribe({
+            next: res => {
+                this.createPayment(paymentIntentResult);
+            },
+            error: err => {
+                this.spinner.hide()
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        })
+    }
+
+    createPayment(paymentIntentResult: any) {
         const data = {
             order_id: this.order.id,
-            transaction: res.paymentIntent.id,
+            transaction: paymentIntentResult.paymentIntent.id,
             payment_date: moment().format(),
             payment_method: 'STRIPE',
-            payment_status: res.paymentIntent.paid ? 'PAGADO' : 'INCOMPLETO',
+            payment_status: paymentIntentResult.paymentIntent.paid ? 'PAGADO' : 'INCOMPLETO',
             currency: this.order.currency,
             payer_name: this.stripeForm.value.name,
             payer_email: this.stripeForm.value.email
         }
-        this.ordersService.paymentOrder(data).subscribe({
+        this.paymentsService.createPayment(data).subscribe({
             next: res => {
-                window.location.href = res.url;
+                this.spinner.hide();
+                this.alertsService.successAlert(res.message);
+                // TODO: redirigir a pagina de success
             },
             error: err => {
                 this.spinner.hide()
@@ -142,7 +158,6 @@ export class CheckoutComponent implements OnInit {
                     next: res => {
                         this.order = res.order;
                         this.getMessages();
-                        this.createPaymentIntent();
                     },
                     error: err => {
                         this.spinner.hide()
@@ -179,6 +194,13 @@ export class CheckoutComponent implements OnInit {
         });
     }
 
+    showPaymentMethod(paymentMethod: any){
+        this.paymentMethodSelected = paymentMethod;
+
+        if (paymentMethod === 'stripe'){
+            this.createPaymentIntent();
+        }
+    }
 
     get message() {
         return this.sendDataForm.get('message');

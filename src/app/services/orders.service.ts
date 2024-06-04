@@ -22,11 +22,8 @@ export class OrdersService {
         return this.httpClient.post(`${this.url}/orders/create`, data);
     }
 
-    paymentOrder(data: any): Observable<any> {
-        return this.httpClient.post(`${this.url}/orders/payment`, data);
+    updateOrder(orderUuid: any, data: any): Observable<any> {
+        return this.httpClient.put(`${this.url}/orders/update/${orderUuid}`, data);
     }
 
-    createPaymentIntent(data: any): Observable<any> {
-        return this.httpClient.post(`${this.url}/orders/payment`, data);
-    }
 }
