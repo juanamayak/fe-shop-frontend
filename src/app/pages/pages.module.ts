@@ -21,13 +21,15 @@ import {
     StripeElementsDirective, StripeExpressCheckoutComponent,
     StripePaymentElementComponent
 } from "ngx-stripe";
+import { PaymentConfirmationComponent } from './checkout/payment-confirmation/payment-confirmation.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'productos/:categoryUuid', component: ProductsComponent},
     {path: 'productos/detalle/:productUuid', component: ProductsDetailComponent},
     {path: 'carrito', component: ShoppingCartComponent},
-    {path: 'checkout/:orderUuid', component: CheckoutComponent}
+    {path: 'checkout/:orderUuid', component: CheckoutComponent},
+    {path: 'confirmacion/:orderUuid', component: PaymentConfirmationComponent}
 
 ]
 
@@ -39,7 +41,8 @@ const routes: Routes = [
         ProductsComponent,
         ProductsDetailComponent,
         ShoppingCartComponent,
-        CheckoutComponent
+        CheckoutComponent,
+        PaymentConfirmationComponent
     ],
     imports: [
         CommonModule,

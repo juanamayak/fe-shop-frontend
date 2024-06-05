@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {OrdersService} from "../../services/orders.service";
 import {AlertsService} from "../../services/alerts.service";
@@ -48,6 +48,7 @@ export class CheckoutComponent implements OnInit {
         private stripeService: StripeService,
         private formBuilder: FormBuilder,
         private alertsService: AlertsService,
+        private router: Router,
         private dialog: MatDialog,
         private spinner: NgxSpinnerService
     ) {
@@ -140,7 +141,9 @@ export class CheckoutComponent implements OnInit {
             next: res => {
                 this.spinner.hide();
                 this.alertsService.successAlert(res.message);
-                // TODO: redirigir a pagina de success
+                setTimeout(() => {
+                    this.router.navigate(['confirmacion'], this.order.uuid);
+                }, 2500)
             },
             error: err => {
                 this.spinner.hide()

@@ -22,6 +22,10 @@ export class CartsService {
         return this.httpClient.post(`${this.url}/cart/create`, data);
     }
 
+    updateCart(cartId: any, data: any): Observable<any>{
+        return this.httpClient.put(`${this.url}/cart/update/${cartId}`, data);
+    }
+
     updateQuantity(productId: any, data: any): Observable<any>{
         return this.httpClient.put(`${this.url}/cart/quantity/${productId}`, data);
     }

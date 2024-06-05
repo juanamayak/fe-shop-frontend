@@ -18,6 +18,7 @@ export class ShoppingCartComponent implements OnInit {
     public orderForm: any;
     public quantityForm: any;
 
+    public cart: any;
     public products: any;
     public deliveryHours: any;
 
@@ -73,6 +74,7 @@ export class ShoppingCartComponent implements OnInit {
         this.spinner.show();
         this.cartService.getCart().subscribe({
             next: res => {
+                this.cart = res.cart;
                 this.products = res.cart.products;
                 this.initQuantityForm();
                 this.calculateSubtotal();
@@ -106,14 +108,29 @@ export class ShoppingCartComponent implements OnInit {
     createOrder(){
         this.spinner.show();
         const data = this.orderForm.value;
-        console.log(data);
         this.ordersService.createOrder(data).subscribe({
             next: res => {
+                this.closeCart(res.message, res.order);
+            },
+            error: err => {
                 this.spinner.hide();
-                this.alertsService.successAlert(res.message);
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        })
+    }
+
+    closeCart(message: any, order: any){
+        const data = {
+            status: 2 // estatus procesado
+        }
+
+        this.cartService.updateCart(this.cart.id, data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.alertsService.successAlert(message);
                 setTimeout(() => {
-                    this.router.navigate(['checkout', res.order]);
-                }, 2500);
+                    this.router.navigate(['checkout', order]);
+                }, 2500)
             },
             error: err => {
                 this.spinner.hide();
