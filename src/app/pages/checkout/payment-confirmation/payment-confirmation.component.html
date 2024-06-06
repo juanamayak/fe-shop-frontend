@@ -7,59 +7,33 @@
     </div>
 </div>
 <div class="p-10 -mt-28">
-    <div class="mx-auto w-full max-w-6xl py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
-        <div class="w-full mx-auto sm:mx-0 mb-5">
-            <div class="flex items-center justify-between w-full">
-                <div class="flex gap-10">
-                    <div>
-                        <div class="text-sm font-semibold">Número de orden</div>
-                        <div class="text-md font-medium text-slate-500">
-                            {{ order.order_number }}
-                        </div>
-                    </div>
-                    <div>
-                        <div class="text-sm font-semibold">Fecha de entrega</div>
-                        <div class="text-md font-medium text-slate-500">
-                            {{ order.delivery_date | date }}
-                        </div>
-                    </div>
-                    <div>
-                        <div class="text-sm font-semibold">Pago total</div>
-                        <div class="text-md font-medium text-slate-500">
-                            {{ order.total | currency}}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex space-x-3">
-                    <button mat-stroked-button>
-                        <i class="fa-solid fa-file-invoice"></i>
-                        Ir a mis compras
-                    </button>
-                </div>
+    <div class="mx-auto w-1/3 py-8 px-4 space-y-3 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
+        <h1 class="text-2xl">Resumen de Compra</h1>
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-gift mt-1"></i>
+            <div>
+                <span class="font-bold">Orden: {{ order.order_number }}</span>
             </div>
         </div>
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Producto
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            @for(product of order.products; track product){
-                <tr class="bg-white border-b">
-                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
-                        <img class="w-10 h-10" src="data:{{ product.image.file.type }};base64,{{ product.image.url}}" alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">{{ product.name }}</div>
-                        </div>
-                    </th>
-                </tr>
-            }
-            </tbody>
-        </table>
+
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-truck mt-1"></i>
+            <div>
+                <span class="font-bold">Envio a domicilio</span>
+                <p class="font-light text-slate-400">
+                    {{ order.addresses.address }} - {{ order.addresses.colony }}, <br>
+                    {{ order.addresses.city.name }}, {{ order.addresses.state.name }}. {{ order.addresses.zip }}. <br>
+                    {{ order.addresses.name_receiver }} - {{ order.addresses.phone_receiver }}</p>
+            </div>
+        </div>
+
+        <div class="flex space-x-2">
+            <i class="fa-solid fa-credit-card mt-1"></i>
+            <div>
+                <span class="font-bold">Pagaste {{ order.total | currency}}</span>
+            </div>
+        </div>
+        <a mat-raised-button color="primary" [routerLink]="['/cuenta/pedidos']">Ir a mis pedidos</a>
     </div>
 
 </div>
