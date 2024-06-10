@@ -16,6 +16,11 @@ import { EditAddressModalComponent } from './modals/addresses/edit-address-modal
 import { MapComponent } from './map/map.component';
 import { DeliveryCityModalComponent } from './modals/delivery-city-modal/delivery-city-modal.component';
 import { AddressesListModalComponent } from './modals/addresses/addresses-list-modal/addresses-list-modal.component';
+import { StripeButtonComponent } from './payment-buttons/stripe-button/stripe-button.component';
+import {StripePaymentElementComponent} from "ngx-stripe";
+import { PaypalButtonComponent } from './payment-buttons/paypal-button/paypal-button.component';
+import {NgxPayPalModule} from "ngx-paypal";
+import { OxxopayButtonComponent } from './payment-buttons/oxxopay-button/oxxopay-button.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +34,10 @@ import { AddressesListModalComponent } from './modals/addresses/addresses-list-m
         EditAddressModalComponent,
         MapComponent,
         DeliveryCityModalComponent,
-        AddressesListModalComponent
+        AddressesListModalComponent,
+        StripeButtonComponent,
+        PaypalButtonComponent,
+        OxxopayButtonComponent
     ],
     exports: [
         MainHeaderComponent,
@@ -37,7 +45,10 @@ import { AddressesListModalComponent } from './modals/addresses/addresses-list-m
         MainFooterComponent,
         UsersNavbarComponent,
         UsersToolbarComponent,
-        ProductSliderComponent
+        ProductSliderComponent,
+        StripeButtonComponent,
+        PaypalButtonComponent,
+        OxxopayButtonComponent
     ],
     imports: [
         CommonModule,
@@ -46,7 +57,9 @@ import { AddressesListModalComponent } from './modals/addresses/addresses-list-m
         GalleryModule,
         MatDialogContent,
         MatDialogTitle,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StripePaymentElementComponent,
+        NgxPayPalModule
     ]
 })
 export class ComponentsModule {
