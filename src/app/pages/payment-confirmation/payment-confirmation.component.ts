@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {OrdersService} from "../../../services/orders.service";
+import {OrdersService} from "../../services/orders.service";
 import {ActivatedRoute} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
-import {AlertsService} from "../../../services/alerts.service";
+import {AlertsService} from "../../services/alerts.service";
 
 @Component({
   selector: 'app-payment-confirmation',

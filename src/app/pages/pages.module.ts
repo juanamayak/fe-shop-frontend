@@ -21,7 +21,8 @@ import {
     StripeElementsDirective, StripeExpressCheckoutComponent,
     StripePaymentElementComponent
 } from "ngx-stripe";
-import { PaymentConfirmationComponent } from './checkout/payment-confirmation/payment-confirmation.component';
+import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
+import {NgxPayPalModule} from "ngx-paypal";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -62,7 +63,8 @@ const routes: Routes = [
         StripeExpressCheckoutComponent,
         StripeCardNumberComponent,
         StripeCardExpiryComponent,
-        StripeCardCvcComponent
+        StripeCardCvcComponent,
+        NgxPayPalModule
     ]
 })
 export class PagesModule {

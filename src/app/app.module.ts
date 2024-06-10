@@ -11,6 +11,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./interceptors/jwt.interceptor";
 import {GalleryComponent} from "@daelmaak/ngx-gallery";
 import {NgxStripeModule} from "ngx-stripe";
+import {NgxPayPalModule} from "ngx-paypal";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {NgxStripeModule} from "ngx-stripe";
         CurrencyMaskModule,
         NgxSpinnerModule,
         GalleryComponent,
-        NgxStripeModule.forRoot('pk_test_51PMtITP8qeL6pM3TmbNcNrb74A2A88iR3vyuY5Yreqi0k3NvzXwRW6XkvDmp5pPsiycIhINiBe8vnuUySlfrGLuy00Psip2dIj')
+        NgxStripeModule.forRoot('pk_test_51PMtITP8qeL6pM3TmbNcNrb74A2A88iR3vyuY5Yreqi0k3NvzXwRW6XkvDmp5pPsiycIhINiBe8vnuUySlfrGLuy00Psip2dIj'),
+        NgxPayPalModule
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
