@@ -140,7 +140,7 @@
                     </table>
 
                     @if (sendDataForm.valid) {
-                        <app-stripe-button [orderInput]="order"></app-stripe-button>
+                        <app-stripe-button [orderInput]="order" (paymentEmitter)="updateOrder()"></app-stripe-button>
                         <app-paypal-button [orderInput]="order"></app-paypal-button>
                         <app-oxxopay-button [orderInput]="order"></app-oxxopay-button>
                     }

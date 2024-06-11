@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {StripePaymentElementComponent, StripeService} from "ngx-stripe";
 import {PaymentsService} from "../../../services/payments.service";
 import {StripeElementsOptions} from "@stripe/stripe-js";
@@ -16,8 +16,9 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class StripeButtonComponent implements OnInit {
 
-    @ViewChild(StripePaymentElementComponent) paymentElement: StripePaymentElementComponent;
     @Input() orderInput: any;
+    @Output() paymentEmitter: EventEmitter<any> = new EventEmitter();
+    @ViewChild(StripePaymentElementComponent) paymentElement: StripePaymentElementComponent;
 
     public sendDataForm: any;
 
@@ -87,21 +88,19 @@ export class StripeButtonComponent implements OnInit {
     }
 
     createPayment(paymentIntentResult: any) {
-        console.log(paymentIntentResult);
         const data = {
             order_id: this.orderInput.id,
             transaction: paymentIntentResult.paymentIntent.id,
             payment_date: moment().format(),
             payment_method: 'STRIPE',
-            payment_status: paymentIntentResult.paymentIntent.paid ? 'PAGADO' : 'INCOMPLETO',
+            payment_status: paymentIntentResult.paymentIntent.status.toUpperCase(),
             currency: this.orderInput.currency,
             payer_name: this.stripeForm.value.name,
             payer_email: this.stripeForm.value.email
         }
         this.paymentsService.createPayment(data).subscribe({
             next: res => {
-                console.log(res);
-                // TODO: emit a padre para confirmar pago
+                this.paymentEmitter.emit(res);
             },
             error: err => {
                 this.spinner.hide()
