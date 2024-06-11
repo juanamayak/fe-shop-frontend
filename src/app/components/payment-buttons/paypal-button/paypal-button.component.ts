@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {environment} from "../../../../environments/environment.development";
 import {ICreateOrderRequest, IPayPalConfig} from "ngx-paypal";
 import moment from "moment/moment";
@@ -14,6 +14,8 @@ import {NgxSpinnerService} from "ngx-spinner";
 export class PaypalButtonComponent implements OnInit{
 
     @Input() orderInput: any;
+    @Output() paymentEmitter: EventEmitter<any> = new EventEmitter();
+
     public payPalConfig: IPayPalConfig;
 
     constructor(
@@ -63,19 +65,14 @@ export class PaypalButtonComponent implements OnInit{
                 layout: 'vertical'
             },
             onApprove: (data, actions) => {
-                console.log('onApprove - transaction was approved, but not authorized', data, actions);
-                actions.order.get().then((details: any) => {
-                    console.log('onApprove - you can get full order details inside onApprove: ', details);
-                });
-
+                console.log('onApprove - transaction was approved, but not authorized');
             },
             onClientAuthorization: (data) => {
-                console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+                console.log('onClientAuthorization');
                 this.createPayment(data)
             },
             onCancel: (data, actions) => {
                 console.log('OnCancel', data, actions);
-
             },
             onError: err => {
                 this.alertsService.errorAlert(err.error.errors);
@@ -87,6 +84,7 @@ export class PaypalButtonComponent implements OnInit{
     }
 
     createPayment(paymentIntentResult: any) {
+        this.spinner.show();
         const data = {
             order_id: this.orderInput.id,
             transaction: paymentIntentResult.id,
@@ -99,8 +97,7 @@ export class PaypalButtonComponent implements OnInit{
         }
         this.paymentsService.createPayment(data).subscribe({
             next: res => {
-                console.log(res);
-                // TODO: emit a padre para confirmar pago
+                this.paymentEmitter.emit(res);
             },
             error: err => {
                 this.spinner.hide()

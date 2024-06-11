@@ -139,10 +139,10 @@
                         </tbody>
                     </table>
 
-                    @if (sendDataForm.valid) {
-                        <app-stripe-button [orderInput]="order" (paymentEmitter)="updateOrder()"></app-stripe-button>
-                        <app-paypal-button [orderInput]="order"></app-paypal-button>
-                        <app-oxxopay-button [orderInput]="order"></app-oxxopay-button>
+                    @if(sendDataForm.valid){
+                        <app-stripe-button [orderInput]="order" (paymentEmitter)="updateOrder($event)"></app-stripe-button>
+                        <app-paypal-button [orderInput]="order" (paymentEmitter)="updateOrder($event)"></app-paypal-button>
+                        <app-oxxopay-button [orderInput]="order" (paymentEmitter)="updateOrder($event, true)"></app-oxxopay-button>
                     }
                 </div>
             </div>

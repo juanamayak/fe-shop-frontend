@@ -64,11 +64,20 @@ export class CheckoutComponent implements OnInit {
         })
     }
 
-    updateOrder() {
+    updateOrder(childResponse: any, isOxxo?: any) {
         const data = this.sendDataForm.value;
         this.ordersService.updateOrder(this.order.uuid, data).subscribe({
             next: res => {
-                this.router.navigate(['confirmacion', this.order.uuid]);
+                this.spinner.hide();
+                this.alertsService.successAlert(childResponse.message);
+                setTimeout(()=> {
+                    if (isOxxo){
+                        this.router.navigate(['cuenta/pedidos']);
+                    } else {
+                        this.router.navigate(['confirmacion', this.order.uuid]);
+                    }
+
+                }, 2500);
             },
             error: err => {
                 this.spinner.hide()
