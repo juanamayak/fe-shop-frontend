@@ -1,139 +1,112 @@
 <div class="lg:px-10 lg:py-10">
     <div class="flex flex-col space-y-8 flex-auto items-center sm:justify-center min-w-0">
-        <div class="w-full max-w-6xl py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
-            <div class="w-full mx-auto sm:mx-0 mb-5">
-                <div class="flex items-center justify-between w-full">
-                    <div class="flex gap-10">
-                        <div>
-                            <div class="text-sm font-semibold">Número de orden</div>
-                            <div class="text-md font-medium text-slate-500">
-                                WU88191111
+        @for (order of orders; track order){
+            <div class="w-full max-w-6xl py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
+                <div class="w-full mx-auto sm:mx-0 mb-5">
+                    <div class="flex items-center justify-between w-full">
+                        <div class="flex gap-10">
+                            <div>
+                                <div class="text-sm font-semibold">Número de orden</div>
+                                <div class="text-md font-medium text-slate-500">
+                                    {{ order.order_number }}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold">Fecha de orden</div>
+                                <div class="text-md font-medium text-slate-500">
+                                    {{ order.createdAt | date }}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold">Fecha de entrega</div>
+                                <div class="text-md font-medium text-slate-500">
+                                    {{ order.delivery_date | date }}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="text-sm font-semibold">Total</div>
+                                <div class="text-md font-medium text-slate-500">
+                                    {{  order.total | currency }}
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div class="text-sm font-semibold">Fecha de orden</div>
-                            <div class="text-md font-medium text-slate-500">
-                                Jul 6, 2021
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-sm font-semibold">Total</div>
-                            <div class="text-md font-medium text-slate-500">
-                                $160.00
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="flex space-x-3">
-                        <button mat-stroked-button>
-                            <i class="fa-solid fa-file-invoice"></i>
-                            Ver resumen
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Producto
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Precio
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="bg-white border-b">
-                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
-                        <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">Nomad Shopping Tote</div>
+                        <div class="flex space-x-3">
+                            <button mat-stroked-button>
+                                <i class="fa-solid fa-file-invoice"></i>
+                                Ver resumen
+                            </button>
                         </div>
-                    </th>
-                    <td class="px-6 py-4">
-                        $500.00
-                    </td>
-                </tr>
-                <tr class="bg-white border-b">
-                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
-                        <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">Nomad Shopping Tote</div>
-                        </div>
-                    </th>
-                    <td class="px-6 py-4">
-                        $500.00
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            <div class="px-6 py-4">
-                <p class="text-sm text-slate-400"><i class="fa-solid fa-circle-check text-green-500"></i> Entregado el July 12, 2021</p>
-            </div>
-        </div>
-        <div class="w-full max-w-6xl py-8 px-4 sm:p-6 bg-white sm:rounded-2xl sm:border sm:border-slate-200">
-            <div class="w-full mx-auto sm:mx-0 mb-5">
-                <div class="flex items-center justify-between w-full">
-                    <div class="flex gap-10">
-                        <div>
-                            <div class="text-sm font-semibold">Número de orden</div>
-                            <div class="text-md font-medium text-slate-500">
-                                WU88191111
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-sm font-semibold">Fecha de orden</div>
-                            <div class="text-md font-medium text-slate-500">
-                                Jul 6, 2021
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-sm font-semibold">Total</div>
-                            <div class="text-md font-medium text-slate-500">
-                                $160.00
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-3">
-                        <button mat-stroked-button>
-                            <i class="fa-solid fa-file-invoice"></i>
-                            Ver resumen
-                        </button>
                     </div>
                 </div>
-            </div>
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Producto
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Precio
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="bg-white border-b">
-                    <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
-                        <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
-                        <div class="ps-3">
-                            <div class="text-base font-semibold">Nomad Shopping Tote</div>
-                        </div>
-                    </th>
-                    <td class="px-6 py-4">
-                        $500.00
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Producto
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Identificador
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Precio
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for(product of order.products; track product){
+                        <tr class="bg-white border-b">
+                            <th scope="row" class="flex items-center px-6 py-4 text-gray-900">
+                                <img class="w-10 h-10" src="assets/default-product.jpg" alt="Jese image">
+                                <div class="ps-3">
+                                    <div class="text-base font-semibold">{{ product.name }}</div>
+                                </div>
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ product.sku }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ product.price | currency }}
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                    <tfoot>
+                    <!-- Shipping row -->
+                    <tr class="bg-white">
+                        <td colspan="2" class="px-6 text-right">
+                            Subtotal
+                        </td>
+                        <td class="px-6 py-2">
+                            {{ order.subtotal | currency }}
+                        </td>
+                    </tr>
+                    <!-- Discount row -->
+                    <tr class="bg-white border-b">
+                        <td colspan="2" class="px-6 text-right">
+                            Envio
+                        </td>
+                        <td class="px-6 py-2">
+                            {{ order.delivery_price | currency }}
+                        </td>
+                    </tr>
+                    <!-- Total row -->
+                    <tr class="bg-white">
+                        <td colspan="2" class="px-6 py-4 text-right">
+                            Total
+                        </td>
+                        <td class="px-6 py-2">
+                            {{ order.total | currency }}
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
 
-            <div class="px-6 py-4">
-                <p class="text-sm text-slate-400"><i class="fa-solid fa-circle-check text-green-500"></i> Entregado el July 12, 2021</p>
+                <div class="py-4">
+                    <p class="text-sm text-slate-400"><i class="fa-solid fa-circle-check text-green-500"></i> Entregado el July 12, 2021</p>
+                </div>
             </div>
-        </div>
+        }
+
     </div>
 </div>

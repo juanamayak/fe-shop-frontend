@@ -65,6 +65,14 @@
                                     </button>
                                 </td>
                             </tr>
+                        } @empty {
+                            <tr>
+                                <td colspan="6">
+                                    <div class="p-5 text-center">
+                                        No se encontraron productos en el carrito de compras
+                                    </div>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -192,10 +200,12 @@
                 </table>
             </div>
 
-            <button mat-raised-button color="primary" class="w-full"
-                    [disabled]="orderForm.invalid" (click)="createOrder()">
-                <i class="fa-solid fa-credit-card"></i> Ir a pagar
-            </button>
+            @if(this.products.length > 0){
+                <button mat-raised-button color="primary" class="w-full"
+                        [disabled]="orderForm.invalid" (click)="createOrder()">
+                    <i class="fa-solid fa-credit-card"></i> Ir a pagar
+                </button>
+            }
         </div>
     </div>
 </main>
