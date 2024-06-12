@@ -26,6 +26,10 @@ export class CartsService {
         return this.httpClient.put(`${this.url}/cart/update/${cartId}`, data);
     }
 
+    deleteCartItem(productId: any): Observable<any>{
+        return this.httpClient.delete(`${this.url}/cart/delete/item/${productId}`);
+    }
+
     updateQuantity(productId: any, data: any): Observable<any>{
         return this.httpClient.put(`${this.url}/cart/quantity/${productId}`, data);
     }

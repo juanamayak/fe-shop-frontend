@@ -206,4 +206,15 @@ export class ShoppingCartComponent implements OnInit {
         })
     }
 
+    deleteCartItem(productId: any){
+        this.spinner.show();
+        this.cartService.deleteCartItem(productId).subscribe({
+            next: res => {
+                this.getCart();
+            },
+            error: err => {
+                this.spinner.hide();
+            }
+        })
+    }
 }
