@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
     }
 
     getUser() {
+        this.spinner.show();
         this.usersService.getUser(this.userUuid).subscribe({
             next: res => {
                 this.initForms(res.client);
@@ -83,6 +84,8 @@ export class ProfileComponent implements OnInit {
 
         this.userForm.disable();
         this.addressForm.disable();
+
+        this.spinner.hide();
     }
 
     updateUser() {
