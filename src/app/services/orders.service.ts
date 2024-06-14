@@ -15,11 +15,11 @@ export class OrdersService {
     }
 
     getOrders(): Observable<any> {
-        return this.httpClient.get(`${this.url}/orders`);
+        return this.httpClient.get(`${this.url}/orders/clients`);
     }
 
     getOrder(orderUuid: any): Observable<any> {
-        return this.httpClient.get(`${this.url}/orders/${orderUuid}`);
+        return this.httpClient.get(`${this.url}/orders/clients/${orderUuid}`);
     }
 
     createOrder(data: any): Observable<any> {
