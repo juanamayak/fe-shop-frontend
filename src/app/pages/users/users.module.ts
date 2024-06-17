@@ -6,11 +6,13 @@ import {MaterialModule} from "../../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from './register/register.component';
 import {AccountVerificationComponent} from './account-verification/account-verification.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'registro', component: RegisterComponent},
-    {path: 'verification/:uuid/:code', component: AccountVerificationComponent}
+    {path: 'verification/:uuid/:code', component: AccountVerificationComponent},
+    {path: 'olvide-mi-contraseña', component: ForgotPasswordComponent}
 ]
 
 
@@ -18,7 +20,8 @@ const routes: Routes = [
     declarations: [
         LoginComponent,
         RegisterComponent,
-        AccountVerificationComponent
+        AccountVerificationComponent,
+        ForgotPasswordComponent
     ],
     imports: [
         CommonModule,

@@ -34,7 +34,7 @@ export class AccountVerificationComponent implements OnInit  {
                     next: res => {
                         this.spinner.hide();
                         this.alertsService.successAlert(res.message);
-                        this.router.navigate(['users/login']);
+                        this.router.navigate(['usuarios/login']);
                     },
                     error: err => {
                         this.spinner.hide()

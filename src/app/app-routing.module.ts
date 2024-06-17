@@ -5,7 +5,7 @@ import {MainLayoutComponent} from "./layouts/main-layout/main-layout.component";
 
 const routes: Routes = [
     {
-        path: 'users',
+        path: 'usuarios',
         component: UsersLayoutComponent,
         children: [
             {

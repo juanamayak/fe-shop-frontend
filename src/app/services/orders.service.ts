@@ -15,7 +15,7 @@ export class OrdersService {
     }
 
     getOrders(): Observable<any> {
-        return this.httpClient.get(`${this.url}/orders/clients`);
+        return this.httpClient.get(`${this.url}/orders/index/clients`);
     }
 
     getOrder(orderUuid: any): Observable<any> {

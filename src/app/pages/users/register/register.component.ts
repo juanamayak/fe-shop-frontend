@@ -46,8 +46,8 @@ export class RegisterComponent implements OnInit {
         const data = this.registerForm.value;
         this.usersService.register(data).subscribe({
             next: res => {
-                const token = res.token;
-                sessionStorage.setItem(this.usersService.jwtToken, token);
+                /*const token = res.token;
+                sessionStorage.setItem(this.usersService.jwtToken, token);*/
 
                 this.alertsService.successAlert(res.message);
                 this.createdAccount = true;

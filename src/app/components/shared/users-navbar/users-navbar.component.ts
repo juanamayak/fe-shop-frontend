@@ -24,7 +24,7 @@ export class UsersNavbarComponent implements OnInit {
     }
 
     logout(){
-        sessionStorage.clear();
-        this.router.navigate(['users/login']);
+        localStorage.clear();
+        this.router.navigate(['usuarios/login']);
     }
 }

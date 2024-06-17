@@ -47,7 +47,7 @@ export class UsersService {
     }
 
     getToken() {
-        const token = sessionStorage.getItem(this.jwtToken);
+        const token = localStorage.getItem(this.jwtToken);
 
         if (token) {
             return token;
@@ -57,7 +57,7 @@ export class UsersService {
     }
 
     getUuid(){
-        const uuid = sessionStorage.getItem(this.uuidToken);
+        const uuid = localStorage.getItem(this.uuidToken);
 
         if (uuid) {
             return uuid;
