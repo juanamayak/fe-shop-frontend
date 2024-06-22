@@ -46,6 +46,10 @@ export class UsersService {
         return this.httpClient.get(`${this.urlApi}/clients/verify/${userUuid}/${verificationCode}`);
     }
 
+    public recoveryPasword(data: any): Observable<any>{
+        return this.httpClient.post(`${this.urlApi}/clients/recovery/password`, data);
+    }
+
     getToken() {
         const token = localStorage.getItem(this.jwtToken);
 

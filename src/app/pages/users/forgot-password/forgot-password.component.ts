@@ -34,5 +34,20 @@ export class ForgotPasswordComponent implements OnInit{
         });
     }
 
+    recoveryPassword(){
+        this.spinner.show();
+        const data = this.restorePasswordForm.value;
+        this.usersService.recoveryPasword(data).subscribe({
+            next: res => {
+                this.spinner.hide();
+                this.alertsService.successAlert(res.message);
+            },
+            error: err => {
+                this.spinner.hide();
+                this.alertsService.errorAlert(err.error.errors);
+            }
+        })
+    }
+
 
 }
