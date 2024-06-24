@@ -25,4 +25,8 @@ export class ProductsService {
     getProductImages(productUuid: string): Observable<any>{
         return this.httpClient.get(`${this.url}/products/images/${productUuid}`);
     }
+
+    getTopSellingProducts(): Observable<any>{
+        return this.httpClient.get(`${this.url}/products/report/top-selling-products`);
+    }
 }

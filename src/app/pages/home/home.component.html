@@ -88,87 +88,33 @@
     <h1 class="text-4xl font-bold text-[#f2999b] text-center md:text-5xl lg:text-4xl">Los más vendidos</h1>
 
     <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-        <div class="group relative">
-            <div
-                class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                <img src="assets/default-product.jpg"
-                     class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4">
-                <div class="text-center">
-                    <h3 class="text-md text-gray-400 font-bold">
-                        <a href="#">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            Ramo de Tulipanes
-                        </a>
-                    </h3>
-                    <p class="mt-1 text-lg text-[#f2999b] font-bold">{{ 980 | currency}}</p>
+        @for (product of products; track product){
+            <div class="group relative">
+                <div
+                    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
+                    @if(product.image){
+                        <img src="data:{{ product.image.file.type }};base64,{{ product.image.url}}"
+                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    } @else {
+                        <img src="assets/default-product.jpg"
+                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    }
                 </div>
+                <div class="mt-4">
+                    <div class="text-center">
+                        <h3 class="text-md text-gray-400 font-bold">
+                            <a href="#">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                {{  product.name }}
+                            </a>
+                        </h3>
+                        <p class="mt-1 text-lg text-[#f2999b] font-bold">{{ product.price | currency}}</p>
+                    </div>
 
-            </div>
-        </div>
-        <div class="group relative">
-            <div
-                class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                <img src="assets/default-product.jpg"
-                     class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4">
-                <div class="text-center">
-                    <h3 class="text-md text-gray-400 font-bold">
-                        <a href="#">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            Ramo de Tulipanes
-                        </a>
-                    </h3>
-                    <p class="mt-1 text-lg text-[#f2999b] font-bold">{{ 980 | currency}}</p>
                 </div>
-
             </div>
-        </div>
-        <div class="group relative">
-            <div
-                class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                <img src="assets/default-product.jpg"
-                     class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4">
-                <div class="text-center">
-                    <h3 class="text-md text-gray-400 font-bold">
-                        <a href="#">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            Ramo de Tulipanes
-                        </a>
-                    </h3>
-                    <p class="mt-1 text-lg text-[#f2999b] font-bold">{{ 980 | currency}}</p>
-                </div>
-
-            </div>
-        </div>
-        <div class="group relative">
-            <div
-                class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                <img src="assets/default-product.jpg"
-                     class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-            </div>
-            <div class="mt-4">
-                <div class="text-center">
-                    <h3 class="text-md text-gray-400 font-bold">
-                        <a href="#">
-                            <span aria-hidden="true" class="absolute inset-0"></span>
-                            Ramo de Tulipanes
-                        </a>
-                    </h3>
-                    <p class="mt-1 text-lg text-[#f2999b] font-bold">{{ 980 | currency}}</p>
-                </div>
-
-            </div>
-        </div>
+        }
     </div>
-
-    <button type="button" class="mx-auto block text-white w-1/5 p-4 bg-[#f2999b] uppercase font-bold">
-        Ver más
-    </button>
 </section>
 
 <section class="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
