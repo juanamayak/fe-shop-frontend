@@ -7,12 +7,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from './register/register.component';
 import {AccountVerificationComponent} from './account-verification/account-verification.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { RestorePasswordComponent } from './restore-password/restore-password.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'registro', component: RegisterComponent},
     {path: 'verification/:uuid/:code', component: AccountVerificationComponent},
-    {path: 'olvide-mi-contraseña', component: ForgotPasswordComponent}
+    {path: 'olvide-mi-contraseña', component: ForgotPasswordComponent},
+    {path: 'restaurar-contrasena/:token', component: RestorePasswordComponent}
 ]
 
 
@@ -21,7 +23,8 @@ const routes: Routes = [
         LoginComponent,
         RegisterComponent,
         AccountVerificationComponent,
-        ForgotPasswordComponent
+        ForgotPasswordComponent,
+        RestorePasswordComponent
     ],
     imports: [
         CommonModule,

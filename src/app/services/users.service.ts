@@ -50,6 +50,10 @@ export class UsersService {
         return this.httpClient.post(`${this.urlApi}/clients/recovery/password`, data);
     }
 
+    public restorePassword(data: any): Observable<any> {
+        return this.httpClient.post(`${this.urlApi}/clients/restore/password`, data);
+    }
+
     getToken() {
         const token = localStorage.getItem(this.jwtToken);
 
