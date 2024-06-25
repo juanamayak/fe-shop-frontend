@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductsService} from "../../services/products.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-home',
@@ -13,6 +14,7 @@ export class HomeComponent implements OnInit {
 
     constructor(
         private productsService: ProductsService,
+        public router: Router,
         private spinner: NgxSpinnerService,
     ) {
     }
@@ -33,6 +35,10 @@ export class HomeComponent implements OnInit {
                 console.error(err.error.errors);
             }
         });
+    }
+
+    goToProducts(uuid: any){
+        this.router.navigate(['productos', uuid]);
     }
 
 }
