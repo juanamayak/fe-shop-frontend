@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../environments/environment.development";
+import {environment} from "../../environments/environment";
 import * as mapboxgl from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 

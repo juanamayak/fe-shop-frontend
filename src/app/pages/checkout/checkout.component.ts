@@ -20,7 +20,7 @@ import {
 } from '@stripe/stripe-js';
 import {PaymentsService} from "../../services/payments.service";
 import moment from "moment";
-import {environment} from "../../../environments/environment.development";
+import {environment} from "../../../environments/environment";
 
 
 @Component({

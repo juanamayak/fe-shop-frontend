@@ -6,7 +6,7 @@ import {AlertsService} from "../../../../services/alerts.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import * as mapboxgl from "mapbox-gl";
-import {environment} from "../../../../../environments/environment.development";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
     selector: 'app-edit-address-modal',

@@ -8,7 +8,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {MapService} from "../../../../services/map.service";
 import {MapComponent} from "../../../map/map.component";
 import * as mapboxgl from "mapbox-gl";
-import {environment} from "../../../../../environments/environment.development";
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-create-address-modal',

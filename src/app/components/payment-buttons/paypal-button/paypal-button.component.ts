@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {environment} from "../../../../environments/environment.development";
+import {environment} from "../../../../environments/environment";
 import {ICreateOrderRequest, IPayPalConfig} from "ngx-paypal";
 import moment from "moment/moment";
 import {AlertsService} from "../../../services/alerts.service";

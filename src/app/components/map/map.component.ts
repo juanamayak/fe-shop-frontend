@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as mapboxgl from "mapbox-gl";
-import {environment} from "../../../environments/environment.development";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-map',

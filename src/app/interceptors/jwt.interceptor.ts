@@ -4,7 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {UsersService} from '../services/users.service';
-import {environment} from '../../environments/environment';
+import {environmentProd} from '../../environments/environment.prod';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
