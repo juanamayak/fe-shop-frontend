@@ -1,10 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {UsersService} from '../services/users.service';
-import {environmentProd} from '../../environments/environment.prod';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -18,7 +15,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
         const token = this.usersService.getToken();
 
-        if (!token){
+        if (!token) {
             return next.handle(req);
         }
 
